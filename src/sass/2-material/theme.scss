@@ -1,0 +1,44 @@
+@import '~@angular/material/theming';
+
+$black-contrast-87: rgba(#393E41, 0.87);
+$white-contrast: #FBFBFB;
+$white-contrast-87: rgba($white-contrast, 0.87);
+
+$mat-primary: (
+  50: #D0EAF2,
+  100: #B9E0EC,
+  200: #8BCBDF,
+  300: #5CB7D3,
+  400: #2EA2C6,
+  500: #008EBA,
+  600: #007599,
+  700: #005B77,
+  800: #004155,
+  900: #002733,
+  A100: #8BE3FF,
+  A200: #5CD8FF,
+  A400: #00C3FF,
+  A700: #005974,
+  contrast: (
+    50: $black-contrast-87,
+    100: $black-contrast-87,
+    200: $black-contrast-87,
+    300: $black-contrast-87,
+    400: $black-contrast-87,
+    500: $white-contrast,
+    600: $white-contrast,
+    700: $white-contrast-87,
+    800: $white-contrast-87,
+    900: $white-contrast-87,
+    A100: $black-contrast-87,
+    A200: $black-contrast-87,
+    A400: $white-contrast,
+    A700: $white-contrast,
+  )
+);
+
+@include mat-core();
+
+$light-app-theme: mat-light-theme(mat-palette($mat-primary), mat-palette($mat-primary), mat-palette($mat-red));
+
+@include angular-material-theme($light-app-theme);
