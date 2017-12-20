@@ -1,38 +1,41 @@
 form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
-    mat-form-field
         .row
-            .form-group
+            mat-form-field
                 label(for="name") Wat is de naam van de sportactiviteit?
-                input(matInput type="text", id="name", formControlName="name", class="form-control", placeholder="Vul een naam in")
+                input#name(matInput type="text", formControlName="name", placeholder="Vul een naam in")
+
         .row
-            .form-group
+            mat-form-field
                 label(for="sport") Welke sport hoort bij deze activiteit?
-                input(matInput type="text", id="sport", formControlName="sport", class="form-control", placeholder="Vul een sport in")
+                input#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
                 
         .row
-            .form-group
-                label Wanneer vindt de activiteit plaats?
-                input(matInput type="text" id="startTime", formControlName="startTime", class="form-control", placeholder="Begintijd")
-                span tot
-                input(matInput type="text" id="endTime", formControlName="endTime", class="form-control", placeholder="Eindtijd")
-                span op
-                input(matInput type="text" id="date", formControlName="date", class="form-control", placeholder="Datum")
+            mat-form-field
+                label Wanneer vindt de sportactiviteit plaats?
+                input#startTime(matInput type="text", formControlName="startTime", placeholder="Begintijd")
+                span Tot
+                input#endTime(matInput type="text", formControlName="endTime", placeholder="Eindtijd")
+                span Op
+                input#date(matInput type="text", formControlName="date", placeholder="Datum")
                 
         .row
-            .form-group
+            mat-form-field
                 label(for="location") Waar zal de sportactiviteit plaatsvinden?
-                input(matInput type="text" id="location", formControlName="location", class="form-control", placeholder="Vul een sportlocatie in")
+                input#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
                 
         .row
-            .form-group
+            mat-form-field
                 label Hoeveel mensen wil je laten deelnemen?
                 span(style="color: gray") (inclusief jezelf)
-                input(matInput type="text", id="minAttendees", formControlName="minAttendees", class="form-control", placeholder="minimum")
+                input#minAttendees(matInput type="text", formControlName="minAttendees", placeholder="minimum")
                 span tot
-                input(matInput type="text", id="maxAttendees", formControlName="maxAttendees", class="form-control", placeholder="maximum")
+                input#maxAttendees(matInput type="text", formControlName="maxAttendees", placeholder="maximum")
                 span personen
-                
+
         .row
-            .form-group
-                label(for="description") Vul een beschrijving in
-                input(matInput type="text", id="description", formControlName="description", class="form-control", placeholder="Vul een beschrijving in")
+            mat-form-field
+                label(for="description") Wil je nog meer informatie geven over de sportactiviteit?
+                input#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
+
+
+        

@@ -14,7 +14,7 @@ export class SportEventListComponent implements OnInit {
 	ngOnInit() {
 	}
 	
-	createNewEvent() {
+	onCreateNewEvent() {
 		this.router.navigate(['add'], {relativeTo: this.route});
 	}
 	
