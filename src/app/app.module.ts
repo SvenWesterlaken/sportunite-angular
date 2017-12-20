@@ -1,19 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/auth/login/login.component';
+import {AppComponent} from './app.component';
 import {AuthService} from './services/auth.service';
-import { RegisterComponent } from './components/auth/register/register.component';
+import {SharedModule} from './modules/shared.module';
+import {AppRoutingModule} from './routes/app.routing.module';
+import {SportEventModule} from './modules/sportevent.module';
+import {AuthModule} from './modules/auth.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SharedModule,
+    AuthModule,
+    SportEventModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService
