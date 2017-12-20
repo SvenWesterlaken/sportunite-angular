@@ -7,10 +7,13 @@ import {SharedModule} from './modules/shared.module';
 import {AppRoutingModule} from './routes/app.routing.module';
 import {SportEventModule} from './modules/sportevent.module';
 import {AuthModule} from './modules/auth.module';
+import {AuthGuard} from "./other/auth.guard";
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,8 @@ import {AuthModule} from './modules/auth.module';
     AppRoutingModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

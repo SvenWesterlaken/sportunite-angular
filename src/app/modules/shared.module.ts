@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CustomErrorStateMatcher} from '../services/errorstate.manager';
+import {CustomErrorStateMatcher} from '../other/errorstate.manager';
 
 @NgModule({
   imports: [

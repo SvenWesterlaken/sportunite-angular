@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomErrorStateMatcher} from '../../../services/errorstate.manager';
+import {CustomErrorStateMatcher} from '../../../other/errorstate.manager';
 import {Router} from '@angular/router';
 
 @Component({
