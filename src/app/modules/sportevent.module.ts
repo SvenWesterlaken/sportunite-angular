@@ -3,15 +3,24 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 import {SharedModule} from './shared.module';
+import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
-  declarations: [
-    SportEventComponent,
-    SportEventListComponent
-  ],
-  imports: [
-    SharedModule,
-    SportEventRoutingModule
-  ]
+	declarations: [
+		SportEventComponent,
+		SportEventListComponent,
+		SporteventAddComponent
+	],
+	imports: [
+		SharedModule,
+		SportEventRoutingModule,
+		ReactiveFormsModule,
+		MatInputModule,
+		BrowserAnimationsModule
+	]
 })
-export class SportEventModule { }
+export class SportEventModule {
+}
