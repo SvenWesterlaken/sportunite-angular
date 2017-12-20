@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   api: {
-    url: 'https://localhost:8080/api/v1'
+    url: 'http://localhost:8080/api/v1'
   }
 };

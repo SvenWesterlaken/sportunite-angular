@@ -1,19 +1,22 @@
 doctype html
 .row.login-container
-  .col.s12.m4.l6.hero-image.hide-on-small-and-down
+  .col.s12.m4.xl6.hero-image.hide-on-small-and-down
 
-  .col.s12.m8.l6.login-screen
-    .col.s12.m10.offset-m1
+  .col.s12.m8.xl6.login-screen
+    .col.s12.xl10.offset-xl1
       h1 Sportunite
 
-    .col.s12.m10.offset-m1
-      form([formGroup]="loginForm")
+    .col.s12.xl10.offset-xl1
+      form([formGroup]="loginForm", (ngSubmit)="submit()")
         mat-form-field.full-width
-          input(matInput, placeholder="Gebruikersnaam", type="text")
+          input(matInput, placeholder="Email", type="text", formControlName="email", [errorStateMatcher]="errors")
+          mat-error(*ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')") Geen geldig e-mailadres
+          mat-error(*ngIf="loginForm.get('email').hasError('required')") E-mailadres is verplicht
         mat-form-field.full-width
-          input(matInput, placeholder="Wachtwoord", type="password")
+          input(matInput, placeholder="Wachtwoord", type="password", formControlName="password")
+          mat-error(*ngIf="loginForm.get('password').hasError('required')") Wachtwoord is verplicht
         .full-width
-          button.right(mat-raised-button, color="primary") Inloggen
+          button.right(mat-raised-button, color="primary", [disabled]="loginForm.invalid") Inloggen
 
 
 
