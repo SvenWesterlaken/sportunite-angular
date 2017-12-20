@@ -1,19 +1,22 @@
 @charset "UTF-8"
 
+//Color variables
 @import 'sass/1-base/colorvars'
 
-
+//Materialize CSS grid, Normalize, Colors & Variables
 @import '~materialize-css/sass/components/color'
 @import '~materialize-css/sass/components/variables'
 @import '~materialize-css/sass/components/normalize'
-
 @import '~materialize-css/sass/components/grid'
+@import '~materialize-css/sass/components/typography'
 
+//Custom Base Styling
 @import 'sass/1-base/typography'
+@import 'sass/1-base/base'
+@import 'sass/1-base/buttons'
 
+//Custom Angular Theme Overrides
 @import 'sass/2-material/theme'
+@import 'sass/2-material/shadows'
 
-body
-  background: $background
-  color: $text
-  font-family: "Roboto", sans-serif
+

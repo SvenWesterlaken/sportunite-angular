@@ -3,6 +3,7 @@ import {AuthService} from '../../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomErrorStateMatcher} from '../../../other/errorstate.manager';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,20 @@ export class LoginComponent implements OnInit {
   submit() {
     this.auth.login(this.loginForm.value).then(() => {
       this.router.navigate(['/']);
+    }).catch((res: HttpErrorResponse) => {
+      if (res.status === 0) {
+        this.loginForm.setErrors({
+          'noConnection': true
+        });
+      } else if (res.status === 404) {
+        this.loginForm.get('email').setErrors({
+          'notFound': true
+        });
+      } else if (res.status === 401) {
+        this.loginForm.get('password').setErrors({
+          'invalidPassword': true
+        });
+      }
     });
   }
 

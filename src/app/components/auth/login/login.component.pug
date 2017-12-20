@@ -8,15 +8,23 @@ doctype html
 
     .col.s12.xl10.offset-xl1
       form([formGroup]="loginForm", (ngSubmit)="submit()")
-        mat-form-field.full-width
-          input(matInput, placeholder="Email", type="text", formControlName="email", [errorStateMatcher]="errors")
-          mat-error(*ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')") Geen geldig e-mailadres
-          mat-error(*ngIf="loginForm.get('email').hasError('required')") E-mailadres is verplicht
-        mat-form-field.full-width
-          input(matInput, placeholder="Wachtwoord", type="password", formControlName="password")
-          mat-error(*ngIf="loginForm.get('password').hasError('required')") Wachtwoord is verplicht
-        .full-width
-          button.right(mat-raised-button, color="primary", [disabled]="loginForm.invalid") Inloggen
+        .row
+          mat-form-field.full-width
+            input(matInput, placeholder="Email", type="text", formControlName="email", [errorStateMatcher]="errors")
+            mat-error(*ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')") Ongeldig e-mailadres
+            mat-error(*ngIf="loginForm.get('email').hasError('required')") E-mailadres is verplicht
+            mat-error(*ngIf="loginForm.get('email').hasError('notFound')") Onbekend Emailadres
+        .row
+          mat-form-field.full-width
+            input(matInput, placeholder="Wachtwoord", type="password", formControlName="password")
+            mat-error(*ngIf="loginForm.get('password').hasError('required')") Wachtwoord is verplicht
+            mat-error(*ngIf="loginForm.get('password').hasError('invalidPassword')") Verkeerd wachtwoord
+        .row
+          .full-width
+            mat-checkbox(formControlName="keep") Houdt mij ingelogd
+            button.btn.right([disabled]="loginForm.invalid") Inloggen
+
+          span(*ngIf="loginForm.hasError('noConnection')") Kon niet verbinden met de server
 
 
 
