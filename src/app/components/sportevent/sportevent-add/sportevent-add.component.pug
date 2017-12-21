@@ -33,10 +33,10 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
             span(style="color: gray; font-style: italic" ) (inclusief jezelf)
         .row
             mat-form-field
-                input#minAttendees(matInput type="number", style="text-align:center", min=1, formControlName="minAttendees", placeholder="minimum")
+                input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
             span tot
             mat-form-field
-                input#maxAttendees(matInput type="number", style="text-align:center", formControlName="maxAttendees", placeholder="maximum")
+                input#maxAttendees(matInput type="number", style="text-align:center", formControlName="maxAttendees", placeholder="maximum", app-min-valid [minimumNumber]="inputValue")
             span personen
 
         label(for="description") Wil je nog meer informatie geven over de sportactiviteit?

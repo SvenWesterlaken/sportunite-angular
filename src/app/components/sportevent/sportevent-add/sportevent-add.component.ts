@@ -10,9 +10,14 @@ import {SportEvent} from "../../../models/SportEvent";
 })
 export class SporteventAddComponent implements OnInit {
 	private eventForm: FormGroup;
-
+	private inputValue: number;
+	
+	// public getInputValue() {
+	// 	return this.inputValue;
+	// }
+	
 	//hardcoded sports
-	private sports = [ new Sport("Basketbal"), new Sport("Hockey"), new Sport("Tennis")];
+	private sports = [new Sport("Basketbal"), new Sport("Hockey"), new Sport("Tennis")];
 	
 	constructor() {
 	}
@@ -43,31 +48,35 @@ export class SporteventAddComponent implements OnInit {
 			'endTime': new FormControl(endTime, Validators.required),
 			'date': new FormControl(date, Validators.required),
 			'location': new FormControl(location, Validators.required),
-			'minAttendees': new FormControl(minAttendees, Validators.compose([Validators.required, Validators.min(1)])),
-			'maxAttendees': new FormControl(maxAttendees, Validators.compose([Validators.required, Validators.min(1)])),
+			'minAttendees': new FormControl(minAttendees, Validators.compose([Validators.required, Validators.min(2)])),
+			'maxAttendees': new FormControl(maxAttendees, Validators.compose([Validators.required, Validators.min(2)])),
 			'description': new FormControl(description)
 		});
 	}
 	
 	onSubmit() {
 		console.log("Added")
-
-		const event : SportEvent = this.eventForm.value;
-
+		
+		const event: SportEvent = this.eventForm.value;
+		
 		console.log(event);
-
+		
 		/*this.dataStorageService.postEvent(event);
-		this.router.navigate(['/sportevent']);*/
+		 this.router.navigate(['/sportevent']);*/
 	}
-
+	
+	revalidate() {
+		this.eventForm.controls['maxAttendees'].updateValueAndValidity();
+	}
+	
 	/*private validateMaxAttendees(formGroup: FormGroup) {
-		let maxAttendees = formGroup.controls.maxAttendees
-		let minAttendees = formGroup.controls.confirm;
-
-
-		return {
-			maxAttendees: {
-				valid: false
-			}
-		};*/
+	 let maxAttendees = formGroup.controls.maxAttendees
+	 let minAttendees = formGroup.controls.confirm;
+	 
+	 
+	 return {
+	 maxAttendees: {
+	 valid: false
+	 }
+	 };*/
 }
