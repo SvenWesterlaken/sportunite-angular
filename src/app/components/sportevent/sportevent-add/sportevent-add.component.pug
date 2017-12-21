@@ -15,10 +15,10 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
         label Wanneer vindt de sportactiviteit plaats?
         .row
             mat-form-field
-                input#startTime(matInput type="time", formControlName="startTime", placeholder="Begintijd")
+                input#startTime(matInput type="time", formControlName="startTime", placeholder="Begintijd", [(ngModel)]="startTime", (change)="revalidate()", (input)="revalidate()")
             span Tot
             mat-form-field
-                input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd")
+                input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd", [(ngModel)]="endTime", app-form-valid [minimumValue]="startTime")
             span Op
             mat-form-field
                 input#date(matInput type="date", formControlName="date", placeholder="Datum")
@@ -36,7 +36,7 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
                 input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
             span tot
             mat-form-field
-                input#maxAttendees(matInput type="number", style="text-align:center", formControlName="maxAttendees", placeholder="maximum", app-min-valid [minimumNumber]="inputValue")
+                input#maxAttendees(matInput type="number", style="text-align:center", formControlName="maxAttendees", placeholder="maximum", app-form-valid [minimumValue]="inputValue")
             span personen
 
         label(for="description") Wil je nog meer informatie geven over de sportactiviteit?

@@ -11,10 +11,8 @@ import {SportEvent} from "../../../models/SportEvent";
 export class SporteventAddComponent implements OnInit {
 	private eventForm: FormGroup;
 	private inputValue: number;
-	
-	// public getInputValue() {
-	// 	return this.inputValue;
-	// }
+	private startTime;
+	private endTime;
 	
 	//hardcoded sports
 	private sports = [new Sport("Basketbal"), new Sport("Hockey"), new Sport("Tennis")];
@@ -55,7 +53,7 @@ export class SporteventAddComponent implements OnInit {
 	}
 	
 	onSubmit() {
-		console.log("Added")
+		console.log("Added");
 		
 		const event: SportEvent = this.eventForm.value;
 		
@@ -67,16 +65,6 @@ export class SporteventAddComponent implements OnInit {
 	
 	revalidate() {
 		this.eventForm.controls['maxAttendees'].updateValueAndValidity();
+		this.eventForm.controls['endTime'].updateValueAndValidity();
 	}
-	
-	/*private validateMaxAttendees(formGroup: FormGroup) {
-	 let maxAttendees = formGroup.controls.maxAttendees
-	 let minAttendees = formGroup.controls.confirm;
-	 
-	 
-	 return {
-	 maxAttendees: {
-	 valid: false
-	 }
-	 };*/
 }
