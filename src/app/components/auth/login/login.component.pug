@@ -1,1 +1,51 @@
-p login works!
+doctype html
+.row.login-container
+  .col.s12.l5.xl6.hero-image.hide-on-med-and-down
+
+  .col.s12.l7.xl6.login-screen
+    .col.s12.xl10.offset-xl1: .col.s12
+      img.logo(src="/assets/img/logo.svg")
+      h4 Inloggen bij SportUnite
+
+    .col.s12.xl10.offset-xl1
+      form([formGroup]="loginForm", (ngSubmit)="submit()")
+        .row
+          mat-form-field.col.s12
+            input(matInput, placeholder="Email", type="text", formControlName="email", [errorStateMatcher]="errors")
+            mat-error(*ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')") Ongeldig e-mailadres
+            mat-error(*ngIf="loginForm.get('email').hasError('required')") E-mailadres is verplicht
+            mat-error(*ngIf="loginForm.get('email').hasError('notFound')") Onbekend Emailadres
+        .row
+          mat-form-field.col.s12
+            input(matInput, placeholder="Wachtwoord", type="password", formControlName="password")
+            mat-error(*ngIf="loginForm.get('password').hasError('required')") Wachtwoord is verplicht
+            mat-error(*ngIf="loginForm.get('password').hasError('invalidPassword')") Verkeerd wachtwoord
+        .row
+          .col.s12
+            mat-checkbox(formControlName="keep") Houdt mij ingelogd
+            span.right-align Wachtwoord vergeten?
+        .row
+          .row
+            .col.s12
+              button.btn.full-width([disabled]="loginForm.invalid") Inloggen
+          .row
+            .col.s12.text-center
+              b.login-btn-divider of
+          .row
+            .col.s12
+              button.btn.full-width.facebook(type="button") Inloggen met Facebook
+          .row
+            .col.s12
+              button.btn.full-width.google-plus(type="button") Inloggen met Google+
+          .row
+            .col.s12.text-center
+              span Nog geen account?
+
+
+
+
+          span(*ngIf="loginForm.hasError('noConnection')") Kon niet verbinden met de server
+
+
+
+

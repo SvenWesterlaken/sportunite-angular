@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import 'pallette';
+@import 'form';
+
+@include mat-core();
+
+$custom-theme: mat-light-theme(mat-palette($mat-primary), mat-palette($mat-primary), mat-palette($mat-warn));
+
+@mixin custom-theme($theme) {
+  @include mat-form-field-theme($theme);
+  @include mat-input-theme($theme);
+}
+
+@include angular-material-theme($custom-theme);
+@include custom-theme($custom-theme);
+
