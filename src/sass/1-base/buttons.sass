@@ -1,14 +1,15 @@
 button.btn
-  height: 44px
+  height: 36px
+  min-width: 88px
   padding: 0 32px
   background: $background
   color: $primary
   border: 3px solid $primary
-  border-radius: 22px
+  border-radius: 18px
   text-transform: uppercase
   font:
     weight: 500
-    size: 16px
+    size: 14px
   cursor: pointer
   transition: all 0.2s ease-in-out
   outline: none
@@ -28,4 +29,22 @@ button.btn
   &.right
     float: right
     clear: right
+
+  &.facebook
+    color: $facebook
+    border-color: $facebook
+
+    &:hover, &:active
+      color: $text-contrast
+      background: $facebook
+
+  &.google-plus
+    color: $google-plus
+    border-color: $google-plus
+
+    &:hover, &:active
+      color: $text-contrast
+      background: $google-plus
+
+
 
