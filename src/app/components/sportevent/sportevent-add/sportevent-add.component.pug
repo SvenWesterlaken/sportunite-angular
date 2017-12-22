@@ -9,7 +9,7 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
         .row
             mat-form-field
                 mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
-                    mat-option(*ngFor="let sport of sports", [value]="sport.name")
+                    mat-option(*ngFor="let sport of sports", [value]="sport.sportId")
                         p {{sport.name}}
 
         label Wanneer vindt de sportactiviteit plaats?
@@ -21,7 +21,7 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
                 input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd", [(ngModel)]="endTime", app-form-valid [minimumValue]="startTime")
             span Op
             mat-form-field
-                input#date(matInput type="date", formControlName="date", placeholder="Datum")
+                input#date(matInput type="date", formControlName="date",placeholder="Datum")
 
         label(for="location") Waar zal de sportactiviteit plaatsvinden?
         .row
@@ -36,7 +36,7 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
                 input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
             span tot
             mat-form-field
-                input#maxAttendees(matInput type="number", style="text-align:center", formControlName="maxAttendees", placeholder="maximum", app-form-valid [minimumValue]="inputValue")
+                input#maxAttendees(matInput type="number", style="text-align:center", min=2,  formControlName="maxAttendees", placeholder="maximum", app-form-valid [minimumValue]="inputValue")
             span personen
 
         label(for="description") Wil je nog meer informatie geven over de sportactiviteit?

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Sport} from "../../../models/Sport";
 import {SportEvent} from "../../../models/SportEvent";
+import {EventService} from "../../../services/event.service";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-sportevent-add',
@@ -13,17 +15,19 @@ export class SporteventAddComponent implements OnInit {
 	private inputValue: number;
 	private startTime;
 	private endTime;
-	
-	//hardcoded sports
-	private sports = [new Sport("Basketbal"), new Sport("Hockey"), new Sport("Tennis")];
-	
-	constructor() {
+	private sports = [];
+
+	constructor(private eventService: EventService, private router: Router) {
 	}
-	
+
 	ngOnInit() {
+		console.log(this.eventService.getSports());
+		this.eventService.getSports()
+			.map(result => { return result.json() as Sport})
+			.subscribe(sports => this.sports = sports._embedded.sports);
 		this.initForm();
 	}
-	
+
 	getForm() {
 		return this.eventForm;
 	}
@@ -35,8 +39,8 @@ export class SporteventAddComponent implements OnInit {
 		let endTime = '';
 		let date = '';
 		let location = '';
-		let minAttendees;
-		let maxAttendees;
+		let minAttendees = '';
+		let maxAttendees = '';
 		let description = '';
 		
 		this.eventForm = new FormGroup({
@@ -53,18 +57,20 @@ export class SporteventAddComponent implements OnInit {
 	}
 	
 	onSubmit() {
-		console.log("Added");
-		
 		const event: SportEvent = this.eventForm.value;
 		
 		console.log(event);
 		
-		/*this.dataStorageService.postEvent(event);
-		 this.router.navigate(['/sportevent']);*/
+		this.eventService.addEvent(event)
+			.map(result => { return result.json() })
+			.subscribe( result => console.log(result));
+
+		this.router.navigate(['/sportevent']);
 	}
 	
 	revalidate() {
 		this.eventForm.controls['maxAttendees'].updateValueAndValidity();
 		this.eventForm.controls['endTime'].updateValueAndValidity();
 	}
+
 }
