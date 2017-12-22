@@ -57,9 +57,16 @@ export class SporteventAddComponent implements OnInit {
 	}
 	
 	onSubmit() {
-		const event: SportEvent = this.eventForm.value;
-		
-		console.log(event);
+
+		const event = {
+			'name': this.eventForm.value.name,
+			'sportId': this.eventForm.value.sportId,
+			'minAttendees': this.eventForm.value.minAttendees,
+			'maxAttendees': this.eventForm.value.maxAttendees,
+			'description': this.eventForm.value.description,
+			'eventEndTime': this.eventForm.value.date,
+			'eventStartTime': this.eventForm.value.date
+		};
 		
 		this.eventService.addEvent(event)
 			.map(result => { return result.json() })

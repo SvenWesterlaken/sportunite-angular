@@ -14,8 +14,7 @@ export class EventService {
     }
 
 
-    addEvent(sportEvent: SportEvent): Observable<any> {
-        console.log(sportEvent);
+    addEvent(sportEvent): Observable<any> {
         return this.http.post(`${environment.backend.url}/sportevents`, sportEvent);
     }
 
