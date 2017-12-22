@@ -44,4 +44,4 @@ form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
             mat-form-field
                 textarea#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
 
-        button(type="submit", [disabled]="!eventForm.valid") Evenement aanmaken
+        button(type="submit", [ngStyle]="{backgroundColor: getForm().valid ? 'green' : 'red'}", [disabled]="!getForm().valid") Evenement aanmaken
