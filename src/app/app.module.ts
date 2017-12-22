@@ -9,6 +9,8 @@ import {SportEventModule} from './modules/sportevent.module';
 import {AuthModule} from './modules/auth.module';
 import {AuthGuard} from "./other/auth.guard";
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { StepperItemComponent } from './components/stepper/stepper-item/stepper-item.component';
 
 @NgModule({
   declarations: [

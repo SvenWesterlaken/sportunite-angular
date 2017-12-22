@@ -1,0 +1,26 @@
+@import '../../../../sass/1-base/colorvars'
+
+.stepper-button
+  height: 16px
+  width: 16px
+  border-radius: 8px
+  border: 3px solid $divider
+  box-sizing: border-box
+  padding: 0
+  background: none
+  margin: 4px
+  outline: none
+  transition: all 250ms ease-in-out
+
+  &.selected
+    background: $primary
+    border-color: $primary
+    cursor: default
+
+    &:hover, &:active
+      background: $primary
+      border-color: $primary
+
+  &:hover, &:active
+    background: $divider
+    border-color: transparent
