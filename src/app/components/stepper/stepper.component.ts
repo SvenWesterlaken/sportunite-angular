@@ -1,39 +1,47 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, Input, OnInit,
+  QueryList,
+  ViewChildren, ViewEncapsulation
+} from '@angular/core';
 import {error} from 'util';
+import {CdkStepper} from '@angular/cdk/stepper';
+import {StepperNavComponent} from './stepper-nav/stepper-nav.component';
+import {StepComponent} from './step/step.component';
+import {takeUntil} from 'rxjs/operators';
+import {state, style, trigger, transition, animate} from "@angular/animations";
+
+
+@Directive({
+  selector: '[appStepper]'
+})
+export class StepperDirective extends CdkStepper implements AfterContentInit {
+  @ViewChildren(StepperNavComponent, {read: ElementRef}) _stepHeader: QueryList<ElementRef>;
+  @ContentChildren(StepComponent) _steps: QueryList<StepComponent>;
+
+  ngAfterContentInit() {
+    this._steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
+  }
+}
+
 
 @Component({
   selector: 'app-stepper',
+  exportAs: 'AppStepper',
   templateUrl: './stepper.component.pug',
-  styleUrls: ['./stepper.component.sass']
+  styleUrls: ['./stepper.component.sass'],
+  inputs: ['selectedIndex'],
+  host: {'class': 'app-stepper', 'role': 'tablist'},
+  animations: [
+    trigger('stepTransition', [
+      state('previous', style({transform: 'translate3d(-100%, 0, 0)', visibility: 'hidden'})),
+      state('current', style({transform: 'none', visibility: 'visible'})),
+      state('next', style({transform: 'translate3d(100%, 0, 0)', visibility: 'hidden'})),
+      transition('* => *', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
+    ])
+  ],
+  providers: [{provide: StepperDirective, useExisting: StepperComponent}],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
-export class StepperComponent implements OnInit {
-  @Input() private size: number;
-  private items;
-  public selected = 0;
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-    this.items = Array(this.size).fill(1).map((x, i) => i);
-    console.log(this.items);
-  }
-
-  next() {
-    this.selected++;
-  }
-
-  previous() {
-    this.selected--;
-  }
-
-  goTo(pos: number) {
-    if (pos <= this.size) {
-      this.selected = pos;
-    } else {
-      throw error('Position out of range.');
-    }
-  }
-
-}
+export class StepperComponent extends StepperDirective {}
