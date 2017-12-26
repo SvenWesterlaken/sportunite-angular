@@ -3,8 +3,9 @@ import {LoginComponent} from '../components/auth/login/login.component';
 import {RegisterComponent} from '../components/auth/register/register.component';
 import {AuthRoutingModule} from '../routes/auth.routing.module';
 import {SharedModule} from './shared.module';
-import {MatButtonModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import {StepperModule} from './stepper.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     SharedModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    StepperModule
   ]
 })
 export class AuthModule {}

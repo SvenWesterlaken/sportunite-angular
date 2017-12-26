@@ -10,5 +10,6 @@ export const environment = {
   },
   backend: {
     url: ' http://localhost:49280/api'
+
   }
 };

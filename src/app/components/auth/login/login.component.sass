@@ -1,4 +1,6 @@
 @import '../../../../sass/1-base/colorvars'
+@import '~materialize-css/sass/components/color'
+@import '~materialize-css/sass/components/variables'
 
 .login-container
   padding: 0
@@ -7,6 +9,7 @@
   .hero-image
     background: $primary
     min-height: 100vh
+    height: 100%
 
   .login-screen
     background: $background
@@ -17,9 +20,34 @@
     justify-content: center
     align-items: center
 
+    @media #{$medium-and-down}
+      padding: 0 32px
+
+      button.btn
+        width: 100%
+
     .full-width
       width: 100%
 
-    h1
+    h4
       font-weight: 500
+      text-align: center
+
+    img.logo
+      width: 50%
+      margin-left: 25%
+
+    span.right-align
+      float: right
+      margin-top: 2px
+
+    .text-center
+      text-align: center
+
+    .login-btn-divider
+      font-weight: 500
+      text-transform: uppercase
+
+
+
 

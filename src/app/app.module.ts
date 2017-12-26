@@ -6,24 +6,28 @@ import {AuthService} from './services/auth.service';
 import {SharedModule} from './modules/shared.module';
 import {AppRoutingModule} from './routes/app.routing.module';
 import {AuthModule} from './modules/auth.module';
+import {AuthGuard} from './other/auth.guard';
 import {SporteventAddComponent} from './components/sportevent/sportevent-add/sportevent-add.component';
 import {SportEventModule} from "./modules/sportevent.module";
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 @NgModule({
-	declarations: [
-		AppComponent
-	],
-	imports: [
-		BrowserModule,
-		SharedModule,
-		AuthModule,
-		AppRoutingModule,
-		SportEventModule
-	],
-	providers: [
-		AuthService
-	],
-	bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NotFoundComponent
+  ],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    AuthModule,
+    SportEventModule,
+    AppRoutingModule
+  ],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

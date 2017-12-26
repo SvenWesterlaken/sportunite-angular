@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormInputValidatorDirective} from "../components/sportevent/sportevent-add/forminputvalidator.directive";
 import {EventService} from "../services/event.service";
 import {HttpModule} from "@angular/http";
+import {StepperModule} from "./stepper.module";
 
 @NgModule({
 	declarations: [
@@ -24,11 +25,13 @@ import {HttpModule} from "@angular/http";
 		SharedModule,
 		SportEventRoutingModule,
 		ReactiveFormsModule,
+		StepperModule,
 		FormsModule,
 		MatInputModule,
 		BrowserAnimationsModule,
 		HttpModule,
 		MatSelectModule
+
 	],
 	providers: [
 		EventService
