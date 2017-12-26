@@ -9,6 +9,7 @@ import {StepperNavComponent} from './stepper-nav/stepper-nav.component';
 import {StepComponent} from './step/step.component';
 import {takeUntil} from 'rxjs/operators';
 import {state, style, trigger, transition, animate} from "@angular/animations";
+import {stepperAnimation} from "../../animations/stepper.animation";
 
 
 @Directive({
@@ -31,14 +32,7 @@ export class StepperDirective extends CdkStepper implements AfterContentInit {
   styleUrls: ['./stepper.component.sass'],
   inputs: ['selectedIndex'],
   host: {'class': 'app-stepper', 'role': 'tablist'},
-  animations: [
-    trigger('stepTransition', [
-      state('previous', style({transform: 'translate3d(-100%, 0, 0)', visibility: 'hidden'})),
-      state('current', style({transform: 'none', visibility: 'visible'})),
-      state('next', style({transform: 'translate3d(100%, 0, 0)', visibility: 'hidden'})),
-      transition('* => *', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
-    ])
-  ],
+  animations: stepperAnimation,
   providers: [{provide: StepperDirective, useExisting: StepperComponent}],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
