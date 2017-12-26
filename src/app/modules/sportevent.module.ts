@@ -7,7 +7,7 @@ import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sp
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material";
-import {MatSelectModule} from "@angular/material";
+import {MatSelectModule, MatCardModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormInputValidatorDirective} from "../components/sportevent/sportevent-add/forminputvalidator.directive";
 import {EventService} from "../services/event.service";
@@ -30,12 +30,13 @@ import {StepperModule} from "./stepper.module";
 		MatInputModule,
 		BrowserAnimationsModule,
 		HttpModule,
-		MatSelectModule
-
+		MatSelectModule,
+		MatCardModule
 	],
 	providers: [
 		EventService
 	]
+
 })
 export class SportEventModule {
 }

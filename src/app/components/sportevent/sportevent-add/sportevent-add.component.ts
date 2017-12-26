@@ -60,14 +60,15 @@ export class SporteventAddComponent implements OnInit {
 
 		const event = {
 			'name': this.eventForm.value.name,
-			'sportId': this.eventForm.value.sportId,
+			'sportId': this.eventForm.value.sport.sportId,
 			'minAttendees': this.eventForm.value.minAttendees,
 			'maxAttendees': this.eventForm.value.maxAttendees,
 			'description': this.eventForm.value.description,
-			'eventEndTime': this.eventForm.value.date,
-			'eventStartTime': this.eventForm.value.date
+			'eventEndTime': this.eventForm.value.date + "T" + this.eventForm.value.endTime,
+			'eventStartTime': this.eventForm.value.date + "T" + this.eventForm.value.startTime
 		};
-		
+
+		console.log(event);
 		this.eventService.addEvent(event)
 			.map(result => { return result.json() })
 			.subscribe( result => console.log(result));

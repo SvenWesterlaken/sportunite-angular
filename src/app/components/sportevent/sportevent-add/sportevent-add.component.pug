@@ -4,14 +4,14 @@
             app-step
                 label(for="name") Wat is de naam van de sportactiviteit?
                 .row
-                    mat-form-field
+                    mat-form-field.full-field
                         input#name(matInput type="text", formControlName="name", placeholder="Vul een naam in")
             app-step
                 label Welke sport hoort bij deze activiteit?
                 .row
-                    mat-form-field
+                    mat-form-field.full-field
                         mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
-                            mat-option(*ngFor="let sport of sports", [value]="sport.sportId")
+                            mat-option(*ngFor="let sport of sports", [value]="sport")
                                 p {{sport.name}}
 
             app-step
@@ -24,12 +24,12 @@
                         input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd", [(ngModel)]="endTime", app-form-valid [minimumValue]="startTime")
                     span Op
                     mat-form-field
-                        input#date(matInput type="date", formControlName="date",placeholder="Datum")
+                        input#date(matInput type="date", formControlName="date", placeholder="Datum")
 
             app-step
                 label(for="location") Waar zal de sportactiviteit plaatsvinden?
                 .row
-                    mat-form-field
+                    mat-form-field.full-field
                         input#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
 
             app-step
@@ -38,15 +38,29 @@
                     span(style="color: gray; font-style: italic" ) (inclusief jezelf)
                 .row
                     mat-form-field
-                        input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
+                        input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="Minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
                     span tot
                     mat-form-field
-                        input#maxAttendees(matInput type="number", style="text-align:center", min=2,  formControlName="maxAttendees", placeholder="maximum", app-form-valid [minimumValue]="inputValue")
+                        input#maxAttendees(matInput type="number", style="text-align:center", min=2,  formControlName="maxAttendees", placeholder="Maximum", app-form-valid [minimumValue]="inputValue")
                     span personen
 
             app-step
                 label(for="description") Wil je nog meer informatie geven over de sportactiviteit?
                 .row
-                    mat-form-field
+                    mat-form-field.full-field
                         textarea#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
+
+            app-step
+                mat-card.summary_card
+                    mat-card-header
+                        mat-card-title Overzicht
+                        mat-card-subtitle Om gegevens aan te passen dien je terug te gaan
+                    mat-card-content
+                        h1 {{ eventForm.value.name }}
+                        p Om bezig te zijn met {{ eventForm.value.sport.name }}
+                        p Op {{ eventForm.value.date | date: 'longDate' }} van {{ eventForm.value.startTime }} tot {{ eventForm.value.endTime }}
+                        p Met {{ eventForm.value.minAttendees }} tot {{ eventForm.value.maxAttendees }} personen
+                        h1 Extra informatie
+                        p {{ eventForm.value.description }}
+
                 button(type="submit", [disabled]="!getForm().valid") Evenement aanmaken
