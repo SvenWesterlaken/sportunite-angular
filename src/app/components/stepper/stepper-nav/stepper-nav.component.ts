@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Host, HostBinding, Input, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
 import {StepperIntlService} from '../stepper-intl.service';
@@ -35,7 +35,8 @@ export class StepperNavComponent implements OnDestroy {
   set optional(value: any) { this._optional = coerceBooleanProperty(value); }
   private _optional: boolean;
 
-  constructor(public _intl: StepperIntlService, private _focusMonitor: FocusMonitor, private _element: ElementRef, changeDetectorRef: ChangeDetectorRef) {
+  constructor(public _intl: StepperIntlService, private _focusMonitor: FocusMonitor,
+              private _element: ElementRef, changeDetectorRef: ChangeDetectorRef) {
     _focusMonitor.monitor(_element.nativeElement, true);
     this._intlSubscription = _intl.changes.subscribe(() => changeDetectorRef.markForCheck());
   }

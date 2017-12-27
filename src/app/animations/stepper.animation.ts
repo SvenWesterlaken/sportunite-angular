@@ -47,7 +47,7 @@ export const stepperAnimation = [
     transition('current => next', group([
       animate(`${outDuration}ms ${outEasing}`, style({
         transform: 'translate3d(0,100%,0)',
-        opacity: 1
+        opacity: 0
       })),
       animate(`0s ${outDuration}ms`, style({
         visibility: 'visible',
@@ -58,7 +58,7 @@ export const stepperAnimation = [
     transition('current => previous', group([
       animate(`${outDuration}ms ${outEasing}`, style({
         transform: 'translate3d(0,-100%,0)',
-        opacity: 1
+        opacity: 0
       })),
       animate(`0s ${outDuration}ms`, style({
         visibility: 'visible',
