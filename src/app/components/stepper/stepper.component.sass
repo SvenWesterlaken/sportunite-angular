@@ -10,9 +10,11 @@
   width: 100%
   max-width: 848px
   position: relative
+  display: block
 
   .stepper-content
     display: block
+    width: 100%
 
 .stepper-nav-container
   display: flex
@@ -20,7 +22,28 @@
   justify-content: center
   align-items: center
   padding-left: 96px
+  position: relative
+  z-index: 2
 
   .step-nav-item
     outline: none
     cursor: pointer
+
+@media only screen and (max-width : 968px)
+  .app-stepper
+    flex-direction: column-reverse
+
+    .stepper-container
+      overflow: hidden
+
+      .stepper-content
+        overflow: hidden
+
+        &[aria-expanded='false']
+          height: 0
+
+    .stepper-nav-container
+      padding: 0 0 16px
+      flex-direction: row
+      position: fixed
+      bottom: 0

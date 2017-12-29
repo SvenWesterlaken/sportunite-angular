@@ -38,4 +38,11 @@ export class StepperDirective extends CdkStepper implements AfterContentInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class StepperComponent extends StepperDirective {}
+export class StepperComponent extends StepperDirective {
+
+  getAnimationDirection(index: number): string {
+    const direction = super._getAnimationDirection(index);
+    return window.screen.width < 968 ? `${direction}-small` : direction;
+  }
+
+}
