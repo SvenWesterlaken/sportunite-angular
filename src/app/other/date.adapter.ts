@@ -1,17 +1,11 @@
 import {Inject, Injectable, Optional} from '@angular/core';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material';
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// TODO(mmalerba): See if we can clean this up at some point.
 import * as _moment from 'moment';
 import {Moment} from 'moment';
 
 const moment = _moment;
 
 
-/** Creates an array and fills it with values. */
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
   const valuesArray = Array(length);
   for (let i = 0; i < length; i++) {
@@ -21,13 +15,8 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 }
 
 
-/** Adapts Moment.js Dates for use with Angular Material. */
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
-  // Note: all of the methods that accept a `Moment` input parameter immediately call `this.clone`
-  // on it. This is to ensure that we're working with a `Moment` that has the correct locale setting
-  // while avoiding mutating the original object passed to us. Just calling `.locale(...)` on the
-  // input would mutate the object.
   private _localeData: {
     firstDayOfWeek: number,
     longMonths: string[],
@@ -75,7 +64,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
   }
 
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-    // Moment.js doesn't support narrow month names, so we just use short if narrow is requested.
     return style === 'long' ? this._localeData.longMonths : this._localeData.shortMonths;
   }
 
@@ -110,8 +98,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
   }
 
   createDate(year: number, month: number, date: number): Moment {
-    // Moment.js will create an invalid date if any of the components are out of bounds, but we
-    // explicitly check each case so we can throw more descriptive errors.
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
@@ -122,7 +108,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     const result = moment({year, month, date}).locale(this.locale);
 
-    // If the result isn't valid, the date must have been out of bounds for this month.
     if (!result.isValid()) {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
     }
@@ -135,8 +120,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
   }
 
   parse(value: any, parseFormat: string | string[]): Moment | null {
-    console.log(value);
-
     if (!value || value === '') {
       return null;
     }
@@ -169,11 +152,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     return this.clone(date).format();
   }
 
-  /**
-   * Returns the given value if given a valid Moment or null. Deserializes valid ISO 8601 strings
-   * (https://www.ietf.org/rfc/rfc3339.txt) and valid Date objects into valid Moments and empty
-   * string into null. Returns an invalid date for all other values.
-   */
   deserialize(value: any): Moment | null {
     let date;
     if (value instanceof Date) {

@@ -9,12 +9,12 @@ import {MomentDateAdapter} from "../other/date.adapter";
 
 const formats = {
   parse: {
-    dateInput: 'D MMMM, YYYY'
+    dateInput: 'D MMMM YYYY'
   },
   display: {
-    dateInput: 'D MMMM, YYYY',
+    dateInput: 'D MMMM YYYY',
     monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'D MMMM, YYYY',
+    dateA11yLabel: 'D MMMM YYYY',
     monthYearA11yLabel: 'MMMM YYYY'
   }
 };

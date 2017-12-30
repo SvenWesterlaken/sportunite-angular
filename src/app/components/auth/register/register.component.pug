@@ -1,6 +1,6 @@
 doctype html
 form([formGroup]="registerForm").register-container
-  app-stepper([linear]="false")
+  app-stepper([linear]="true")
     app-step(formGroupName="registerName", [stepControl]="registerForm.get('registerName')")
       .big-form-title-container
         h3.big-form-header Zouden wij mogen weten hoe u heet?

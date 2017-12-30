@@ -15,8 +15,6 @@ export class RegisterComponent implements OnInit {
   private registerForm: FormGroup;
   @ViewChild(StepperComponent) stepper: StepperComponent;
 
-
-
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +29,7 @@ export class RegisterComponent implements OnInit {
         email: new FormControl(null, [Validators.required, CustomValidators.email])
       }),
       registerBirth: new FormGroup({
-        birth: new FormControl(null, [Validators.required, ValidateDateFormat, CustomValidators.maxDate(moment().format())])
+        birth: new FormControl(moment().subtract(1, 'days'), [Validators.required, ValidateDateFormat, CustomValidators.maxDate(moment().format())])
       }),
       registerGender: new FormGroup({
         gender: new FormControl(null, Validators.required)
