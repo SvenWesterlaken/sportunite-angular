@@ -36,11 +36,11 @@ export class RegisterComponent implements OnInit {
       }),
       registerAddress: new FormGroup({
         postalCode: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$/i)]),
-        number: new FormControl(null, [Validators.required, CustomValidators.digits, Validators.maxLength(3)])
+        number: new FormControl(null, [Validators.required, CustomValidators.digits, Validators.maxLength(3)]),
+        suffix: new FormControl(null, Validators.maxLength(1))
       }),
       registerAddressConfirmation: new FormGroup({
         street: new FormControl(null, Validators.required),
-        suffix: new FormControl(null, Validators.maxLength(1)),
         city: new FormControl(null, Validators.required),
         state: new FormControl(null, Validators.required),
         country: new FormControl('Nederland', Validators.required)

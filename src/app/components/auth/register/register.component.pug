@@ -1,6 +1,6 @@
 doctype html
 form([formGroup]="registerForm").register-container
-  app-stepper([linear]="true")
+  app-stepper([linear]="false")
     app-step(formGroupName="registerName", [stepControl]="registerForm.get('registerName')")
       .big-form-title-container
         h3.big-form-header Zouden wij mogen weten hoe u heet?
@@ -45,4 +45,36 @@ form([formGroup]="registerForm").register-container
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
         button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerBirth').invalid", type='button') Volgende stap
+
+    app-step(formGroupName="registerGender")
+      .big-form-title-container
+        h3.big-form-header {{firstname}}, hoe beschrijft u uzelf?
+
+      .big-form-input-container
+        mat-form-field.big-form-field(floatLabel="never")
+          mat-select(placeholder="Geslacht", formControlName="gender")
+            mat-option(value="male") Man
+            mat-option(value="female") Vrouw
+
+      .big-form-footer-container
+        span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+        button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerGender').invalid", type='button') Volgende stap
+
+    app-step(formGroupName="registerAddress")
+      .big-form-title-container
+        h3.big-form-header Wat zijn uw adresgegevens?
+
+      .big-form-input-container
+        mat-form-field.big-form-field(floatLabel="never")
+          input(matInput, placeholder="Postcode", formControlName="postalCode", type="text")
+        mat-form-field.big-form-field(floatLabel="never")
+          input(matInput, placeholder="Huisnummer", formControlName="number", type="text")
+        mat-form-field.big-form-field(floatLabel="never")
+          input(matInput, placeholder="Toev.", formControlName="suffix", type="text")
+
+      .big-form-footer-container
+        span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+        button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerAddress').invalid", type='button') Volgende stap
+
+
 
