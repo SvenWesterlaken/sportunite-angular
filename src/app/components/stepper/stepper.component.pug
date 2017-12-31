@@ -5,5 +5,5 @@
                                   [selected]="selectedIndex === i", [active]="step.completed || selectedIndex === i || !linear", [optional]="step.optional", [class.selected]="selectedIndex === i")
 
 .stepper-container
-  .stepper-content(*ngFor="let step of _steps; let i = index", role="tabpanel", [@stepTransition]="_getAnimationDirection(i)", [id]="_getStepContentId(i)", [attr.aria-expanded]="selectedIndex === i")
+  .stepper-content(*ngFor="let step of _steps; let i = index", role="tabpanel", [@stepTransition]="getAnimationDirection(i)", [id]="_getStepContentId(i)", [attr.aria-expanded]="selectedIndex === i")
     ng-container([ngTemplateOutlet]="step.content")

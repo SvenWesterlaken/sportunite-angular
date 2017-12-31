@@ -1,0 +1,86 @@
+.big-form-title-container
+  padding: 0 16px 16px
+
+  h3.big-form-header
+    margin: 0
+    padding: 0
+    font:
+      size: 32px
+      weight: 500
+
+  span.big-form-subheader
+    padding: 0
+    margin: 0
+    font-size: 18px
+    color: $text-secondary
+
+.big-form-input-container
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 0
+
+  mat-form-field.mat-form-field
+    font-size: 16px
+    width: 100%
+    padding: 0 16px
+    box-sizing: border-box
+
+    &.big-form-field
+      font-size: 32px
+
+      .mat-form-field-infix
+        border-top: none
+
+      &.mat-form-field-invalid .mat-form-field-label
+        color: $text-disabled
+
+      .mat-form-field-subscript-wrapper
+        font-size: 50%
+        margin-top: 0
+
+.big-form-footer-container
+  padding: 8px 16px 0
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  span.step-counter
+    font-size: 24px
+    color: $text-secondary
+
+@media only screen and (max-width : 968px)
+  .big-form-title-container
+    h3.big-form-header
+      font-size: 24px
+
+    span.big-form-subheader
+      font-size: 16px
+
+  .big-form-input-container
+    flex-wrap: wrap
+
+    mat-form-field.mat-form-field.big-form-field
+      flex: 0 0 100%
+      font-size: 16px
+
+      .mat-form-field-infix
+        border-top: 0.5em solid transparent
+
+      .mat-form-field-subscript-wrapper
+        font-size: 75%
+        margin-top: 0.54166667em
+
+  .big-form-footer-container
+    padding-top: 16px
+
+    button.btn.btn-large
+      height: 36px
+      border-radius: 18px
+      font-size: 14px
+
+
+
+
+
+

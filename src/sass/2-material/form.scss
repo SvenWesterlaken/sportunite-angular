@@ -9,24 +9,23 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   // Label colors. Required is used for the `*` star shown in the label.
-  $label-color: mat-color($foreground, secondary-text);
+  $label-color: $text-disabled;
   $focused-label-color: mat-color($primary);
   $required-label-color: mat-color($accent);
 
   // Underline colors.
   $underline-color: $text;
   $underline-color-accent: mat-color($accent);
-  $underline-color-warn: mat-color($warn);
+  $underline-color-warn: $danger;
   $underline-focused-color: mat-color($primary);
 
   .mat-form-field-label {
     color: $label-color;
-    font-size: 16px !important;
-}
+  }
 
   .mat-hint {
     color: mat-color($foreground, secondary-text);
-}
+  }
 
   .mat-focused .mat-form-field-label {
     color: $focused-label-color;
@@ -102,12 +101,10 @@
   }
 
   .mat-input-element {
-    font-size: 16px !important;
     padding: 2px 0 !important;
 
     @include input-placeholder {
       color: _mat-control-placeholder-color($theme);
-      font-size: 16px !important;
     }
   }
 }
