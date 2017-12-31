@@ -7,15 +7,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 	styleUrls: ['./sportevent-list.component.sass']
 })
 export class SportEventListComponent implements OnInit {
-	
+
 	constructor(private router: Router, private route: ActivatedRoute) {
 	}
-	
+
 	ngOnInit() {
 	}
-	
 	onCreateNewEvent() {
 		this.router.navigate(['add'], {relativeTo: this.route});
 	}
-	
+
 }

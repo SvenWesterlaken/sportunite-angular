@@ -13,6 +13,7 @@ import {FormInputValidatorDirective} from "../components/sportevent/sportevent-a
 import {EventService} from "../services/event.service";
 import {HttpModule} from "@angular/http";
 import {StepperModule} from "./stepper.module";
+import {DatepickerModule} from "./datepicker.module";
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,7 @@ import {StepperModule} from "./stepper.module";
 		ReactiveFormsModule,
 		StepperModule,
 		FormsModule,
+    DatepickerModule,
 		MatInputModule,
 		BrowserAnimationsModule,
 		HttpModule,

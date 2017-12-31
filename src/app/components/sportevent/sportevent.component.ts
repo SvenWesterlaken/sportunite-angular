@@ -7,11 +7,11 @@ import {Component, OnInit} from '@angular/core';
 	styleUrls: ['./sportevent.component.sass']
 })
 export class SportEventComponent implements OnInit {
-	
+
 	constructor() {
 	}
-	
+
 	ngOnInit() {
 	}
-	
+
 }

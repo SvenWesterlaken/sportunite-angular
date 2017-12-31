@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {ViewChild, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Sport} from "../../../models/Sport";
-import {SportEvent} from "../../../models/SportEvent";
+import * as moment from 'moment';
 import {EventService} from "../../../services/event.service";
 import {Router} from "@angular/router";
+import {StepperComponent} from "../../stepper/stepper.component";
+import { CustomValidators } from 'ng4-validators';
+import {ValidateDateFormat} from "../../../other/date.validator";
 
 @Component({
 	selector: 'app-sportevent-add',
@@ -17,6 +20,10 @@ export class SporteventAddComponent implements OnInit {
 	private endTime;
 	private sports = [];
 
+  @ViewChild(StepperComponent) stepper: StepperComponent;
+
+  tomorrow = moment().add(1, 'days');
+
 	constructor(private eventService: EventService, private router: Router) {
 	}
 
@@ -26,12 +33,13 @@ export class SporteventAddComponent implements OnInit {
 			.map(result => { return result.json() as Sport})
 			.subscribe(sports => this.sports = sports._embedded.sports);
 		this.initForm();
+
 	}
 
 	getForm() {
 		return this.eventForm;
 	}
-	
+
 	private initForm() {
 		let sportEventName = '';
 		let sportId = '';
@@ -42,20 +50,20 @@ export class SporteventAddComponent implements OnInit {
 		let minAttendees = '';
 		let maxAttendees = '';
 		let description = '';
-		
+
 		this.eventForm = new FormGroup({
 			'name': new FormControl(sportEventName, Validators.compose([Validators.required, Validators.minLength(3)])),
 			'sport': new FormControl(sportId, Validators.required),
 			'startTime': new FormControl(startTime, Validators.required),
 			'endTime': new FormControl(endTime, Validators.required),
-			'date': new FormControl(date, Validators.required),
+			'date': new FormControl(date, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
 			'location': new FormControl(location, Validators.required),
 			'minAttendees': new FormControl(minAttendees, Validators.compose([Validators.required, Validators.min(2)])),
 			'maxAttendees': new FormControl(maxAttendees, Validators.compose([Validators.required, Validators.min(2)])),
 			'description': new FormControl(description)
 		});
 	}
-	
+
 	onSubmit() {
 
 		const event = {
@@ -64,8 +72,9 @@ export class SporteventAddComponent implements OnInit {
 			'minAttendees': this.eventForm.value.minAttendees,
 			'maxAttendees': this.eventForm.value.maxAttendees,
 			'description': this.eventForm.value.description,
-			'eventEndTime': this.eventForm.value.date + "T" + this.eventForm.value.endTime,
-			'eventStartTime': this.eventForm.value.date + "T" + this.eventForm.value.startTime
+      //temporary solution 
+			'eventEndTime': this.eventForm.value.date.format("YYYY-MM-DD") + "T" + this.eventForm.value.endTime,
+			'eventStartTime': this.eventForm.value.date.format("YYYY-MM-DD") + "T" + this.eventForm.value.startTime
 		};
 
 		console.log(event);
@@ -75,7 +84,7 @@ export class SporteventAddComponent implements OnInit {
 
 		this.router.navigate(['/sportevent']);
 	}
-	
+
 	revalidate() {
 		this.eventForm.controls['maxAttendees'].updateValueAndValidity();
 		this.eventForm.controls['endTime'].updateValueAndValidity();

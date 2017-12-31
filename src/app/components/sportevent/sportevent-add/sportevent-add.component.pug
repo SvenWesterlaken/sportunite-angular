@@ -1,54 +1,91 @@
 .form-container
     form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
         app-stepper
+
             app-step
-                label(for="name") Wat is de naam van de sportactiviteit?
-                .row
-                    mat-form-field.full-field
+                .big-form-title-container
+                  h3.big-form-header Wat is de naam van de sportactiviteit?
+
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#name(matInput type="text", formControlName="name", placeholder="Vul een naam in")
+
+                .big-form-footer-container
+                  span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('name').invalid", type='button') Volgende stap
             app-step
-                label Welke sport hoort bij deze activiteit?
-                .row
-                    mat-form-field.full-field
+                .big-form-title-container
+                  h3.big-form-header Welke sport hoort bij deze activiteit?
+
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
                             mat-option(*ngFor="let sport of sports", [value]="sport")
                                 p {{sport.name}}
+                .big-form-footer-container
+                  span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('sport').invalid", type='button') Volgende stap
 
             app-step
-                label Wanneer vindt de sportactiviteit plaats?
-                .row
-                    mat-form-field
+                .big-form-title-container
+                  h3.big-form-header Wanneer vindt de sportactiviteit plaats?
+
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#startTime(matInput type="time", formControlName="startTime", placeholder="Begintijd", [(ngModel)]="startTime", (change)="revalidate()", (input)="revalidate()")
                     span Tot
-                    mat-form-field
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd", [(ngModel)]="endTime", app-form-valid [minimumValue]="startTime")
                     span Op
-                    mat-form-field
-                        input#date(matInput type="date", formControlName="date", placeholder="Datum")
+                    mat-form-field.big-form-field(floatLabel="never")
+                        input(matInput, [min]="tomorrow", [matDatepicker]="datePicker", placeholder="Datum", formControlName="date", type="text")
+                        mat-datepicker-toggle(matSuffix, [for]="datePicker")
+                        mat-datepicker(#datePicker)
+
+                .big-form-footer-container
+                    span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('date').invalid", type='button') Volgende stap
 
             app-step
-                label(for="location") Waar zal de sportactiviteit plaatsvinden?
-                .row
-                    mat-form-field.full-field
+                .big-form-title-container
+                  h3.big-form-header Waar zal de sportactiviteit plaatsvinden?
+
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
 
+                .big-form-footer-container
+                    span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('location').invalid", type='button') Volgende stap
+
             app-step
-                label Hoeveel mensen wil je laten deelnemen?
-                .row
-                    span(style="color: gray; font-style: italic" ) (inclusief jezelf)
-                .row
-                    mat-form-field
+                .big-form-title-container
+                  h3.big-form-header Hoeveel mensen wil je laten deelnemen?
+                  span.big-form-subheader(style="font-style: italic" ) (inclusief jezelf)
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="Minimum", [(ngModel)]="inputValue", (change)="revalidate()", (input)="revalidate()")
                     span tot
-                    mat-form-field
+                    mat-form-field.big-form-field(floatLabel="never")
                         input#maxAttendees(matInput type="number", style="text-align:center", min=2,  formControlName="maxAttendees", placeholder="Maximum", app-form-valid [minimumValue]="inputValue")
                     span personen
 
+                .big-form-footer-container
+                  span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('maxAttendees').invalid", type='button') Volgende stap
+
+
             app-step
-                label(for="description") Wil je nog meer informatie geven over de sportactiviteit?
-                .row
-                    mat-form-field.full-field
+                .big-form-title-container
+                  h3.big-form-header Wil je nog meer informatie geven over de sportactiviteit?
+
+                .big-form-input-container
+                    mat-form-field.big-form-field(floatLabel="never")
                         textarea#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
+
+                .big-form-footer-container
+                    span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('description').invalid", type='button') Bekijk resultaat
 
             app-step
                 mat-card.summary_card
@@ -63,4 +100,6 @@
                         h1 Extra informatie
                         p {{ eventForm.value.description }}
 
-                button(type="submit", [disabled]="!getForm().valid") Evenement aanmaken
+                .big-form-footer-container
+                  span 
+                  button.btn.btn-large(type="submit", [disabled]="!getForm().valid") Evenement aanmaken

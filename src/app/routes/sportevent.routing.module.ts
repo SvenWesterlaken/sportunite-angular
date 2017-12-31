@@ -4,11 +4,13 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 
 import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
+import {AuthGuard} from "../other/auth.guard";
 
 const routes = [
 	{
 		path: 'sportevent',
 		component: SportEventComponent,
+    /*canActivate: [AuthGuard],*/
 		children: [
 			{
 				path: '',
@@ -20,15 +22,6 @@ const routes = [
 			}
 		]
 	}];
-
-/*import {AuthGuard} from '../other/auth.guard';
-
-const routes = [
-	{ path: 'sportevent', component: SportEventComponent, canActivate: [AuthGuard], children: [
-		{ path: '', component: SportEventListComponent }
-	] }
-
-];*/
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],
