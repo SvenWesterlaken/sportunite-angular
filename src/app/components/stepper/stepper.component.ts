@@ -1,6 +1,7 @@
 import {
   AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, forwardRef,
-  Inject, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
+  HostListener,
+  Inject, OnInit, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
 } from '@angular/core';
 import {CdkStep, CdkStepper} from '@angular/cdk/stepper';
 import {StepperNavComponent} from './stepper-nav/stepper-nav.component';
@@ -18,7 +19,8 @@ import {ErrorStateMatcher} from '@angular/material';
 })
 export class StepComponent extends CdkStep implements ErrorStateMatcher {
 
-  constructor(@Inject(forwardRef(() => StepperComponent)) stepper: StepperComponent, @SkipSelf() private _errorStateMatcher: ErrorStateMatcher) {
+  constructor(@Inject(forwardRef(() => StepperComponent)) stepper: StepperComponent,
+              @SkipSelf() private _errorStateMatcher: ErrorStateMatcher) {
     super(stepper);
   }
 
@@ -57,8 +59,38 @@ export class StepperDirective extends CdkStepper implements AfterContentInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class StepperComponent extends StepperDirective {
+export class StepperComponent extends StepperDirective implements OnInit {
+  private isSmallScreen;
 
+  ngOnInit() {
+    this.isSmallScreen = window.screen.width < 968;
+    console.log(this.isSmallScreen);
+  }
+
+  // Change state when switching over media queries
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Window) {
+    if (event.screen.width < 968 && !this.isSmallScreen) {
+      this.isSmallScreen = true;
+
+      // Update the transition state for all the steps
+      this._steps.forEach((step: StepComponent, index: number) => {
+        this.getAnimationDirection(index);
+      });
+
+    } else if (event.screen.width >= 968 && this.isSmallScreen) {
+      this.isSmallScreen = false;
+
+      // Update the transition state for all the steps
+      this._steps.forEach((step: StepComponent, index: number) => {
+        this.getAnimationDirection(index);
+      });
+
+    }
+  }
+
+
+  // Override the states on a small screen (for better animations)
   getAnimationDirection(index: number): string {
     const direction = super._getAnimationDirection(index);
     return window.screen.width < 968 ? `${direction}-small` : direction;
