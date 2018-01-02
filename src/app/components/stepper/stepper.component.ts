@@ -69,16 +69,10 @@ export class StepperComponent extends StepperDirective implements OnInit {
 
   // Change state when switching over media queries
   @HostListener('window:resize', ['$event'])
-  onResize(event: Window) {
-    if (event.screen.width < 968 && !this.isSmallScreen) {
+  onResize(event) {
+    if (window.screen.width < 968 && !this.isSmallScreen) {
       this.isSmallScreen = true;
-
-      // Update the transition state for all the steps
-      this._steps.forEach((step: StepComponent, index: number) => {
-        this.getAnimationDirection(index);
-      });
-
-    } else if (event.screen.width >= 968 && this.isSmallScreen) {
+    } else if (window.screen.width >= 968 && this.isSmallScreen) {
       this.isSmallScreen = false;
 
       // Update the transition state for all the steps
@@ -88,7 +82,6 @@ export class StepperComponent extends StepperDirective implements OnInit {
 
     }
   }
-
 
   // Override the states on a small screen (for better animations)
   getAnimationDirection(index: number): string {
