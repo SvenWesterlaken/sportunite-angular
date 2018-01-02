@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {StepperComponent} from "../../stepper/stepper.component";
 import { CustomValidators } from 'ng4-validators';
 import {ValidateDateFormat} from "../../../other/date.validator";
+import {Hall} from "../../../models/Hall";
 
 @Component({
 	selector: 'app-sportevent-add',
@@ -19,6 +20,8 @@ export class SporteventAddComponent implements OnInit {
 	private startTime;
 	private endTime;
 	private sports = [];
+  halls : Hall[];
+  resultHalls = [];
 
   @ViewChild(StepperComponent) stepper: StepperComponent;
 
@@ -32,7 +35,13 @@ export class SporteventAddComponent implements OnInit {
 		this.eventService.getSports()
 			.map(result => { return result.json() as Sport})
 			.subscribe(sports => this.sports = sports._embedded.sports);
+
+    this.eventService.getHalls()
+      .map(result => { return result.json() as Hall})
+      .subscribe(halls => this.halls = halls._embedded.halls as Hall[]);
+
 		this.initForm();
+
 
 	}
 
@@ -89,5 +98,20 @@ export class SporteventAddComponent implements OnInit {
 		this.eventForm.controls['maxAttendees'].updateValueAndValidity();
 		this.eventForm.controls['endTime'].updateValueAndValidity();
 	}
+
+  getHalls(sport) {
+
+    let resultHalls = [];
+
+    this.halls.forEach(function(item,index){
+
+      if (item.sports.findIndex(x => x.name === sport.name) != -1) {
+        resultHalls.push(item);
+      }
+    });
+
+    this.resultHalls = resultHalls;
+  }
+  
 
 }

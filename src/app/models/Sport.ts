@@ -1,7 +1,7 @@
 export class Sport {
 
-    private name: string;
-    private sportId : number;
+    name: string;
+    sportId : number;
 
 
     constructor(name : string, sportId: number ) {

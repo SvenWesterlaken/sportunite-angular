@@ -19,7 +19,7 @@
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
+                        mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in", (change)="getHalls(eventForm.value.sport)")
                             mat-option(*ngFor="let sport of sports", [value]="sport")
                                 p {{sport.name}}
                 .big-form-footer-container
@@ -48,11 +48,13 @@
 
             app-step
                 .big-form-title-container
-                  h3.big-form-header Waar zal de sportactiviteit plaatsvinden?
+                    h3.big-form-header Waar zal de sportactiviteit plaatsvinden?
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
+                      mat-select#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
+                        mat-option(*ngFor="let hall of resultHalls", [value]="hall")
+                          p {{hall.name}}
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}

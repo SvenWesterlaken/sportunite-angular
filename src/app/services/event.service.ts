@@ -22,4 +22,8 @@ export class EventService {
        return this.http.get(`${environment.backend.url}/sports`)
     }
 
+    getHalls(): Observable<any> {
+      return this.http.get(`${environment.backend.url}/halls`)
+    }
+
 }
