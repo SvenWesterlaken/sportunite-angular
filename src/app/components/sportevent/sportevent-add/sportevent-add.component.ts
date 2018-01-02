@@ -72,7 +72,7 @@ export class SporteventAddComponent implements OnInit {
 			'minAttendees': this.eventForm.value.minAttendees,
 			'maxAttendees': this.eventForm.value.maxAttendees,
 			'description': this.eventForm.value.description,
-      //temporary solution 
+      //temporary solution
 			'eventEndTime': this.eventForm.value.date.format("YYYY-MM-DD") + "T" + this.eventForm.value.endTime,
 			'eventStartTime': this.eventForm.value.date.format("YYYY-MM-DD") + "T" + this.eventForm.value.startTime
 		};

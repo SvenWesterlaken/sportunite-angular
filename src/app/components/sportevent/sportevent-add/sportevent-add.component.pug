@@ -88,18 +88,25 @@
                     button.btn.btn-large(appStepperNext, [disabled]="getForm().get('description').invalid", type='button') Bekijk resultaat
 
             app-step
-                mat-card.summary_card
+                mat-card
                     mat-card-header
-                        mat-card-title Overzicht
-                        mat-card-subtitle Om gegevens aan te passen dien je terug te gaan
-                    mat-card-content
-                        h1 {{ eventForm.value.name }}
-                        p Om bezig te zijn met {{ eventForm.value.sport.name }}
-                        p Op {{ eventForm.value.date | date: 'longDate' }} van {{ eventForm.value.startTime }} tot {{ eventForm.value.endTime }}
-                        p Met {{ eventForm.value.minAttendees }} tot {{ eventForm.value.maxAttendees }} personen
-                        h1 Extra informatie
+                        mat-card-title
+                          h3 Overzicht
+                        mat-card-subtitle Er is de mogelijkheid om dingen aan te passen door terug te gaan
+                    mat-card-content.summary
+                        h4 {{ eventForm.value.name }}
+                        p Om bezig te zijn met
+                          span.card  {{ eventForm.value.sport.name }}
+                        p Op #[span.card {{ eventForm.value.date | date: 'longDate' }}] van #[span.card {{ eventForm.value.startTime }}] tot #[span.card {{ eventForm.value.endTime }}]
+                        p Met #[span.card {{ eventForm.value.minAttendees }}] tot #[span.card {{ eventForm.value.maxAttendees }}] personen
+
+
+                    mat-card-content.footer
+                        h4 Extra informatie
                         p {{ eventForm.value.description }}
 
+
+
                 .big-form-footer-container
-                  span 
+                  span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
                   button.btn.btn-large(type="submit", [disabled]="!getForm().valid") Evenement aanmaken
