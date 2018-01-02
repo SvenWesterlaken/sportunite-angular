@@ -1,17 +1,36 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, Input, OnInit,
-  QueryList,
-  ViewChildren, ViewEncapsulation
+  AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, forwardRef,
+  Inject, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
 } from '@angular/core';
-import {error} from 'util';
-import {CdkStepper} from '@angular/cdk/stepper';
+import {CdkStep, CdkStepper} from '@angular/cdk/stepper';
 import {StepperNavComponent} from './stepper-nav/stepper-nav.component';
-import {StepComponent} from './step/step.component';
 import {takeUntil} from 'rxjs/operators';
-import {state, style, trigger, transition, animate} from "@angular/animations";
-import {stepperAnimation} from "../../animations/stepper.animation";
+import {stepperAnimation} from '../../animations/stepper.animation';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material';
 
 
+// Step Component
+@Component({
+  selector: 'app-step',
+  templateUrl: './step/step.component.pug',
+  styleUrls: ['./step/step.component.sass']
+})
+export class StepComponent extends CdkStep implements ErrorStateMatcher {
+
+  constructor(@Inject(forwardRef(() => StepperComponent)) stepper: StepperComponent, @SkipSelf() private _errorStateMatcher: ErrorStateMatcher) {
+    super(stepper);
+  }
+
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const originalErrorState = this._errorStateMatcher.isErrorState(control, form);
+    const customErrorState = !!(control && control.invalid && this.interacted);
+    return originalErrorState || customErrorState;
+  }
+
+}
+
+// Stepper Directive
 @Directive({
   selector: '[appStepper]'
 })
@@ -24,7 +43,7 @@ export class StepperDirective extends CdkStepper implements AfterContentInit {
   }
 }
 
-
+// Stepper Component
 @Component({
   selector: 'app-stepper',
   exportAs: 'AppStepper',
