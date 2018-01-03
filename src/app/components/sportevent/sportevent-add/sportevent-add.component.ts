@@ -69,7 +69,7 @@ export class SporteventAddComponent implements OnInit {
 			'location': new FormControl(location, Validators.required),
 			'minAttendees': new FormControl(minAttendees, Validators.compose([Validators.required, Validators.min(2)])),
 			'maxAttendees': new FormControl(maxAttendees, Validators.compose([Validators.required, Validators.min(2)])),
-			'description': new FormControl(description)
+			'description': new FormControl(description, Validators.compose([Validators.required, Validators.minLength(50), Validators.maxLength(500)])),
 		});
 	}
 
@@ -112,6 +112,5 @@ export class SporteventAddComponent implements OnInit {
 
     this.resultHalls = resultHalls;
   }
-  
 
 }
