@@ -4,13 +4,14 @@ import {RegisterComponent} from '../components/auth/register/register.component'
 import {AuthRoutingModule} from '../routes/auth.routing.module';
 import {SharedModule} from './shared.module';
 import {
-  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatInputModule,
+  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatInputModule, MatProgressSpinnerModule,
   MatSelectModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {StepperModule} from './stepper.module';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {DatepickerModule} from "./datepicker.module";
+import {AddressService} from "../services/address.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import {DatepickerModule} from "./datepicker.module";
     ReactiveFormsModule,
     StepperModule,
     DatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    AddressService
   ]
 })
 export class AuthModule {}

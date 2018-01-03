@@ -64,7 +64,6 @@ export class StepperComponent extends StepperDirective implements OnInit {
 
   ngOnInit() {
     this.isSmallScreen = window.screen.width < 968;
-    console.log(this.isSmallScreen);
   }
 
   // Change state when switching over media queries

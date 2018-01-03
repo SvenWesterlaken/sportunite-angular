@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs/Observable';
+import {User} from "../models/user";
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     return this.getToken() != null;
   }
 
-  register(user): Observable<any> {
+  register(user: User): Observable<any> {
     return this.http.post(`${environment.api.url}/register`, user);
   }
 

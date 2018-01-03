@@ -1,10 +1,10 @@
 doctype html
-form([formGroup]="registerForm").register-container
-  app-stepper([linear]="false")
+form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
+  app-stepper([linear]="true")
     app-step(formGroupName="registerName", [stepControl]="registerForm.get('registerName')")
       .big-form-title-container
         h3.big-form-header Zouden wij mogen weten hoe u heet?
-        span.big-form-subheader Dan kunnen wij, en anderen, u persoonlijker aanspreken
+        span.big-form-subheader Dan kunnen wij, en anderen, u persoonlijker aanspreken.
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
           input(matInput, placeholder="Voornaam", formControlName="firstName", type="text", [(ngModel)]="firstname")
@@ -19,7 +19,7 @@ form([formGroup]="registerForm").register-container
     app-step(formGroupName="registerEmail", [stepControl]="registerForm.get('registerEmail')")
       .big-form-title-container
         h3.big-form-header Hallo, {{firstname}}! Wat is uw e-mailadres?
-        span.big-form-subheader Dit emailadres zal gebruikt worden om in te loggen en u te bereiken als er problemen zijn
+        span.big-form-subheader Dit emailadres zal gebruikt worden om in te loggen en u te bereiken als er problemen zijn.
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
           input(matInput, placeholder="E-mailadres", formControlName="email", type="email")
@@ -29,7 +29,7 @@ form([formGroup]="registerForm").register-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
         button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerEmail').invalid", type='button') Volgende stap
 
-    app-step(formGroupName="registerBirth")
+    app-step(formGroupName="registerBirth", [stepControl]="registerForm.get('registerBirth')")
       .big-form-title-container
         h3.big-form-header En wanneer bent u geboren, {{firstname}}?
 
@@ -37,7 +37,7 @@ form([formGroup]="registerForm").register-container
         mat-form-field.big-form-field(floatLabel="never", hintLabel="Bijv: 1 januari 2000")
           input(matInput, [max]="maxDate", [matDatepicker]="birthDatePicker", placeholder="Geboortedatum", formControlName="birth", type="text")
           mat-datepicker-toggle(matSuffix, [for]="birthDatePicker")
-          mat-datepicker(#birthDatePicker)
+          mat-datepicker(#birthDatePicker, [touchUi]="stepper.isSmallScreen")
           mat-error(*ngIf="registerForm.get('registerBirth.birth').hasError('maxDate') && !registerForm.get('registerBirth.birth').hasError('required') && !registerForm.get('registerBirth.birth').hasError('dateFormat')") Datum moet voor vandaag zijn
           mat-error(*ngIf="registerForm.get('registerBirth.birth').hasError('dateFormat') && !registerForm.get('registerBirth.birth').hasError('required')") Ongeldige datum
           mat-error(*ngIf="registerForm.get('registerBirth.birth').hasError('required')") Dit veld is verplicht
@@ -46,7 +46,7 @@ form([formGroup]="registerForm").register-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
         button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerBirth').invalid", type='button') Volgende stap
 
-    app-step(formGroupName="registerGender")
+    app-step(formGroupName="registerGender", [stepControl]="registerForm.get('registerGender')")
       .big-form-title-container
         h3.big-form-header {{firstname}}, hoe beschrijft u uzelf?
 
@@ -60,21 +60,70 @@ form([formGroup]="registerForm").register-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
         button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerGender').invalid", type='button') Volgende stap
 
-    app-step(formGroupName="registerAddress")
+    app-step(formGroupName="registerAddress", [stepControl]="registerForm.get('registerAddress')")
       .big-form-title-container
         h3.big-form-header Wat zijn uw adresgegevens?
+        span.big-form-subheader Hiermee wordt de rest van uw adres aangevuld en kan de afstand met evenementen berekend worden.
 
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
           input(matInput, placeholder="Postcode", formControlName="postalCode", type="text")
-        mat-form-field.big-form-field(floatLabel="never")
+          mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('pattern') && !registerForm.get('registerAddress.postalCode').hasError('maxlength')") Ongeldige postcode
+          mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('maxlength')") Maximaal 6 tekens
+          mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('noAddress')") Geen adres gevonden
+          mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('required')") Dit veld is verplicht
+        mat-form-field.big-form-field.small50(floatLabel="never")
           input(matInput, placeholder="Huisnummer", formControlName="number", type="text")
-        mat-form-field.big-form-field(floatLabel="never")
+          mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('maxlength')") Maximaal 4 cijfers
+          mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('digits')") Alleen cijfers toegestaan
+          mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('required')") Dit veld is verplicht
+        mat-form-field.big-form-field.small50(floatLabel="never")
           input(matInput, placeholder="Toev.", formControlName="suffix", type="text")
+          mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('pattern') && !registerForm.get('registerAddress.suffix').hasError('maxlength')") Alleen letters toegestaan
+          mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('maxlength')") Maximaal 1 teken
+          mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('noAddress')") Geen adres gevonden met deze letter
+          mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('required')") Dit veld is verplicht
 
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-        button.btn.btn-large(appStepperNext, [disabled]="registerForm.get('registerAddress').invalid", type='button') Volgende stap
+        button.btn.btn-large((click)="getAddress()", [disabled]="registerForm.get('registerAddress').invalid", type='button') Volgende stap
+
+    app-step
+      .big-form-title-container
+        h3.big-form-header Kloppen deze adresgegevens?
+        span.big-form-subheader Als deze niet kloppen kunt u kijken of uw bij de vorige stap de juiste gegevens hebt ingevuld.
+
+      .big-form-input-container
+        mat-progress-spinner.centered-spinner(mode="indeterminate", [diameter]="44", [strokeWidth]="3", *ngIf="!address")
+        p.big-form-info-content([class.hidden]="!address") {{address?.street}} {{address?.number}}{{address?.suffix}} #[br] {{address?.postal_code}}, {{address?.city}}
+
+      .big-form-footer-container
+        span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+        div
+          button.btn.btn-large.danger((click)="cancelAddress()", type='button') Terug
+          button.btn.btn-large((click)="getAddress()", [disabled]="!address", type='button') Volgende stap
+
+    app-step(formGroupName="registerPassword", [stepControl]="registerForm.get('registerPassword')")
+      .big-form-title-container
+        h3.big-form-header Tot slot, nog een wachtwoord voor uw account.
+        span.big-form-subheader Dit is natuurlijk om uw account te beveiligen en zal gebruikt worden tijdens het inloggen
+
+      .big-form-input-container
+        mat-form-field.big-form-field(floatLabel="never")
+          input(matInput, placeholder="Wachtwoord", formControlName="password", type="password")
+          mat-error(*ngIf="registerForm.get('registerPassword.password').hasError('required')") Dit veld is verplicht
+        mat-form-field.big-form-field(floatLabel="never")
+          input(matInput, placeholder="Herhaal wachtwoord", formControlName="passwordConfirmation", type="password")
+          mat-error(*ngIf="registerForm.get('registerPassword.passwordConfirmation').hasError('equalTo') && !registerForm.get('registerPassword.passwordConfirmation').hasError('required')") Wachtwoorden komen niet overeen
+          mat-error(*ngIf="registerForm.get('registerPassword.passwordConfirmation').hasError('required')") Dit veld is verplicht
+
+      .big-form-footer-container
+        span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
+        button.btn.btn-large([disabled]="registerForm.get('registerPassword').invalid", type='submit') Registreren
+
+
+
+
 
 
 

@@ -1,21 +1,32 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { CustomValidators } from 'ng4-validators';
 import {StepperComponent} from '../../stepper/stepper.component';
 import * as moment from 'moment';
 import {ValidateDateFormat} from '../../../other/date.validator';
+import {AddressService} from '../../../services/address.service';
+import {AuthService} from '../../../services/auth.service';
+import {Subscription} from 'rxjs/Subscription';
+import {Address} from '../../../models/address';
+import {HttpErrorResponse} from '@angular/common/http';
+import {User} from "../../../models/user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.pug',
   styleUrls: ['./register.component.sass']
 })
-export class RegisterComponent implements OnInit {
-  private maxDate = moment();
-  private registerForm: FormGroup;
+export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild(StepperComponent) stepper: StepperComponent;
 
-  constructor() { }
+  private maxDate = moment();
+  private addressSub: Subscription;
+  private registerForm: FormGroup;
+  private address: Address;
+
+
+  constructor(private addressService: AddressService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     const passwordControl = new FormControl(null, Validators.required);
@@ -29,27 +40,89 @@ export class RegisterComponent implements OnInit {
         email: new FormControl(null, [Validators.required, CustomValidators.email])
       }),
       registerBirth: new FormGroup({
-        birth: new FormControl(moment().subtract(1, 'days'), [Validators.required, ValidateDateFormat, CustomValidators.maxDate(moment().format())])
+        birth: new FormControl(moment().subtract(1, 'days'), [
+          Validators.required,
+          ValidateDateFormat,
+          CustomValidators.maxDate(moment().format())])
       }),
       registerGender: new FormGroup({
         gender: new FormControl(null, Validators.required)
       }),
       registerAddress: new FormGroup({
-        postalCode: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$/i)]),
-        number: new FormControl(null, [Validators.required, CustomValidators.digits, Validators.maxLength(3)]),
-        suffix: new FormControl(null, Validators.maxLength(1))
-      }),
-      registerAddressConfirmation: new FormGroup({
-        street: new FormControl(null, Validators.required),
-        city: new FormControl(null, Validators.required),
-        state: new FormControl(null, Validators.required),
-        country: new FormControl('Nederland', Validators.required)
+        postalCode: new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$/i),
+          Validators.maxLength(6)]),
+        number: new FormControl(null, [Validators.required, CustomValidators.digits, Validators.maxLength(4)]),
+        suffix: new FormControl(null, [Validators.maxLength(1), Validators.pattern(/^[a-zA-Z]+$/)])
       }),
       registerPassword: new FormGroup({
         password: passwordControl,
         passwordConfirmation: new FormControl(null, [Validators.required, CustomValidators.equalTo(passwordControl)])
       })
     });
+  }
+
+  ngOnDestroy() {
+    this.addressSub.unsubscribe();
+  }
+
+  getAddress() {
+    this.stepper.next();
+    this.requestAddress();
+  }
+
+  cancelAddress() {
+    this.stepper.previous();
+    this.address = null;
+  }
+
+  requestAddress() {
+    const values = this.registerForm.value.registerAddress;
+    this.addressSub = this.addressService.getAddress(values.postalCode, values.number, values.suffix).subscribe((response: Address) => {
+      this.address = response;
+    }, (err: HttpErrorResponse) => {
+
+      if (err.status === 404 && err.error.error === 'No address with this suffix') {
+        this.registerForm.get('registerAddress.suffix').setErrors({noAddress: true});
+      } else if (err.status === 404 && err.error.error === 'No address found') {
+        this.registerForm.get('registerAddress.postalCode').setErrors({noAddress: true});
+        this.registerForm.get('registerAddress.number').setErrors({noAddress: true});
+      }
+
+      this.stepper.previous();
+    });
+  }
+
+  register() {
+    const form = this.registerForm.value;
+
+
+    const userObject: User = {
+      email: form.registerEmail.email,
+      password: form.registerPassword.password,
+      firstname: form.registerName.firstName,
+      lastname: form.registerName.lastName,
+      birth: moment(form.registerBirth.birth).toDate(),
+      gender: form.registerGender.gender,
+      address: {
+        street: this.address.street,
+        number: this.address.number,
+        suffix: this.address.suffix,
+        postal_code: this.address.postal_code,
+        city: this.address.city,
+        state: this.address.state,
+        geometry: {
+          coordinates: this.address.coordinates
+        }
+      }
+    };
+
+    console.log(userObject);
+
+    this.auth.register(userObject).subscribe((res) => this.router.navigate(['sportevent']), (err) => console.log(err));
+
+
   }
 
 }
