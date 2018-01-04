@@ -10,7 +10,7 @@ const routes = [
 	{
 		path: 'sportevent',
 		component: SportEventComponent,
-    /*canActivate: [AuthGuard],*/
+    canActivate: [AuthGuard],
 		children: [
 			{
 				path: '',
