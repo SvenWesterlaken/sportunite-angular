@@ -33,15 +33,14 @@ export class SporteventAddComponent implements OnInit {
 	ngOnInit() {
 		console.log(this.eventService.getSports());
 		this.eventService.getSports()
-			.map(result => { return result.json() as Sport})
+			.map(result => { return result as Sport})
 			.subscribe(sports => this.sports = sports._embedded.sports);
 
     this.eventService.getHalls()
-      .map(result => { return result.json() as Hall})
+      .map(result => { return result as Hall})
       .subscribe(halls => this.halls = halls._embedded.halls as Hall[]);
 
 		this.initForm();
-
 
 	}
 
@@ -94,10 +93,17 @@ export class SporteventAddComponent implements OnInit {
 
 		console.log(event);
 		this.eventService.addEvent(event)
-			.map(result => { return result.json() })
-			.subscribe( result => console.log(result));
+			.map(result => { return result })
+			.subscribe( result => {
+          console.log(result.sportEventId);
+          this.eventService.addUserToEvent(result.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
+            .map(result => {return result})
+            .subscribe( result => console.log(result));
+        }
+      );
 
 		this.router.navigate(['/sportevent']);
+
 	}
 
 	revalidateDate() {

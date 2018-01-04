@@ -26,6 +26,7 @@ export class AuthService {
     return this.http.post(`${environment.api.url}/login`, { email: login.email, password: login.password}).toPromise()
       .then((res: {token: string}) => {
         login.keep ? localStorage.setItem('token', res.token) : sessionStorage.setItem('token', res.token);
+        login.keep ? localStorage.setItem('email', login.email) : sessionStorage.setItem('email', login.email);
       });
   }
 

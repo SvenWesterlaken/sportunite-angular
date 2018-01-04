@@ -1,6 +1,6 @@
 import {Sport} from "./Sport";
 export class SportEvent {
-	
+
 	private name: string;
 	private minAttendees: number;
 	private maxAttendees: number;
@@ -8,14 +8,16 @@ export class SportEvent {
 	private eventStartTime: string;
 	private eventEndTime: string;
 	private sport: Sport;
-	
+	private id: string;
+
 	constructor(name: string,
 	            minAttendees: number,
 	            maxAttendees: number,
 	            description: string,
 	            eventStartTime: string,
 	            eventEndTime: string,
-	            sport: Sport) {
+	            sport: Sport,
+              id?: string) {
 		this.name = name;
 		this.minAttendees = minAttendees;
 		this.maxAttendees = maxAttendees;
@@ -23,5 +25,6 @@ export class SportEvent {
 		this.eventStartTime = eventStartTime;
 		this.eventEndTime = eventEndTime;
 		this.sport = sport;
+		this.id = id;
 	}
 }

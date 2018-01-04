@@ -10,12 +10,18 @@ import {SportEvent} from "../models/SportEvent";
 @Injectable()
 export class EventService {
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
 
     addEvent(sportEvent): Observable<any> {
         return this.http.post(`${environment.backend.url}/sportevents`, sportEvent);
+    }
+
+    addUserToEvent(eventId, email): Observable<any> {
+        return this.http.post(`${environment.api.url}/sportevents`, { email : email, eventId: eventId });
+
+
     }
 
     getSports(): Observable<any> {
