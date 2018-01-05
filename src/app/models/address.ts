@@ -8,6 +8,8 @@ export class Address {
   country?: string;
   geometry?: Geometry;
   coordinates?: [number];
+
+
 }
 
 class Geometry {

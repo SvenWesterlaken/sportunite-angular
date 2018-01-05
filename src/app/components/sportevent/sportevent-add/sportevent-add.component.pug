@@ -21,7 +21,7 @@
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in", (change)="getHalls(eventForm.value.sport)")
+                        mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
                             mat-option(*ngFor="let sport of sports", [value]="sport")
                                 p {{sport.name}}
                         mat-error(*ngIf="getForm().get('sport').hasError('required')") Selecteer een sport om verder te gaan
@@ -53,16 +53,31 @@
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
                     button.btn.btn-large(appStepperNext, [disabled]="getForm().get('event-date').invalid", type='button') Volgende stap
 
-            app-step([stepControl]="getForm().get('location')")
+            app-step(formGroupName="location", [stepControl]="getForm().get('location')")
                 .big-form-title-container
                     h3.big-form-header Waar zal de sportactiviteit plaatsvinden?
 
                 .big-form-input-container
+
                     mat-form-field.big-form-field(floatLabel="never")
-                      mat-select#location(matInput type="text", formControlName="location", placeholder="Vul een sportlocatie in")
+                      input#city(matInput type="text", formControlName="city", placeholder="Vul een stad in", (change)="getBuildings(eventForm.get('location.city').value)")
+                      mat-error(*ngIf="getForm().get('location.city').hasError('required')") Dit veld is verplicht
+                      mat-error(*ngIf="getForm().get('location.city').hasError('notFound')") Er zijn geen sportcomplexen gevonden in deze stad
+
+                    mat-form-field.big-form-field(floatLabel="never")
+                      mat-select#building(matInput type="text", formControlName="building", placeholder="Vul een gebouw in", (change)="getHalls(eventForm.get('location.building').value, eventForm.get('sport').value)")
+                        mat-option(*ngFor="let building of resultBuildings", [value]="building")
+                          p {{ building.name }}
+                      mat-error(*ngIf="getForm().get('location.building').hasError('required')") Voer een sportcomplex in om verder te gaan
+                      mat-error(*ngIf="getForm().get('location.building').hasError('notFound')") Er zijn geen sportzalen gevonden die voldoen aan jouw voorkeuren
+
+                    mat-form-field.big-form-field(floatLabel="never")
+                      mat-select#location(matInput type="text", formControlName="hall", placeholder="Vul een sportlocatie in")
                         mat-option(*ngFor="let hall of resultHalls", [value]="hall")
                           p {{hall.name}}
-                      mat-error(*ngIf="getForm().get('location').hasError('required')") Voer een locatie in om verder te gaan
+                      mat-error(*ngIf="getForm().get('location.hall').hasError('required')") Dit veld is verplicht
+
+
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
@@ -116,6 +131,7 @@
                         p Om bezig te zijn met
                           span.card  {{ eventForm.value.sport.name }}
                         p Op #[span.card {{ eventForm.get('event-date.date').value | date: 'longDate' }}] van #[span.card {{ eventForm.get('event-date.startTime').value }}] tot #[span.card {{ eventForm.get('event-date.endTime').value }}]
+                        p Bij #[span.card {{ eventForm.get('location.building').value.name }}] in  #[span.card {{ eventForm.get('location.hall').value.name }}]op  #[span.card {{ streetName }} {{ houseNumber }} ] te #[span.card {{ eventForm.get('location.city').value }}]
                         p Met #[span.card {{ eventForm.get('event-attendees.minAttendees').value }}] tot #[span.card {{ eventForm.get('event-attendees.maxAttendees').value }}] personen
 
 

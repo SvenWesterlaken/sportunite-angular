@@ -24,6 +24,10 @@ export class EventService {
 
     }
 
+    addReservation(reservation): Observable<any> {
+      console.log(reservation);
+      return this.http.post(`${environment.backend.url}/reservations`, reservation);
+    }
     getSports(): Observable<any> {
        return this.http.get(`${environment.backend.url}/sports`)
     }
@@ -31,5 +35,10 @@ export class EventService {
     getHalls(): Observable<any> {
       return this.http.get(`${environment.backend.url}/halls`)
     }
+
+    getBuildings(): Observable<any> {
+      return this.http.get(`${environment.backend.url}/buildings`)
+    }
+
 
 }
