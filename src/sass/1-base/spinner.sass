@@ -1,4 +1,14 @@
-.centered-spinner
+.address-loading-spinner
   position: absolute !important
-  top: calc(50% - 18px)
-  left: calc(50% - 18px)
+  bottom: 0
+  right: -60px
+  z-index: 99
+
+@media only screen and (max-width : 968px)
+  .address-loading-spinner
+    position: absolute !important
+    bottom: -52px
+    right: 50%
+    transform: translateX(-50%)
+
+

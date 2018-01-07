@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private addressSub: Subscription;
   private registerForm: FormGroup;
   private address: Address;
+  private addressLoading = false;
 
 
   constructor(private addressService: AddressService, private auth: AuthService, private router: Router) { }
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           Validators.pattern(/^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$/i),
           Validators.maxLength(6)]),
         number: new FormControl(null, [Validators.required, CustomValidators.digits, Validators.maxLength(4)]),
-        suffix: new FormControl(null, [Validators.maxLength(1), Validators.pattern(/^[a-zA-Z]+$/)])
+        suffix: new FormControl(null)
       }),
       registerPassword: new FormGroup({
         password: passwordControl,
@@ -68,7 +69,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   getAddress() {
-    this.stepper.next();
+    this.addressLoading = true;
     this.requestAddress();
   }
 
@@ -80,8 +81,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   requestAddress() {
     const values = this.registerForm.value.registerAddress;
     this.addressSub = this.addressService.getAddress(values.postalCode, values.number, values.suffix).subscribe((response: Address) => {
+      this.addressLoading = false;
       this.address = response;
+      this.stepper.next();
     }, (err: HttpErrorResponse) => {
+
+      this.addressLoading = false;
 
       if (err.status === 404 && err.error.error === 'No address with this suffix') {
         this.registerForm.get('registerAddress.suffix').setErrors({noAddress: true});
@@ -89,8 +94,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.registerForm.get('registerAddress.postalCode').setErrors({noAddress: true});
         this.registerForm.get('registerAddress.number').setErrors({noAddress: true});
       }
-
-      this.stepper.previous();
     });
   }
 

@@ -11,10 +11,12 @@ export class AddressService {
   constructor(private http: HttpClient) {}
 
   getAddress(postcode: string, number: number, suffix?: string): Observable<Address> {
-    return this.http.post<Address>(`${environment.api.url}/address`, {
-      postal_code: postcode,
-      number: number,
-      suffix: suffix
+    return this.http.get<Address>(`${environment.api.url}/address`, {
+      params: {
+        postal_code: postcode,
+        number: number.toString(),
+        suffix: suffix
+      }
     });
   }
 

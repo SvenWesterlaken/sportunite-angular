@@ -7,10 +7,10 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
         span.big-form-subheader Dan kunnen wij, en anderen, u persoonlijker aanspreken.
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="Voornaam", formControlName="firstName", type="text", [(ngModel)]="firstname")
+          input(matInput, placeholder="Voornaam", formControlName="firstName", type="text", [(ngModel)]="firstname", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerName.firstName').hasError('required')") Dit veld is verplicht
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="Achternaam", formControlName="lastName", type="text", [(ngModel)]="lastname")
+          input(matInput, placeholder="Achternaam", formControlName="lastName", type="text", [(ngModel)]="lastname", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerName.lastName').hasError('required')") Dit veld is verplicht
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
@@ -22,7 +22,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
         span.big-form-subheader Dit emailadres zal gebruikt worden om in te loggen en u te bereiken als er problemen zijn.
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="E-mailadres", formControlName="email", type="email")
+          input(matInput, placeholder="E-mailadres", formControlName="email", type="email", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerEmail.email').hasError('email') && !registerForm.get('registerEmail.email').hasError('required')") Ongeldig e-mailadres
           mat-error(*ngIf="registerForm.get('registerEmail.email').hasError('required')") E-mailadres is verplicht
       .big-form-footer-container
@@ -35,7 +35,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
 
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never", hintLabel="Bijv: 1 januari 2000")
-          input(matInput, [max]="maxDate", [matDatepicker]="birthDatePicker", placeholder="Geboortedatum", formControlName="birth", type="text")
+          input(matInput, [max]="maxDate", [matDatepicker]="birthDatePicker", placeholder="Geboortedatum", formControlName="birth", type="text", (keyup.enter)="stepper.next()")
           mat-datepicker-toggle(matSuffix, [for]="birthDatePicker")
           mat-datepicker(#birthDatePicker, [touchUi]="stepper.isSmallScreen")
           mat-error(*ngIf="registerForm.get('registerBirth.birth').hasError('maxDate') && !registerForm.get('registerBirth.birth').hasError('required') && !registerForm.get('registerBirth.birth').hasError('dateFormat')") Datum moet voor vandaag zijn
@@ -67,18 +67,18 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
 
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="Postcode", formControlName="postalCode", type="text")
+          input(matInput, placeholder="Postcode", formControlName="postalCode", type="text", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('pattern') && !registerForm.get('registerAddress.postalCode').hasError('maxlength')") Ongeldige postcode
           mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('maxlength')") Maximaal 6 tekens
           mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('noAddress')") Geen adres gevonden
           mat-error(*ngIf="registerForm.get('registerAddress.postalCode').hasError('required')") Dit veld is verplicht
         mat-form-field.big-form-field.small50(floatLabel="never")
-          input(matInput, placeholder="Huisnummer", formControlName="number", type="text")
+          input(matInput, placeholder="Huisnummer", formControlName="number", type="text", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('maxlength')") Maximaal 4 cijfers
           mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('digits')") Alleen cijfers toegestaan
           mat-error(*ngIf="registerForm.get('registerAddress.number').hasError('required')") Dit veld is verplicht
         mat-form-field.big-form-field.small50(floatLabel="never")
-          input(matInput, placeholder="Toev.", formControlName="suffix", type="text")
+          input(matInput, placeholder="Toev.", formControlName="suffix", type="text", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('pattern') && !registerForm.get('registerAddress.suffix').hasError('maxlength')") Alleen letters toegestaan
           mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('maxlength')") Maximaal 1 teken
           mat-error(*ngIf="registerForm.get('registerAddress.suffix').hasError('noAddress')") Geen adres gevonden met deze letter
@@ -87,6 +87,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
         button.btn.btn-large((click)="getAddress()", [disabled]="registerForm.get('registerAddress').invalid", type='button') Volgende stap
+        mat-progress-spinner.address-loading-spinner(mode="indeterminate", [diameter]="stepper.isSmallScreen ? 36 : 44", [strokeWidth]="3", *ngIf="addressLoading")
 
     app-step
       .big-form-title-container
@@ -94,8 +95,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
         span.big-form-subheader Als deze niet kloppen kunt u kijken of uw bij de vorige stap de juiste gegevens hebt ingevuld.
 
       .big-form-input-container
-        mat-progress-spinner.centered-spinner(mode="indeterminate", [diameter]="44", [strokeWidth]="3", *ngIf="!address")
-        p.big-form-info-content([class.hidden]="!address") {{address?.street}} {{address?.number}}{{address?.suffix}} #[br] {{address?.postal_code}}, {{address?.city}}
+        p.big-form-info-content([class.hidden]="!address") {{address?.street}} {{address?.number}}{{address?.suffix.length > 1 ? ' ' : ''}}{{address?.suffix}} #[br] {{address?.postal_code}}, {{address?.city}}
 
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
@@ -110,10 +110,10 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
 
       .big-form-input-container
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="Wachtwoord", formControlName="password", type="password")
+          input(matInput, placeholder="Wachtwoord", formControlName="password", type="password", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerPassword.password').hasError('required')") Dit veld is verplicht
         mat-form-field.big-form-field(floatLabel="never")
-          input(matInput, placeholder="Herhaal wachtwoord", formControlName="passwordConfirmation", type="password")
+          input(matInput, placeholder="Herhaal wachtwoord", formControlName="passwordConfirmation", type="password", (keyup.enter)="stepper.next()")
           mat-error(*ngIf="registerForm.get('registerPassword.passwordConfirmation').hasError('equalTo') && !registerForm.get('registerPassword.passwordConfirmation').hasError('required')") Wachtwoorden komen niet overeen
           mat-error(*ngIf="registerForm.get('registerPassword.passwordConfirmation').hasError('required')") Dit veld is verplicht
 
