@@ -5,10 +5,12 @@ import {AppComponent} from './app.component';
 import {AuthService} from './services/auth.service';
 import {SharedModule} from './modules/shared.module';
 import {AppRoutingModule} from './routes/app.routing.module';
-import {SportEventModule} from './modules/sportevent.module';
-import {AuthModule} from './modules/auth.module';
-import {AuthGuard} from "./other/auth.guard";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+
+import {AuthGuard} from './other/auth.guard';
+import {SporteventAddComponent} from './components/sportevent/sportevent-add/sportevent-add.component';
+import {SportEventModule} from "./modules/sportevent.module";
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {InnerModule} from './modules/inner.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   imports: [
     BrowserModule,
     SharedModule,
-    AuthModule,
-    SportEventModule,
+    InnerModule,
     AppRoutingModule
   ],
   providers: [
@@ -28,4 +29,5 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
