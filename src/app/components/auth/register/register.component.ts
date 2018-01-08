@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { CustomValidators } from 'ng4-validators';
 import {StepperComponent} from '../../stepper/stepper.component';
 import * as moment from 'moment';
-import {ValidateDateFormat} from '../../../other/date.validator';
+import {ValidateDateFormat} from '../../../other/custom.validator';
 import {AddressService} from '../../../services/address.service';
 import {AuthService} from '../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';

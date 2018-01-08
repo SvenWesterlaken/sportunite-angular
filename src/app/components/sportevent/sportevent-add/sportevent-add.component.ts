@@ -1,191 +1,123 @@
 import {ViewChild, Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Sport} from "../../../models/Sport";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Sport} from '../../../models/sport';
 import * as moment from 'moment';
-import {EventService} from "../../../services/event.service";
-import {Router} from "@angular/router";
-import {StepperComponent} from "../../stepper/stepper.component";
+import {EventService} from '../../../services/event.service';
+import {Router} from '@angular/router';
+import {StepperComponent} from '../../stepper/stepper.component';
 import {CustomValidators} from 'ng4-validators';
-import {ValidateDateFormat} from "../../../other/date.validator";
-import {Hall} from "../../../models/Hall";
-import {Building} from "../../../models/Building";
+import {IsGreaterThan, MinimumTime, ValidateDateFormat} from '../../../other/custom.validator';
+import {Hall} from '../../../models/hall';
+import {Building} from '../../../models/building';
+import {SportEvent} from '../../../models/sportevent';
+import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-sportevent-add',
 	templateUrl: './sportevent-add.component.pug',
 	styleUrls: ['./sportevent-add.component.sass']
 })
-export class SporteventAddComponent implements OnInit {
+export class SportEventAddComponent implements OnInit {
 	private eventForm: FormGroup;
 	private inputValue: number;
 	private startTime;
 	private endTime;
 	private sports = [];
-	streetName: string;
-	houseNumber: string;
 	halls: Hall[];
 	resultHalls = [];
 	resultBuildings = [];
 	buildings: Building[];
-	
+
 	@ViewChild(StepperComponent) stepper: StepperComponent;
-	
+
 	tomorrow = moment().add(1, 'days');
-	
-	constructor(private eventService: EventService, private router: Router) {
-	}
-	
+
+	constructor(private eventService: EventService, private router: Router) {}
+
 	ngOnInit() {
-		console.log(this.eventService.getSports());
-		this.eventService.getSports()
-			.map(result => {
-				return result as Sport
-			})
-			.subscribe(sports => this.sports = sports._embedded.sports);
-		
-		this.eventService.getHalls()
-			.map(result => {
-				return result as Hall
-			})
-			.subscribe(halls => this.halls = halls._embedded.halls as Hall[]);
-		
-		this.eventService.getBuildings()
-			.map(result => {
-				return result as Building
-			})
-			.subscribe(buildings => this.buildings = buildings._embedded.buildings as Building[]);
-		
-		
+		this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
+		this.eventService.getHalls().then((halls: Hall[]) => this.halls = halls );
+		this.eventService.getBuildings().then((buildings: Building[]) => this.buildings = buildings);
 		this.initForm();
-		
 	}
-	
+
 	getForm() {
 		return this.eventForm;
 	}
-	
+
 	private initForm() {
-		let sportEventName = '';
-		let sportId = '';
-		let startTime = '';
-		let endTime = '';
-		let date = '';
-		let hall = '';
-		let building = '';
-		let city = '';
-		let minAttendees = '';
-		let maxAttendees = '';
-		let description = '';
-		
+	  const startTime = new FormControl(null, Validators.required);
+	  const minAttendees = new FormControl(2, [Validators.required, Validators.min(2), CustomValidators.digits]);
+
 		this.eventForm = new FormGroup({
-			'name': new FormControl(sportEventName, Validators.compose([Validators.required, Validators.minLength(3)])),
-			'sport': new FormControl(sportId, Validators.required),
-			'event-date': new FormGroup({
-				'startTime': new FormControl(startTime, Validators.required),
-				'endTime': new FormControl(endTime, Validators.required),
-				'date': new FormControl(date, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
+			name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+			sport: new FormControl(null, Validators.required),
+			eventDate: new FormGroup({
+				startTime: startTime,
+				endTime: new FormControl(null, [Validators.required, MinimumTime(startTime)]),
+				date: new FormControl(null, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
 			}),
-			'location': new FormGroup({
-				'city': new FormControl(city, Validators.required),
-				'building': new FormControl(building, Validators.required),
-				'hall': new FormControl(hall, Validators.required)
+			location: new FormGroup({
+				city: new FormControl(null, Validators.required),
+				building: new FormControl(null, Validators.required),
+				hall: new FormControl(null, Validators.required)
 			}),
-			'event-attendees': new FormGroup({
-				'minAttendees': new FormControl(minAttendees, Validators.compose([Validators.required, Validators.min(2)])),
-				'maxAttendees': new FormControl(maxAttendees, Validators.compose([Validators.required, Validators.min(2)])),
+			eventAttendees: new FormGroup({
+				minAttendees: minAttendees,
+				maxAttendees: new FormControl(2, [Validators.required, Validators.min(2), IsGreaterThan, CustomValidators.digits]),
 			}),
-			'description': new FormControl(description, Validators.compose([Validators.required, Validators.minLength(50), Validators.maxLength(500)])),
+			description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(500)])
 		});
 	}
-	
+
 	onSubmit() {
-		
+		const form = this.eventForm.value;
+
 		const event = {
-			'name': this.eventForm.value.name,
-			'sportId': this.eventForm.value.sport.sportId,
-			'minAttendees': this.eventForm.controls['event-attendees'].value.minAttendees,
-			'maxAttendees': this.eventForm.controls['event-attendees'].value.maxAttendees,
-			'description': this.eventForm.value.description,
-			//temporary solution
-			'eventEndTime': this.eventForm.controls['event-date'].value.date.format("YYYY-MM-DD") + "T" +
-			this.eventForm.controls['event-date'].value.endTime,
-			'eventStartTime': this.eventForm.controls['event-date'].value.date.format("YYYY-MM-DD") + "T" +
-			this.eventForm.controls['event-date'].value.startTime
+			name: form.name,
+			sportId: form.sport.sportId,
+			minAttendees: form.eventAttendees.minAttendees,
+			maxAttendees: form.eventAttendees.maxAttendees,
+			description: form.value.description,
+			eventEndTime: moment(`${form.eventDate.date} ${form.eventDate.endTime}`).format(),
+			eventStartTime: moment(`${form.eventDate.date} ${form.eventDate.startTime}`).format()
 		};
-		
-		console.log(event);
-		
-		
-		this.eventService.addEvent(event)
-			.subscribe(resultEvent => {
-				console.log(resultEvent.sportEventId);
-				this.eventService.addUserToEvent(resultEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
-					.subscribe(result => {
-						console.log(result);
-						this.eventService.addReservation(
-							{
-								'hallId': this.eventForm.controls['location'].value.hall.hallId,
-								'timeFinish': this.eventForm.controls['event-date'].value.date.format("YYYY-MM-DD") + "T" +
-								this.eventForm.controls['event-date'].value.endTime,
-								'startTime': this.eventForm.controls['event-date'].value.date.format("YYYY-MM-DD") + "T" +
-								this.eventForm.controls['event-date'].value.startTime,
-								'sportEventId': resultEvent.sportEventId,
-								'definite': false
-							})
-							.subscribe(result => {
-								console.log(result);
-							})
-					});
-			});
-		
-		this.router.navigate(['/sportevent']);
-		
+
+		this.eventService.addEvent(event).then((resultEvent: SportEvent) =>
+      this.eventService.addUserToEvent(resultEvent.sportEventId).then(result =>
+				this.eventService.addReservation({
+					hallId: form.hall.hallId,
+					timeFinish: moment(`${form.eventDate.date} ${form.eventDate.endTime}`).format(),
+					startTime: moment(`${form.eventDate.date} ${form.eventDate.startTime}`).format(),
+					sportEventId: resultEvent.sportEventId,
+					definite: false
+				}).then(reservation => this.router.navigate(['/sportevent']))
+			)
+		);
 	}
-	
-	revalidateDate() {
-		this.eventForm.controls['event-date'].get('endTime').updateValueAndValidity();
-	}
-	
-	revalidateAttendees() {
-		this.eventForm.controls['event-attendees'].get('maxAttendees').updateValueAndValidity();
-	}
-	
+
 	getHalls(building, sport) {
-		
-		let resultHalls = [];
-		
-		this.halls.forEach(function (item, index) {
-			
-			if (item.sports.findIndex(x => x.name === sport.name) != -1 && item.buildingId === building.buildingId) {
-				resultHalls.push(item);
-			}
-		});
-		
-		this.streetName = this.eventForm.get('location.building').value.address.streetName;
-		this.houseNumber = this.eventForm.get('location.building').value.address.houseNumber;
-		
-		this.resultHalls = resultHalls;
-		
-		if (this.resultHalls.length === 0)
-			this.eventForm.get('location.building').setErrors({
-				'notFound': true
-			});
+		this.resultHalls = _.filter(this.halls, (item: Hall) =>
+			_.includes(item.sports, { sportId: sport.sportId }) && item.buildingId === building.buildingId
+		);
+
+		if (this.resultHalls.length === 0) {
+      this.eventForm.get('location.building').setErrors({'notFound': true});
+    }
 	}
-	
+
 	getBuildings(city) {
-		
-		this.resultBuildings = this.buildings.filter(function (b) {
-			return (b.address.city === city);
-		});
-		
-		
-		if (this.resultBuildings.length === 0)
-			this.eventForm.get('location.city').setErrors({
-				'notFound': true
-			});
-		
-		
+
+		this.resultBuildings = _.filter(this.buildings, { address: { city: city } });
+
+
+		if (this.resultBuildings.length === 0) {
+      this.eventForm.get('location.city').setErrors({'notFound': true});
+		}
+
+
+
 	}
-	
-	
+
+
 }

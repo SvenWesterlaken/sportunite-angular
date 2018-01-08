@@ -3,42 +3,37 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 import {SharedModule} from './shared.module';
-import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {FormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material";
-import {MatSelectModule, MatCardModule} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormInputValidatorDirective} from "../components/sportevent/sportevent-add/forminputvalidator.directive";
-import {EventService} from "../services/event.service";
-import {HttpModule} from "@angular/http";
-import {StepperModule} from "./stepper.module";
-import {DatepickerModule} from "./datepicker.module";
+import {SporteventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {EventService} from '../services/event.service';
+import {StepperModule} from './stepper.module';
+import {DatepickerModule} from './datepicker.module';
+import {HttpClientModule} from '@angular/common/http';
+import {MomentModule} from 'angular2-moment';
 
 @NgModule({
-	declarations: [
-		SportEventComponent,
-		SportEventListComponent,
-		SporteventAddComponent,
-		FormInputValidatorDirective
-	],
-	imports: [
-		SharedModule,
-		SportEventRoutingModule,
-		ReactiveFormsModule,
-		StepperModule,
-		FormsModule,
+  declarations: [
+    SportEventComponent,
+    SportEventListComponent,
+    SporteventAddComponent
+  ],
+  imports: [
+    SharedModule,
+    SportEventRoutingModule,
+    ReactiveFormsModule,
+    StepperModule,
+    FormsModule,
     DatepickerModule,
-		MatInputModule,
-		BrowserAnimationsModule,
-		HttpModule,
-		MatSelectModule,
-		MatCardModule
-	],
-	providers: [
-		EventService
-	]
+    MatInputModule,
+    HttpClientModule,
+    MatSelectModule,
+    MatCardModule,
+    MomentModule
+  ],
+  providers: [
+    EventService
+  ]
 
 })
-export class SportEventModule {
-}
+export class SportEventModule {}

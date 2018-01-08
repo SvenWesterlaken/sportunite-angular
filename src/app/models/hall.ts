@@ -1,13 +1,13 @@
-import {Sport} from "./Sport";
+import {Sport} from "./sport";
 export class Hall {
 
   name: string;
-  hallId : number;
+  hallId: number;
   buildingId: string;
   openingHours: string[];
   sports: Sport[];
 
-  constructor(name : string, hallId: number, openingHours: string[], sports: Sport[], buildingId: string) {
+  constructor(name: string, hallId: number, openingHours: string[], sports: Sport[], buildingId: string) {
     this.name = name;
     this.hallId = hallId;
     this.openingHours = openingHours;
