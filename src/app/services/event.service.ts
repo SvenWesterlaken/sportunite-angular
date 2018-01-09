@@ -14,11 +14,11 @@ export class EventService {
 
     constructor(private http: HttpClient) {}
 
-    addEvent(sportEvent): Promise<SportEvent> {
+    addEvent(sportEvent): Promise<any> {
       return this.http.post(`${environment.backend.url}/sportevents`, sportEvent).toPromise();
     }
 
-    addUserToEvent(eventId): Promise<{msg: string}> {
+    addUserToEvent(eventId): Promise<any> {
       return this.http.post(`${environment.api.url}/sportevents`, { eventId: eventId }).toPromise();
     }
 
@@ -27,17 +27,17 @@ export class EventService {
     }
 
     getSports(): Promise<Sport[]> {
-      return this.http.get<Sport[]>(`${environment.backend.url}/sports`).toPromise()
+      return this.http.get<{_embedded: Sport[], _links: any}>(`${environment.backend.url}/sports`).toPromise()
         .then((result: {_embedded: Sport[], _links: any}) => result._embedded);
     }
 
     getHalls(): Promise<Hall[]> {
-      return this.http.get<Hall[]>(`${environment.backend.url}/halls`).toPromise()
+      return this.http.get<{_embedded: Hall[], _links: any}>(`${environment.backend.url}/halls`).toPromise()
         .then((result: {_embedded: Hall[], _links: any}) => result._embedded);
     }
 
     getBuildings(): Promise<Building[]> {
-      return this.http.get<Building[]>(`${environment.backend.url}/buildings`).toPromise()
+      return this.http.get<{_embedded: Building[], _links: any}>(`${environment.backend.url}/buildings`).toPromise()
         .then((result: {_embedded: Building[], _links: any}) => result._embedded);
     }
 

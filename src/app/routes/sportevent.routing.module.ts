@@ -3,8 +3,8 @@ import {RouterModule} from '@angular/router';
 import {SportEventListComponent} from '../components/sportevent/sportevent-list/sportevent-list.component';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 
-import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
-import {AuthGuard} from "../other/auth.guard";
+import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
+import {AuthGuard} from '../other/auth.guard';
 
 const routes = [
 	{
@@ -18,7 +18,7 @@ const routes = [
 			},
 			{
 				path: 'add',
-				component: SporteventAddComponent
+				component: SportEventAddComponent
 			}
 		]
 	}];
@@ -28,5 +28,4 @@ const routes = [
 	exports: [RouterModule]
 })
 
-export class SportEventRoutingModule {
-}
+export class SportEventRoutingModule {}

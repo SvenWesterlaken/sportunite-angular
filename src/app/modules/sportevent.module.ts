@@ -3,7 +3,7 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 import {SharedModule} from './shared.module';
-import {SporteventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
+import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule, MatInputModule, MatSelectModule} from '@angular/material';
 import {EventService} from '../services/event.service';
@@ -16,7 +16,8 @@ import {MomentModule} from 'angular2-moment';
   declarations: [
     SportEventComponent,
     SportEventListComponent,
-    SporteventAddComponent
+    SportEventComponent,
+    SportEventAddComponent
   ],
   imports: [
     SharedModule,

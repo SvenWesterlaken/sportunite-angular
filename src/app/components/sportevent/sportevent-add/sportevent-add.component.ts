@@ -35,39 +35,32 @@ export class SportEventAddComponent implements OnInit {
 	constructor(private eventService: EventService, private router: Router) {}
 
 	ngOnInit() {
+    const startTime = new FormControl(null, Validators.required);
+    const minAttendees = new FormControl(2, [Validators.required, Validators.min(2), CustomValidators.digits]);
+
+    this.eventForm = new FormGroup({
+      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      sport: new FormControl(null, Validators.required),
+      eventDate: new FormGroup({
+        startTime: startTime,
+        endTime: new FormControl(null, [Validators.required, MinimumTime(startTime)]),
+        date: new FormControl(null, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
+      }),
+      location: new FormGroup({
+        city: new FormControl(null, Validators.required),
+        building: new FormControl(null, Validators.required),
+        hall: new FormControl(null, Validators.required)
+      }),
+      eventAttendees: new FormGroup({
+        minAttendees: minAttendees,
+        maxAttendees: new FormControl(2, [Validators.required, Validators.min(2), IsGreaterThan, CustomValidators.digits]),
+      }),
+      description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(500)])
+    });
+
 		this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
 		this.eventService.getHalls().then((halls: Hall[]) => this.halls = halls );
 		this.eventService.getBuildings().then((buildings: Building[]) => this.buildings = buildings);
-		this.initForm();
-	}
-
-	getForm() {
-		return this.eventForm;
-	}
-
-	private initForm() {
-	  const startTime = new FormControl(null, Validators.required);
-	  const minAttendees = new FormControl(2, [Validators.required, Validators.min(2), CustomValidators.digits]);
-
-		this.eventForm = new FormGroup({
-			name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-			sport: new FormControl(null, Validators.required),
-			eventDate: new FormGroup({
-				startTime: startTime,
-				endTime: new FormControl(null, [Validators.required, MinimumTime(startTime)]),
-				date: new FormControl(null, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
-			}),
-			location: new FormGroup({
-				city: new FormControl(null, Validators.required),
-				building: new FormControl(null, Validators.required),
-				hall: new FormControl(null, Validators.required)
-			}),
-			eventAttendees: new FormGroup({
-				minAttendees: minAttendees,
-				maxAttendees: new FormControl(2, [Validators.required, Validators.min(2), IsGreaterThan, CustomValidators.digits]),
-			}),
-			description: new FormControl(null, [Validators.required, Validators.minLength(50), Validators.maxLength(500)])
-		});
 	}
 
 	onSubmit() {

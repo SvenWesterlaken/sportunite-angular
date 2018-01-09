@@ -7,8 +7,7 @@ import {SharedModule} from './modules/shared.module';
 import {AppRoutingModule} from './routes/app.routing.module';
 
 import {AuthGuard} from './other/auth.guard';
-import {SporteventAddComponent} from './components/sportevent/sportevent-add/sportevent-add.component';
-import {SportEventModule} from "./modules/sportevent.module";
+import {SportEventModule} from './modules/sportevent.module';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InnerModule} from './modules/inner.module';
 
@@ -21,6 +20,7 @@ import {InnerModule} from './modules/inner.module';
     BrowserModule,
     SharedModule,
     InnerModule,
+    SportEventModule,
     AppRoutingModule
   ],
   providers: [
