@@ -27,18 +27,18 @@ export class EventService {
     }
 
     getSports(): Promise<Sport[]> {
-      return this.http.get<{_embedded: Sport[], _links: any}>(`${environment.backend.url}/sports`).toPromise()
-        .then((result: {_embedded: Sport[], _links: any}) => result._embedded);
+      return this.http.get<{_embedded: { sports: Sport[] }, _links: any}>(`${environment.backend.url}/sports`).toPromise()
+        .then((result: {_embedded: { sports: Sport[] }, _links: any}) => result._embedded.sports);
     }
 
     getHalls(): Promise<Hall[]> {
-      return this.http.get<{_embedded: Hall[], _links: any}>(`${environment.backend.url}/halls`).toPromise()
-        .then((result: {_embedded: Hall[], _links: any}) => result._embedded);
+      return this.http.get<{_embedded: { halls : Hall[] }, _links: any}>(`${environment.backend.url}/halls`).toPromise()
+        .then((result: {_embedded: { halls : Hall[] }, _links: any}) => result._embedded.halls);
     }
 
     getBuildings(): Promise<Building[]> {
-      return this.http.get<{_embedded: Building[], _links: any}>(`${environment.backend.url}/buildings`).toPromise()
-        .then((result: {_embedded: Building[], _links: any}) => result._embedded);
+      return this.http.get<{_embedded:{ buildings : Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
+        .then((result: {_embedded: { buildings : Building[] }, _links: any}) => result._embedded.buildings);
     }
 
 

@@ -43,7 +43,7 @@ export class SportEventAddComponent implements OnInit {
       sport: new FormControl(null, Validators.required),
       eventDate: new FormGroup({
         startTime: startTime,
-        endTime: new FormControl(null, [Validators.required, MinimumTime(startTime)]),
+        endTime: new FormControl(null, [Validators.required, /*MinimumTime(startTime)*/]),
         date: new FormControl(null, [Validators.required, ValidateDateFormat, CustomValidators.minDate(moment().format())]),
       }),
       location: new FormGroup({
@@ -90,8 +90,9 @@ export class SportEventAddComponent implements OnInit {
 	}
 
 	getHalls(building, sport) {
+    
 		this.resultHalls = _.filter(this.halls, (item: Hall) =>
-			_.includes(item.sports, { sportId: sport.sportId }) && item.buildingId === building.buildingId
+        _.find(item.sports, x => x.sportId === sport.sportId) && item.buildingId === building.buildingId
 		);
 
 		if (this.resultHalls.length === 0) {

@@ -21,7 +21,7 @@
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        mat-select#sport(matInput, type="text", formControlName="sport", placeholder="Sport")
+                        mat-select#sport(formControlName="sport", placeholder="Sport")
                             mat-option(*ngFor="let sport of sports", [value]="sport") {{sport.name}}
                         mat-error(*ngIf="eventForm.get('sport').hasError('required')") Selecteer een sport om verder te gaan
                 .big-form-footer-container
