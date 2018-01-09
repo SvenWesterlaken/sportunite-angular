@@ -3,7 +3,7 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 import {SharedModule} from './shared.module';
-import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
+import {SportEventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material";
@@ -14,12 +14,16 @@ import {EventService} from "../services/event.service";
 import {HttpModule} from "@angular/http";
 import {StepperModule} from "./stepper.module";
 import {DatepickerModule} from "./datepicker.module";
+import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
+import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
 
 @NgModule({
 	declarations: [
 		SportEventComponent,
 		SportEventListComponent,
-		SporteventAddComponent,
+		SportEventAddComponent,
+		SportEventDetailComponent,
+		SportEventAttendComponent,
 		FormInputValidatorDirective
 	],
 	imports: [

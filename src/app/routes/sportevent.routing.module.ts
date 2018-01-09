@@ -3,14 +3,16 @@ import {RouterModule} from '@angular/router';
 import {SportEventListComponent} from '../components/sportevent/sportevent-list/sportevent-list.component';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
 
-import {SporteventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
+import {SportEventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
 import {AuthGuard} from "../other/auth.guard";
+import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
+import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 
 const routes = [
 	{
 		path: 'sportevent',
 		component: SportEventComponent,
-    canActivate: [AuthGuard],
+		canActivate: [AuthGuard],
 		children: [
 			{
 				path: '',
@@ -18,7 +20,15 @@ const routes = [
 			},
 			{
 				path: 'add',
-				component: SporteventAddComponent
+				component: SportEventAddComponent
+			},
+			{
+				path: ':id',
+				component: SportEventDetailComponent,
+			},
+			{
+				path: ':id/attend',
+				component: SportEventAttendComponent
 			}
 		]
 	}];

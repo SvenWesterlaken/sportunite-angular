@@ -15,7 +15,7 @@ import {Building} from "../../../models/Building";
 	templateUrl: './sportevent-add.component.pug',
 	styleUrls: ['./sportevent-add.component.sass']
 })
-export class SporteventAddComponent implements OnInit {
+export class SportEventAddComponent implements OnInit {
 	private eventForm: FormGroup;
 	private inputValue: number;
 	private startTime;
