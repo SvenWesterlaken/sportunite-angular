@@ -8,7 +8,7 @@ export class SportEvent {
 	private eventStartTime: string;
 	private eventEndTime: string;
 	private sport: Sport;
-	private id: string;
+	public id: string;
 
 	constructor(name: string,
 	            minAttendees: number,

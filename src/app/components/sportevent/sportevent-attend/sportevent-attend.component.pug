@@ -1,3 +1,35 @@
-<p>
-  sportevent-attend works!
-</p>
+mat-card
+    mat-card-header
+        mat-card-title
+            h3 {{ getEvent()?.name }}
+        mat-card-subtitle {{ getEvent()?.description }}
+    mat-card-content.summary
+        h4 Mijn portemonnee
+        p Huidige balans:
+            span.card  &euro;35,-
+        hr
+        table
+            tr
+                td
+                    |Saldo
+                td
+                    p &euro;35,-
+            tr
+                td
+                    |Boeking
+                td
+                    p &euro;5,-
+            tr
+                td
+                td
+                    hr
+            tr
+                td
+                    |Resterend Saldo:
+                td
+                    p &euro;30,-
+    hr
+    mat-card-content.footer
+        h4 Boeking bevestigen
+        button.btn(style="color: red; border-color: red", (click)="cancel()") Annuleren
+        button.btn((click)="proceed()") Betalen
