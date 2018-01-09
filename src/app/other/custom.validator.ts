@@ -5,6 +5,10 @@ export function ValidateDateFormat(control: AbstractControl): ValidationErrors {
   return moment(control.value).isSame('0001-01-01') ? { dateFormat: true } : null;
 }
 
+export function ValidateMomentFormat(format: string): ValidatorFn {
+  return (control: AbstractControl) => moment(control.value, format, true).isValid() ? null : { momentFormat: true };
+}
+
 export function MinimumTime(minControl: AbstractControl): ValidatorFn {
   return (control: AbstractControl) => {
     const startTime = moment(minControl.value, 'HH:mm');

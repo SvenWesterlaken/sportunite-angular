@@ -36,12 +36,14 @@
                     mat-form-field.big-form-field(floatLabel="never")
                         input#startTime(matInput type="text", formControlName="startTime", placeholder="Begintijd", (keyup.enter)="stepper.next()", (keyup)="eventForm.get('eventDate.endTime').updateValueAndValidity()")
                         mat-error(*ngIf="eventForm.get('eventDate.startTime').hasError('required')") Dit veld is verplicht
-                    span Tot
+                        mat-error(*ngIf="eventForm.get('eventDate.startTime').hasError('momentFormat') && !eventForm.get('eventDate.startTime').hasError('required')") Ongeldig tijd-formaat
+                    span.between-text Tot
                     mat-form-field.big-form-field(floatLabel="never")
                         input#endTime(matInput type="text", formControlName="endTime", placeholder="Eindtijd", (keyup.enter)="stepper.next()")
                         mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('momentFormat') && !eventForm.get('eventDate.endTime').hasError('required')") Ongeldig tijd-formaat
                         mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('minTime') && !eventForm.get('eventDate.endTime').hasError('required') && !eventForm.get('eventDate.startTime').hasError('required')") Eindtijd mag niet voor begintijd zijn
-                    span Op
+                    span.between-text Op
                     mat-form-field.big-form-field(floatLabel="never")
                         input(matInput, [min]="tomorrow", [matDatepicker]="datePicker", placeholder="Datum", formControlName="date", type="text", (keyup.enter)="stepper.next()")
                         mat-datepicker-toggle(matSuffix, [for]="datePicker")
@@ -61,19 +63,19 @@
                 .big-form-input-container
 
                     mat-form-field.big-form-field(floatLabel="never")
-                      input#city(matInput type="text", formControlName="city", placeholder="Vul een stad in", (change)="getBuildings(eventForm.get('location.city').value)", (keyup.enter)="stepper.next()")
+                      input#city(matInput type="text", formControlName="city", placeholder="Stad", (change)="getBuildings(eventForm.get('location.city').value)", (keyup.enter)="stepper.next()")
                       mat-error(*ngIf="eventForm.get('location.city').hasError('required')") Dit veld is verplicht
                       mat-error(*ngIf="eventForm.get('location.city').hasError('notFound')") Er zijn geen sportcomplexen gevonden in deze stad
 
                     mat-form-field.big-form-field(floatLabel="never")
-                      mat-select#building(matInput type="text", formControlName="building", placeholder="Vul een gebouw in", (change)="getHalls(eventForm.get('location.building').value, eventForm.get('sport').value)")
+                      mat-select#building(formControlName="building", placeholder="Gebouw", (change)="getHalls(eventForm.get('location.building').value, eventForm.get('sport').value)")
                         mat-option(*ngFor="let building of resultBuildings", [value]="building")
                           p {{ building.name }}
                       mat-error(*ngIf="eventForm.get('location.building').hasError('required')") Voer een sportcomplex in om verder te gaan
                       mat-error(*ngIf="eventForm.get('location.building').hasError('notFound')") Er zijn geen sportzalen gevonden die voldoen aan jouw voorkeuren
 
                     mat-form-field.big-form-field(floatLabel="never")
-                      mat-select#location(matInput type="text", formControlName="hall", placeholder="Vul een sportlocatie in")
+                      mat-select#location(formControlName="hall", placeholder="Zaal")
                         mat-option(*ngFor="let hall of resultHalls", [value]="hall")
                           p {{hall.name}}
                       mat-error(*ngIf="eventForm.get('location.hall').hasError('required')") Dit veld is verplicht
@@ -133,7 +135,7 @@
                         h4 {{ eventForm.value.name }}
                         p Om bezig te zijn met
                           span.card  {{ eventForm.value.sport.name }}
-                        p Op #[span.card {{ eventForm.get('eventDate.date').value | amLocal | amDateFormat: 'D MMMM YYYY' }}] van #[span.card {{ startTime }}] tot #[span.card {{ endTime }}]
+                        p Op #[span.card {{ eventForm.get('eventDate.date').value | amLocal | amDateFormat: 'D MMMM YYYY' }}] van #[span.card {{ eventForm.value.eventDate.startTime }}] tot #[span.card {{ eventForm.value.eventDate.endTime }}]
                         p Bij #[span.card {{ eventForm.get('location.building').value.name }}] in  #[span.card {{ eventForm.get('location.hall').value.name }}]op  #[span.card {{ eventForm.get('location.building').value.address?.streetName }} {{ eventForm.get('location.building').value.address?.houseNumber }} ] te #[span.card {{ eventForm.get('location.city').value }}]
                         p Met #[span.card {{ eventForm.get('eventAttendees.minAttendees').value }}] tot #[span.card {{ eventForm.get('eventAttendees.maxAttendees').value }}] personen
 
