@@ -9,13 +9,13 @@ import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material";
 import {MatSelectModule, MatCardModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormInputValidatorDirective} from "../components/sportevent/sportevent-add/forminputvalidator.directive";
 import {EventService} from "../services/event.service";
-import {HttpModule} from "@angular/http";
+import {HttpClientModule} from "@angular/common/http";
 import {StepperModule} from "./stepper.module";
 import {DatepickerModule} from "./datepicker.module";
 import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
+import {MomentModule} from 'angular2-moment';
 
 @NgModule({
 	declarations: [
@@ -24,7 +24,6 @@ import {SportEventDetailComponent} from "../components/sportevent/sportevent-det
 		SportEventAddComponent,
 		SportEventDetailComponent,
 		SportEventAttendComponent,
-		FormInputValidatorDirective
 	],
 	imports: [
 		SharedModule,
@@ -33,16 +32,15 @@ import {SportEventDetailComponent} from "../components/sportevent/sportevent-det
 		StepperModule,
 		FormsModule,
     DatepickerModule,
-		MatInputModule,
-		BrowserAnimationsModule,
-		HttpModule,
-		MatSelectModule,
-		MatCardModule
-	],
-	providers: [
-		EventService
-	]
+    MatInputModule,
+    HttpClientModule,
+    MatSelectModule,
+    MatCardModule,
+    MomentModule
+  ],
+  providers: [
+    EventService
+  ]
 
 })
-export class SportEventModule {
-}
+export class SportEventModule {}

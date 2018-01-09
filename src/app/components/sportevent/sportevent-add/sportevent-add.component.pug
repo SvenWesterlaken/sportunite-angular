@@ -1,124 +1,127 @@
 .form-container
-    form([formGroup]="getForm()", (ngSubmit)="onSubmit()")
+    form([formGroup]="eventForm", (ngSubmit)="onSubmit()")
         app-stepper([linear]="true")
 
-            app-step([stepControl]="getForm().get('name')")
+            app-step([stepControl]="eventForm.get('name')")
                 .big-form-title-container
                   h3.big-form-header Wat is de naam van de sportactiviteit?
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#name(matInput type="text", formControlName="name", placeholder="Vul een naam in")
-                        mat-error(*ngIf="getForm().get('name').hasError('required')") Dit veld is verplicht
+                        input#name(matInput type="text", formControlName="name", placeholder="Evenementnaam", (keyup.enter)="stepper.next()")
+                        mat-error(*ngIf="eventForm.get('name').hasError('required')") Dit veld is verplicht
 
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('name').invalid", type='button') Volgende stap
+                  button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('name').invalid", type='button') Volgende stap
 
-            app-step([stepControl]="getForm().get('sport')")
+            app-step([stepControl]="eventForm.get('sport')")
                 .big-form-title-container
                   h3.big-form-header Welke sport hoort bij deze activiteit?
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        mat-select#sport(matInput type="text", formControlName="sport", placeholder="Vul een sport in")
-                            mat-option(*ngFor="let sport of sports", [value]="sport")
-                                p {{sport.name}}
-                        mat-error(*ngIf="getForm().get('sport').hasError('required')") Selecteer een sport om verder te gaan
+                        mat-select#sport(formControlName="sport", placeholder="Sport")
+                            mat-option(*ngFor="let sport of sports", [value]="sport") {{sport.name}}
+                        mat-error(*ngIf="eventForm.get('sport').hasError('required')") Selecteer een sport om verder te gaan
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('sport').invalid", type='button') Volgende stap
+                  button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('sport').invalid", type='button') Volgende stap
 
-            app-step(formGroupName="event-date", [stepControl]="getForm().get('event-date')")
+            app-step(formGroupName="eventDate", [stepControl]="eventForm.get('eventDate')")
                 .big-form-title-container
                   h3.big-form-header Wanneer vindt de sportactiviteit plaats?
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#startTime(matInput type="time", formControlName="startTime", placeholder="Begintijd", [(ngModel)]="startTime", (change)="revalidateDate()", (input)="revalidateDate()")
-                        mat-error(*ngIf="getForm().get('event-date.startTime').hasError('required')") Dit veld is verplicht
+                        input#startTime(matInput type="text", formControlName="startTime", placeholder="Begintijd", (keyup.enter)="stepper.next()", (keyup)="eventForm.get('eventDate.endTime').updateValueAndValidity()")
+                        mat-error(*ngIf="eventForm.get('eventDate.startTime').hasError('required')") Dit veld is verplicht
                     span Tot
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#endTime(matInput type="time", formControlName="endTime", placeholder="Eindtijd", [(ngModel)]="endTime", app-form-valid [minimumValue]="startTime")
-                        mat-error(*ngIf="getForm().get('event-date.endTime').hasError('required')") Dit veld is verplicht
-                        mat-error(*ngIf="getForm().get('event-date.endTime').hasError('minimumValue')") Eindtijd mag niet voor begintijd liggen
+                        input#endTime(matInput type="text", formControlName="endTime", placeholder="Eindtijd", (keyup.enter)="stepper.next()")
+                        mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('minTime') && !eventForm.get('eventDate.endTime').hasError('required') && !eventForm.get('eventDate.startTime').hasError('required')") Eindtijd mag niet voor begintijd zijn
                     span Op
                     mat-form-field.big-form-field(floatLabel="never")
-                        input(matInput, [min]="tomorrow", [matDatepicker]="datePicker", placeholder="Datum", formControlName="date", type="text")
+                        input(matInput, [min]="tomorrow", [matDatepicker]="datePicker", placeholder="Datum", formControlName="date", type="text", (keyup.enter)="stepper.next()")
                         mat-datepicker-toggle(matSuffix, [for]="datePicker")
                         mat-datepicker(#datePicker)
-                        mat-error(*ngIf="getForm().get('event-date.date').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('eventDate.date').hasError('minDate') && !eventForm.get('eventDate.date').hasError('required') && !eventForm.get('eventDate.date').hasError('dateFormat')") Datum moet na vandaag zijn
+                        mat-error(*ngIf="eventForm.get('eventDate.date').hasError('dateFormat') && !eventForm.get('eventDate.date').hasError('required')") Ongeldige datum
+                        mat-error(*ngIf="eventForm.get('eventDate.date').hasError('required')") Dit veld is verplicht
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('event-date').invalid", type='button') Volgende stap
+                    button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('eventDate').invalid", type='button') Volgende stap
 
-            app-step(formGroupName="location", [stepControl]="getForm().get('location')")
+            app-step(formGroupName="location", [stepControl]="eventForm.get('location')")
                 .big-form-title-container
                     h3.big-form-header Waar zal de sportactiviteit plaatsvinden?
 
                 .big-form-input-container
 
                     mat-form-field.big-form-field(floatLabel="never")
-                      input#city(matInput type="text", formControlName="city", placeholder="Vul een stad in", (change)="getBuildings(eventForm.get('location.city').value)")
-                      mat-error(*ngIf="getForm().get('location.city').hasError('required')") Dit veld is verplicht
-                      mat-error(*ngIf="getForm().get('location.city').hasError('notFound')") Er zijn geen sportcomplexen gevonden in deze stad
+                      input#city(matInput type="text", formControlName="city", placeholder="Vul een stad in", (change)="getBuildings(eventForm.get('location.city').value)", (keyup.enter)="stepper.next()")
+                      mat-error(*ngIf="eventForm.get('location.city').hasError('required')") Dit veld is verplicht
+                      mat-error(*ngIf="eventForm.get('location.city').hasError('notFound')") Er zijn geen sportcomplexen gevonden in deze stad
 
                     mat-form-field.big-form-field(floatLabel="never")
                       mat-select#building(matInput type="text", formControlName="building", placeholder="Vul een gebouw in", (change)="getHalls(eventForm.get('location.building').value, eventForm.get('sport').value)")
                         mat-option(*ngFor="let building of resultBuildings", [value]="building")
                           p {{ building.name }}
-                      mat-error(*ngIf="getForm().get('location.building').hasError('required')") Voer een sportcomplex in om verder te gaan
-                      mat-error(*ngIf="getForm().get('location.building').hasError('notFound')") Er zijn geen sportzalen gevonden die voldoen aan jouw voorkeuren
+                      mat-error(*ngIf="eventForm.get('location.building').hasError('required')") Voer een sportcomplex in om verder te gaan
+                      mat-error(*ngIf="eventForm.get('location.building').hasError('notFound')") Er zijn geen sportzalen gevonden die voldoen aan jouw voorkeuren
 
                     mat-form-field.big-form-field(floatLabel="never")
                       mat-select#location(matInput type="text", formControlName="hall", placeholder="Vul een sportlocatie in")
                         mat-option(*ngFor="let hall of resultHalls", [value]="hall")
                           p {{hall.name}}
-                      mat-error(*ngIf="getForm().get('location.hall').hasError('required')") Dit veld is verplicht
+                      mat-error(*ngIf="eventForm.get('location.hall').hasError('required')") Dit veld is verplicht
 
 
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('location').invalid", type='button') Volgende stap
+                    button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('location').invalid", type='button') Volgende stap
 
-            app-step(formGroupName="event-attendees", [stepControl]="getForm().get('event-attendees')")
+            app-step(formGroupName="eventAttendees", [stepControl]="eventForm.get('eventAttendees')")
                 .big-form-title-container
                   h3.big-form-header Hoeveel mensen wil je laten deelnemen?
-                  span.big-form-subheader(style="font-style: italic" ) (inclusief jezelf)
+                  span.big-form-subheader inclusief jezelf
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#minAttendees(matInput type="number", style="text-align:center", min=2, formControlName="minAttendees", placeholder="Minimum", [(ngModel)]="inputValue", (change)="revalidateAttendees()", (input)="revalidateAttendees()")
-                        mat-error(*ngIf="getForm().get('event-attendees.minAttendees').hasError('required')") Dit veld is verplicht
-                        mat-error(*ngIf="getForm().get('event-attendees.minAttendees').hasError('min')") Voer minimaal 2 deelnemers in
+                        input#minAttendees(matInput, type="text", formControlName="minAttendees", placeholder="Minimum", (keyup.enter)="stepper.next()", (keyup)="eventForm.get('eventAttendees.maxAttendees').updateValueAndValidity()")
+                        mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('min')") Voer minimaal 2 deelnemers in
+                        mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('digits')") Alleen cijfers toegestaan
                     span tot
                     mat-form-field.big-form-field(floatLabel="never")
-                        input#maxAttendees(matInput type="number", style="text-align:center", min=2,  formControlName="maxAttendees", placeholder="Maximum", app-form-valid [minimumValue]="inputValue")
-                        mat-error(*ngIf="getForm().get('event-attendees.maxAttendees').hasError('required')") Dit veld is verplicht
-                        mat-error(*ngIf="getForm().get('event-attendees.maxAttendees').hasError('min')") Voer minimaal 2 deelnemers in
-                        mat-error(*ngIf="getForm().get('event-attendees.maxAttendees').hasError('minimumValue')") Het minimale aantal deelnemers kan niet meer zijn dan het maximum
+                        input#maxAttendees(matInput, type="text", formControlName="maxAttendees", placeholder="Maximum", (keyup.enter)="stepper.next()")
+                        mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('min')") Voer minimaal 2 deelnemers in
+                        mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('isGreater')") Het minimale aantal deelnemers kan niet meer zijn dan het maximum
+                        mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('digits')") Alleen cijfers toegestaan
                     span personen
 
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                  button.btn.btn-large(appStepperNext, [disabled]="getForm().get('event-attendees').invalid", type='button') Volgende stap
+                  button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('eventAttendees').invalid", type='button') Volgende stap
 
 
-            app-step([stepControl]="getForm().get('description')")
+            app-step([stepControl]="eventForm.get('description')")
                 .big-form-title-container
                   h3.big-form-header Wil je nog meer informatie geven over de sportactiviteit?
 
                 .big-form-input-container
                     mat-form-field.big-form-field(floatLabel="never")
                         textarea#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
-                        mat-error(*ngIf="getForm().get('description').hasError('minlength')") Moet uit minimaal 50 tekens bestaan
-                        mat-error(*ngIf="getForm().get('description').hasError('maxlength')") Mag uit maximaal 500 tekens bestaan
-                        mat-error(*ngIf="getForm().get('description').hasError('required')") Dit veld is verplicht
+                        mat-error(*ngIf="eventForm.get('description').hasError('minlength')") Moet uit minimaal 50 tekens bestaan
+                        mat-error(*ngIf="eventForm.get('description').hasError('maxlength')") Mag uit maximaal 500 tekens bestaan
+                        mat-error(*ngIf="eventForm.get('description').hasError('required')") Dit veld is verplicht
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                    button.btn.btn-large(appStepperNext, [disabled]="getForm().get('description').invalid", type='button') Bekijk resultaat
+                    button.btn.btn-large(appStepperNext, [disabled]="eventForm.get('description').invalid", type='button') Bekijk resultaat
 
             app-step
                 mat-card
@@ -130,9 +133,9 @@
                         h4 {{ eventForm.value.name }}
                         p Om bezig te zijn met
                           span.card  {{ eventForm.value.sport.name }}
-                        p Op #[span.card {{ eventForm.get('event-date.date').value | date: 'longDate' }}] van #[span.card {{ eventForm.get('event-date.startTime').value }}] tot #[span.card {{ eventForm.get('event-date.endTime').value }}]
-                        p Bij #[span.card {{ eventForm.get('location.building').value.name }}] in  #[span.card {{ eventForm.get('location.hall').value.name }}]op  #[span.card {{ streetName }} {{ houseNumber }} ] te #[span.card {{ eventForm.get('location.city').value }}]
-                        p Met #[span.card {{ eventForm.get('event-attendees.minAttendees').value }}] tot #[span.card {{ eventForm.get('event-attendees.maxAttendees').value }}] personen
+                        p Op #[span.card {{ eventForm.get('eventDate.date').value | amLocal | amDateFormat: 'D MMMM YYYY' }}] van #[span.card {{ startTime }}] tot #[span.card {{ endTime }}]
+                        p Bij #[span.card {{ eventForm.get('location.building').value.name }}] in  #[span.card {{ eventForm.get('location.hall').value.name }}]op  #[span.card {{ eventForm.get('location.building').value.address?.streetName }} {{ eventForm.get('location.building').value.address?.houseNumber }} ] te #[span.card {{ eventForm.get('location.city').value }}]
+                        p Met #[span.card {{ eventForm.get('eventAttendees.minAttendees').value }}] tot #[span.card {{ eventForm.get('eventAttendees.maxAttendees').value }}] personen
 
 
                     mat-card-content.footer
@@ -143,4 +146,4 @@
 
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-                  button.btn.btn-large(type="submit", [disabled]="!getForm().valid") Evenement aanmaken
+                  button.btn.btn-large(type="submit", [disabled]="!eventForm.valid") Evenement aanmaken
