@@ -6,9 +6,7 @@ import {SharedModule} from './shared.module';
 import {SportEventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material";
-import {MatSelectModule, MatCardModule} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSelectModule, MatInputModule, MatCardModule} from "@angular/material";
 import {EventService} from "../services/event.service";
 import {HttpClientModule} from "@angular/common/http";
 import {StepperModule} from "./stepper.module";
@@ -45,6 +43,5 @@ import {SportEventListItemComponent} from "../components/sportevent/sportevent-l
   providers: [
     EventService
   ]
-
 })
 export class SportEventModule {}

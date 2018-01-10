@@ -32,13 +32,13 @@ export class EventService {
     }
 
     getHalls(): Promise<Hall[]> {
-      return this.http.get<{_embedded: { halls : Hall[] }, _links: any}>(`${environment.backend.url}/halls`).toPromise()
-        .then((result: {_embedded: { halls : Hall[] }, _links: any}) => result._embedded.halls);
+      return this.http.get<{_embedded: { halls: Hall[] }, _links: any}>(`${environment.backend.url}/halls`).toPromise()
+        .then((result: {_embedded: { halls: Hall[] }, _links: any}) => result._embedded.halls);
     }
 
     getBuildings(): Promise<Building[]> {
-      return this.http.get<{_embedded:{ buildings : Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
-        .then((result: {_embedded: { buildings : Building[] }, _links: any}) => result._embedded.buildings);
+      return this.http.get<{_embedded: { buildings: Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
+        .then((result: {_embedded: { buildings: Building[] }, _links: any}) => result._embedded.buildings);
     }
 
 

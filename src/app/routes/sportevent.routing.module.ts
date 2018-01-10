@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {SportEventListComponent} from '../components/sportevent/sportevent-list/sportevent-list.component';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
-import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
-import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
+import {SportEventAttendComponent} from '../components/sportevent/sportevent-attend/sportevent-attend.component';
+import {SportEventDetailComponent} from '../components/sportevent/sportevent-detail/sportevent-detail.component';
 import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
 import {AuthGuard} from '../other/auth.guard';
 
