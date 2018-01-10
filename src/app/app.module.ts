@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -10,6 +10,7 @@ import {AuthGuard} from './other/auth.guard';
 import {SportEventModule} from './modules/sportevent.module';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InnerModule} from './modules/inner.module';
+import {MatIconModule, MatIconRegistry} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {InnerModule} from './modules/inner.module';
     SharedModule,
     InnerModule,
     SportEventModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule
   ],
   providers: [
     AuthService,
@@ -30,4 +32,8 @@ import {InnerModule} from './modules/inner.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
+  }
 }
