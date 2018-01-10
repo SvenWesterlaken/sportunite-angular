@@ -22,8 +22,7 @@ import {MatIconModule, MatIconRegistry} from '@angular/material';
     SharedModule,
     InnerModule,
     SportEventModule,
-    AppRoutingModule,
-    MatIconModule
+    AppRoutingModule
   ],
   providers: [
     AuthService,
