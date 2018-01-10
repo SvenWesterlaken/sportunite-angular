@@ -21,7 +21,7 @@ export class SportEventAddComponent implements OnInit {
     @ViewChild(StepperComponent) stepper: StepperComponent;
 
     private eventForm: FormGroup;
-    private sports: Sport[] = [];
+    private sports = [];
     private halls: Hall[];
     private resultHalls = [];
     private resultBuildings = [];
@@ -64,28 +64,28 @@ export class SportEventAddComponent implements OnInit {
     onSubmit() {
         const form = this.eventForm.value;
 
-		const event = {
-			name: form.name,
-			sportId: form.sport.sportId,
-			minAttendees: form.eventAttendees.minAttendees,
-			maxAttendees: form.eventAttendees.maxAttendees,
-			description: form.description,
-			eventEndTime: moment(`${form.eventDate.date} ${form.eventDate.endTime}`).format(),
-			eventStartTime: moment(`${form.eventDate.date} ${form.eventDate.startTime}`).format()
-		};
+        const event = {
+					name: form.name,
+					sportId: form.sport.sportId,
+					minAttendees: form.eventAttendees.minAttendees,
+					maxAttendees: form.eventAttendees.maxAttendees,
+					description: form.description,
+					eventEndTime: moment(`${form.eventDate.date.format('YYYY-MM-DD')} ${form.eventDate.endTime}`).format(),
+					eventStartTime: moment(`${form.eventDate.date.format('YYYY-MM-DD')} ${form.eventDate.startTime}`).format()
+				};
 
-		this.eventService.addEvent(event).then((resultEvent: SportEvent) =>
-      this.eventService.addUserToEvent(resultEvent.sportEventId).then(result =>
-				this.eventService.addReservation({
-					hallId: form.hall.hallId,
-					timeFinish: moment(`${form.eventDate.date} ${form.eventDate.endTime}`).format(),
-					startTime: moment(`${form.eventDate.date} ${form.eventDate.startTime}`).format(),
-					sportEventId: resultEvent.sportEventId,
-					definite: false
-				}).then(reservation => this.router.navigate(['/sportevent']))
-			)
-		);
-	}
+			this.eventService.addEvent(event).then((resultEvent: SportEvent) =>
+				this.eventService.addUserToEvent(resultEvent.sportEventId).then(result =>
+					this.eventService.addReservation({
+						hallId: form.location.hall.hallId,
+						timeFinish: moment(`${form.eventDate.date.format('YYYY-MM-DD')} ${form.eventDate.endTime}`).format(),
+						startTime: moment(`${form.eventDate.date.format('YYYY-MM-DD')} ${form.eventDate.startTime}`).format(),
+						sportEventId: resultEvent.sportEventId,
+						definite: false
+					}).then(reservation => this.router.navigate(['/sportevent']))
+				)
+			);
+		}
 
 	getHalls(building, sport) {
 
