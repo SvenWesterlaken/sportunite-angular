@@ -96,14 +96,14 @@
                         mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('required')") Dit veld is verplicht
                         mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('min')") Voer minimaal 2 deelnemers in
                         mat-error(*ngIf="eventForm.get('eventAttendees.minAttendees').hasError('digits')") Alleen cijfers toegestaan
-                    span tot
+                    span.between-text tot
                     mat-form-field.big-form-field(floatLabel="never")
                         input#maxAttendees(matInput, type="text", formControlName="maxAttendees", placeholder="Maximum", (keyup.enter)="stepper.next()")
                         mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('required')") Dit veld is verplicht
                         mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('min')") Voer minimaal 2 deelnemers in
                         mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('isGreater')") Het minimale aantal deelnemers kan niet meer zijn dan het maximum
                         mat-error(*ngIf="eventForm.get('eventAttendees.maxAttendees').hasError('digits')") Alleen cijfers toegestaan
-                    span personen
+                    span.between-text personen
 
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
