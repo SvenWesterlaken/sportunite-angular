@@ -1,0 +1,11 @@
+a([routerLink]="[index]" routerLinkActive="active")
+    mat-card
+        mat-card-header
+            mat-card-title
+                h5 {{event.name}}
+                h5.title 6/12
+        mat-card-content
+            p AANWEZIGEN
+            mat-progress-bar(mode="determinate" value="40" color="warn")
+            p {{event.description }}
+        mat-card-footer

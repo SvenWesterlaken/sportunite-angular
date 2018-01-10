@@ -1,6 +1,12 @@
+
+.event-container
+  app-sportevent-list-item( *ngFor="let event of events; let i = index", [event] = "event", [index] = "event.sportEventId" )
+
 .row
   button.btn((click)="onCreateNewEvent()") +
   label Nieuw evenement
 
 .row
   button.btn((click)="logout()") Uitloggen
+
+

@@ -13,9 +13,11 @@ import {EventService} from "../services/event.service";
 import {HttpClientModule} from "@angular/common/http";
 import {StepperModule} from "./stepper.module";
 import {DatepickerModule} from "./datepicker.module";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
 import {MomentModule} from 'angular2-moment';
+import {SportEventListItemComponent} from "../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component";
 
 @NgModule({
 	declarations: [
@@ -24,6 +26,7 @@ import {MomentModule} from 'angular2-moment';
 		SportEventAddComponent,
 		SportEventDetailComponent,
 		SportEventAttendComponent,
+		SportEventListItemComponent
 	],
 	imports: [
 		SharedModule,
@@ -36,6 +39,7 @@ import {MomentModule} from 'angular2-moment';
     HttpClientModule,
     MatSelectModule,
     MatCardModule,
+		MatProgressBarModule,
     MomentModule
   ],
   providers: [
