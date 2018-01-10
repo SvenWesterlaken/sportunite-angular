@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -7,25 +7,31 @@ import {SharedModule} from './modules/shared.module';
 import {AppRoutingModule} from './routes/app.routing.module';
 
 import {AuthGuard} from './other/auth.guard';
+
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InnerModule} from './modules/inner.module';
+import {MatIconRegistry} from '@angular/material';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		NotFoundComponent
-	],
-	imports: [
-		BrowserModule,
-		SharedModule,
-		InnerModule,
-		AppRoutingModule
-	],
-	providers: [
-		AuthService,
-		AuthGuard
-	],
-	bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NotFoundComponent
+  ],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    InnerModule,
+    AppRoutingModule
+  ],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
+  }
 }

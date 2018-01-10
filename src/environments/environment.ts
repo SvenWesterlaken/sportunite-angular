@@ -9,8 +9,7 @@ export const environment = {
     url: 'http://localhost:8080/api/v1'
   },
   backend: {
-    url: ' http://localhost:49280/api'
-
+    url: 'http://localhost:50259/api'
   }
 };
 

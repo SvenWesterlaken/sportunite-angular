@@ -1,43 +1,44 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {Sport} from "../models/Sport";
-import {Http} from "@angular/http";
-import {SportEvent} from "../models/SportEvent";
+import {Sport} from '../models/sport';
+import {SportEvent} from '../models/sportevent';
+import {Hall} from '../models/hall';
+import {Building} from '../models/building';
+import {Reservation} from '../models/reservation';
 
 @Injectable()
 export class EventService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) {}
+
+    addEvent(sportEvent): Promise<any> {
+      return this.http.post(`${environment.backend.url}/sportevents`, sportEvent).toPromise();
     }
 
-
-    addEvent(sportEvent): Observable<any> {
-        return this.http.post(`${environment.backend.url}/sportevents`, sportEvent);
+    addUserToEvent(eventId): Promise<any> {
+      return this.http.post(`${environment.api.url}/sportevents`, { eventId: eventId }).toPromise();
     }
 
-    addUserToEvent(eventId, email): Observable<any> {
-        return this.http.post(`${environment.api.url}/sportevents`, { email : email, eventId: eventId });
-
-
+    addReservation(reservation): Promise<Reservation> {
+      return this.http.post<Reservation>(`${environment.backend.url}/reservations`, reservation).toPromise();
     }
 
-    addReservation(reservation): Observable<any> {
-      console.log(reservation);
-      return this.http.post(`${environment.backend.url}/reservations`, reservation);
-    }
-    getSports(): Observable<any> {
-       return this.http.get(`${environment.backend.url}/sports`)
+    getSports(): Promise<Sport[]> {
+      return this.http.get<{_embedded: { sports: Sport[] }, _links: any}>(`${environment.backend.url}/sports`).toPromise()
+        .then((result: {_embedded: { sports: Sport[] }, _links: any}) => result._embedded.sports);
     }
 
-    getHalls(): Observable<any> {
-      return this.http.get(`${environment.backend.url}/halls`)
+    getHalls(): Promise<Hall[]> {
+      return this.http.get<{_embedded: { halls: Hall[] }, _links: any}>(`${environment.backend.url}/halls`).toPromise()
+        .then((result: {_embedded: { halls: Hall[] }, _links: any}) => result._embedded.halls);
     }
 
-    getBuildings(): Observable<any> {
-      return this.http.get(`${environment.backend.url}/buildings`)
+    getBuildings(): Promise<Building[]> {
+      return this.http.get<{_embedded: { buildings: Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
+        .then((result: {_embedded: { buildings: Building[] }, _links: any}) => result._embedded.buildings);
     }
 
 
