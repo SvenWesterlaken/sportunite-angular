@@ -4,17 +4,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CustomErrorStateMatcher} from '../other/errorstate.manager';
 import {StepperComponent} from '../components/stepper/stepper.component';
+import {MatIconModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   exports: [
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [CustomErrorStateMatcher]
 })
