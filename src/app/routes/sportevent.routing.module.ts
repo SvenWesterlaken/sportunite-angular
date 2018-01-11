@@ -6,6 +6,7 @@ import {SportEventAttendComponent} from '../components/sportevent/sportevent-att
 import {SportEventDetailComponent} from '../components/sportevent/sportevent-detail/sportevent-detail.component';
 import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
 import {AuthGuard} from '../other/auth.guard';
+import {SportEventLeaveComponent} from "../components/sportevent/sportevent-leave/sportevent-leave.component";
 
 
 const routes = [
@@ -29,6 +30,10 @@ const routes = [
 			{
 				path: ':id/attend',
 				component: SportEventAttendComponent
+			},
+			{
+				path: ':id/leave',
+				component: SportEventLeaveComponent
 			}
 		]
 	}];

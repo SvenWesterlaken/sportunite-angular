@@ -28,6 +28,10 @@ export class EventService {
 		return this.http.post(`${environment.api.url}/sportevents/${eventId}/attend`, {email: email, eventId: eventId});
 	}
 	
+	removeUserFromEventAttending(eventId, email): Observable<any> {
+		return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {email: email, eventId: eventId});
+	}
+	
 	addReservation(reservation): Promise<any> {
 		return this.http.post<Reservation>(`${environment.backend.url}/reservations`, reservation).toPromise();
 	}
