@@ -28,7 +28,7 @@ export class SportEventAttendComponent implements OnInit {
 							(event: SportEvent) => {
 								console.log(event);
 								this.sportEvent = event;
-								this.sportEvent.id = event.sportEventId;
+								//this.sportEvent.sportEventId = event.sportEventId;
 							}
 						)
 				}
@@ -48,7 +48,7 @@ export class SportEventAttendComponent implements OnInit {
 	}
 	
 	public proceed() {
-		this.eventService.addUserToAttendEvent(this.sportEvent.id, sessionStorage.getItem('email') || localStorage.getItem('email'))
+		this.eventService.addUserToAttendEvent(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
 			.subscribe(result => {
 				this.router.navigate(['../'], {relativeTo: this.route})
 			});
