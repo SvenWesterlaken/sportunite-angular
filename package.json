@@ -34,6 +34,7 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "materialize-css": "^0.100.2",
+    "mdi-svg": "^2.1.19",
     "moment": "^2.20.1",
     "ng4-validators": "^4.3.5",
     "rxjs": "^5.5.2",

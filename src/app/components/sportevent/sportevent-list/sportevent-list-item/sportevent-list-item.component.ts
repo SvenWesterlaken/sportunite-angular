@@ -11,11 +11,23 @@ export class SportEventListItemComponent implements OnInit {
 
   @Input() event: SportEvent;
   @Input() index: number;
-
+  color = '';
+  value = 40;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setColor() {
+    if (this.value < 30) {
+      return 'primary'
+    }
+    else if (this.value === 100) {
+      return 'primary'
+    }
+    else
+      return 'accent'
   }
 
 }
