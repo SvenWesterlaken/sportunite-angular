@@ -1,0 +1,21 @@
+.mat-dialog-title Hi
+.div(*ngIf="passwordForm")
+    .form-container
+        form([formGroup]="passwordForm", (ngSubmit)="updatePassword()")
+            .big-form-input-container
+                mat-form-field.big-form-field(floatLabel="never")
+                    input(matInput, placeholder="Oud wachtwoord", formControlName="oldPassword", type="password", [(ngModel)]="oldPassword")
+                    mat-error(*ngIf="passwordForm.get('oldPassword').hasError('required')") Dit veld is verplicht
+                .div(formGroupName="newPassword")
+                    mat-form-field.big-form-field(floatLabel="never")
+                        input(matInput, placeholder="Nieuw wachtwoord", formControlName="password", type="password", [(ngModel)]="password")
+                        mat-error(*ngIf="passwordForm.get('newPassword.password').hasError('required')") Dit veld is verplicht
+                    mat-form-field.big-form-field(floatLabel="never")
+                        input(matInput, placeholder="Herhaal wachtwoord", formControlName="passwordConfirmation", type="password", [(ngModel)]="passwordConfirmation")
+                        mat-error(*ngIf="passwordForm.get('newPassword.passwordConfirmation').hasError('equalTo') && !passwordForm.get('newPassword.passwordConfirmation').hasError('required')") Wachtwoorden komen niet overeen
+                        mat-error(*ngIf="passwordForm.get('newPassword.passwordConfirmation').hasError('required')") Dit veld is verplicht
+            .big-form-footer-container
+                mat-error(*ngIf="passwordForm.get('oldPassword').hasError('wrongPassword')") Onjuist wachtwoord
+                button.btn.btn-large((click)="closeDialog()", type='button') sluiten
+                button.btn.btn-large([disabled]="passwordForm.invalid", type='submit') Wachtwoord wijzigen
+

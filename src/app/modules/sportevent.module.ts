@@ -11,13 +11,17 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SharedModule} from './shared.module';
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {NgModule} from '@angular/core/';
+import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
+import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 
 @NgModule({
   declarations: [
     SportEventComponent,
     SportEventListComponent,
     SportEventComponent,
-    SportEventAddComponent
+    SportEventAddComponent,
+    SportEventDetailComponent,
+    SportEventAttendComponent
   ],
   imports: [
     SharedModule,
