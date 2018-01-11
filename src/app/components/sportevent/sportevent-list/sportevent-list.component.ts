@@ -16,10 +16,21 @@ export class SportEventListComponent {
         new SportEvent("Basketballen in een zaal", 10, 20, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
     ];
 
+    sportevents;
+
     constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService) {}
 
     onCreateNewEvent() {
         this.router.navigate(['add'], {relativeTo: this.route});
+    }
+
+    searchEvents(searchInput: HTMLInputElement) {
+        /*this.service.getEventsyFilter(searchInput.value);*/
+        //solution until api is available
+        if (searchInput.value != "") {
+            this.events = this.events.filter(x => x.name === searchInput.value)
+        }
+        console.log(searchInput.value);
     }
 
     logout() {

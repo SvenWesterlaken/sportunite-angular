@@ -1,5 +1,11 @@
 
+
 .event-container
+
+  .search-container
+    input(#titleInput type="text",  (keyup.enter)="searchEvents(titleInput)")
+    mat-icon(svgIcon="magnify", (click)="searchEvents(titleInput)" )
+
   app-sportevent-list-item( *ngFor="let event of events; let i = index", [event] = "event", [index] = "event.sportEventId" )
 
 .row
