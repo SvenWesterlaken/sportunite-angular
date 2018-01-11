@@ -11,11 +11,15 @@ import {AuthGuard} from './other/auth.guard';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InnerModule} from './modules/inner.module';
 import {MatIconRegistry} from '@angular/material';
+import {HeaderComponent} from './components/header/header.component';
+import { NavItemComponent } from './components/header/nav-item/nav-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HeaderComponent,
+    NavItemComponent
   ],
   imports: [
     BrowserModule,
