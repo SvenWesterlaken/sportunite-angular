@@ -160,4 +160,7 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+# Custom start batchfile config file
+locations.txt
+
 # End of https://www.gitignore.io/api/node,angular,webstorm
