@@ -23,6 +23,10 @@ export class UserService {
     };
 
     changePassword(passwords): Promise<any> {
-        return this.http.put(`${environment.api.url}/changePassword`, passwords).toPromise();
+        return this.http.put(`${environment.api.url}/changePassword`, passwords).toPromise()
+            .then((res: {token: string}) => {
+                sessionStorage.setItem('token', res.token);
+                localStorage.removeItem('token');
+            });
     }
 }

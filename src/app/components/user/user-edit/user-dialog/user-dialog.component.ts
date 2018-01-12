@@ -41,9 +41,6 @@ export class UserDialogComponent {
             newPassword: form.newPassword.password
         };
         this.userService.changePassword(passwordObject).then((res) => {
-            console.log(res);
-            sessionStorage.setItem('token', res.token);
-            localStorage.removeItem('token');
             this.dialogRef.close({passwordChanged: true});
         }, (err: HttpErrorResponse) => {
             console.log(err.error.error);

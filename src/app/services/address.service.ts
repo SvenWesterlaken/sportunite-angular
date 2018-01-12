@@ -14,8 +14,8 @@ export class AddressService {
     return this.http.get<Address>(`${environment.api.url}/address`, {
       params: {
         postal_code: postcode,
-        number: number.toString()
-        // suffix: suffix
+        number: number.toString(),
+        suffix: suffix
       }
     });
   }

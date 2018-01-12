@@ -15,6 +15,7 @@ import {UserComponent} from "../components/user/user.component";
 import {UserRoutingModule} from "../routes/user.routing.module";
 import {UserService} from "../services/user.service";
 import {UserDialogComponent} from "../components/user/user-edit/user-dialog/user-dialog.component";
+import {SuiModule} from 'ng2-semantic-ui';
 
 @NgModule({
     entryComponents: [
@@ -40,10 +41,11 @@ import {UserDialogComponent} from "../components/user/user-edit/user-dialog/user
         MatCardModule,
         MatTooltipModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        SuiModule
     ],
     providers: [
-       UserService
+        UserService
     ]
 
 })
