@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {Sport} from "../../../../models/sport";
 import {SportEvent} from "../../../../models/sportevent";
+import {EventService} from "../../../../services/event.service";
 
 @Component({
   selector: 'app-sportevent-list-item',
@@ -11,12 +12,15 @@ export class SportEventListItemComponent implements OnInit {
 
   @Input() event: SportEvent;
   @Input() index: number;
+  attendees = 10;
   color = '';
-  value = 40;
+  value = 0;
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
+
+    this.value =  (this.attendees / this.event.maxAttendees) * 100;
   }
 
   setColor() {
@@ -24,7 +28,7 @@ export class SportEventListItemComponent implements OnInit {
       return 'primary'
     }
     else if (this.value === 100) {
-      return 'primary'
+      return 'warn'
     }
     else
       return 'accent'

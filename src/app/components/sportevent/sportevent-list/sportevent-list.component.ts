@@ -3,22 +3,24 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {SportEvent} from "../../../models/sportevent";
 import {Sport} from "../../../models/sport";
+import {EventService} from "../../../services/event.service";
 
 @Component({
     selector: 'app-sportevent-list',
     templateUrl: './sportevent-list.component.pug',
     styleUrls: ['./sportevent-list.component.sass']
 })
-export class SportEventListComponent {
+export class SportEventListComponent implements OnInit {
 
-    events: SportEvent[] = [
-      new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
-        new SportEvent("Basketballen in een zaal", 10, 20, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
-    ];
+    events: SportEvent[];
+    resultEvents: SportEvent[];
 
-    sportevents;
+    constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService, private eventService: EventService) {}
 
-    constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService) {}
+    ngOnInit() {
+        this.events = this.eventService.getEvents();
+        this.resultEvents = this.events;
+}
 
     onCreateNewEvent() {
         this.router.navigate(['add'], {relativeTo: this.route});
@@ -28,7 +30,10 @@ export class SportEventListComponent {
         /*this.service.getEventsyFilter(searchInput.value);*/
         //solution until api is available
         if (searchInput.value != "") {
-            this.events = this.events.filter(x => x.name === searchInput.value)
+            this.resultEvents = this.events.filter(x => x.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+        }
+        else {
+            this.resultEvents = this.events;
         }
         console.log(searchInput.value);
     }

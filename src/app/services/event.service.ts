@@ -12,6 +12,16 @@ import {Reservation} from '../models/reservation';
 @Injectable()
 export class EventService {
 
+  //dummy data
+   events : SportEvent[] = [
+  new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+  new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+     new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+     new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+     new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+     new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+
+];
     constructor(private http: HttpClient) {}
 
     addEvent(sportEvent): Promise<any> {
@@ -39,6 +49,10 @@ export class EventService {
     getBuildings(): Promise<Building[]> {
       return this.http.get<{_embedded: { buildings: Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
         .then((result: {_embedded: { buildings: Building[] }, _links: any}) => result._embedded.buildings);
+    }
+
+    getEvents() {
+      return this.events;
     }
 
 

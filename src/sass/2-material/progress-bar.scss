@@ -11,7 +11,7 @@
   }
 
   .mat-progress-bar-buffer {
-    background-color: mat-color($primary, lighter);
+    background-color: transparent;
   }
 
   .mat-progress-bar-fill::after {
