@@ -1,11 +1,18 @@
 header
-    .nav-button
-        nav
-            button.hamburger.hamburger--spin(type="button", (click)="clicked = !clicked", [class.is-active]="clicked")
+    .nav-container
+        .nav-button
+            button.hamburger.hamburger--spin(type="button", (click)="toggleNav()", [class.is-active]="opened")
                 span.hamburger-box
                     span.hamburger-inner
+        nav.app-nav
+            app-nav-item(link="/sportevent", name="Evenementen", icon="calendar-text")
+            app-nav-item(link="/sportevent", name="Mijn Evenementen", icon="calendar")
+            app-nav-item(name="Vrienden", icon="account-multiple-outline")
+            app-nav-item((click)="logout()", name="Uitloggen", icon="logout-variant")
 
     .floating-header
         span SportUnite
 
-    .profile-button
+    a.profile-button(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')")
+        .hover-icon
+            mat-icon(svgIcon="eye-outline")

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
+  private opened = false;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  toggleNav() {
+    this.opened = !this.opened;
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
 }

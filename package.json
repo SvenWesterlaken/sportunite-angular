@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "backend": "backend.bat",
     "postinstall": "node angular-pug.js"
   },
   "private": true,
