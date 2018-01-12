@@ -18,8 +18,7 @@ import { NavItemComponent } from './components/header/nav-item/nav-item.componen
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HeaderComponent,
-    NavItemComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

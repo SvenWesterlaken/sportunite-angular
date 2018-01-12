@@ -4,7 +4,7 @@
 header
   display: flex
   align-items: center
-  justify-content: space-around
+  justify-content: space-between
   padding: 16px 0
   position: fixed
   top: 0
@@ -72,9 +72,6 @@ header
       text-transform: uppercase
 
   .nav-container
-    .app-nav
-      position: absolute
-
     .nav-button
       background: white
       border-radius: 50%
@@ -85,9 +82,38 @@ header
       justify-content: center
       align-items: center
       margin: 8px 16px
+      z-index: 2
 
       button.hamburger
         padding: 5px 16px 0
+
+    nav.app-nav
+      z-index: 1
+      position: absolute
+
+      a.nav-item
+        color: $text
+        display: flex
+        align-items: center
+        z-index: 0
+
+        .icon-container
+          height: 40px
+          width: 40px
+          margin: 8px 16px 8px 24px
+          border-radius: 50%
+          border: 3px solid $text
+          background: $text-contrast
+          display: flex
+          justify-content: center
+          align-items: center
+
+
+        .text-container
+          font:
+            weight: 500
+            size: 16px
+
 
 
 

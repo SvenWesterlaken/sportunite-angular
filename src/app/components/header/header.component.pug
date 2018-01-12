@@ -1,14 +1,30 @@
+doctype html
+
+mixin nav-item(title, icon, link)
+    a.nav-item([@navItemAnimation]="opened", routerLink=link)
+        .icon-container
+            mat-icon(svgIcon=icon)
+
+        .text-container
+            span= title
+
+
 header
     .nav-container
         .nav-button
             button.hamburger.hamburger--spin(type="button", (click)="toggleNav()", [class.is-active]="opened")
                 span.hamburger-box
                     span.hamburger-inner
-        nav.app-nav
-            app-nav-item(link="/sportevent", name="Evenementen", icon="calendar-text")
-            app-nav-item(link="/sportevent", name="Mijn Evenementen", icon="calendar")
-            app-nav-item(name="Vrienden", icon="account-multiple-outline")
-            app-nav-item((click)="logout()", name="Uitloggen", icon="logout-variant")
+        nav.app-nav([@navItemsAnimation]="opened")
+            +nav-item("Evenementen", "calendar-text", "/sportevent")
+            +nav-item("Mijn Evenementen", "calendar", "/")
+            +nav-item("Vrienden", "account-multiple-outline", "/")
+            a.nav-item([@navItemAnimation]="opened", (click)="logout()")
+                .icon-container
+                    mat-icon(svgIcon="logout-variant")
+
+                .text-container
+                    span Uitloggen
 
     .floating-header
         span SportUnite
