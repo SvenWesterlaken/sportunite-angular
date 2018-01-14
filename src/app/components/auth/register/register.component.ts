@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.addressSub.unsubscribe();
+    if (this.addressSub) { this.addressSub.unsubscribe(); }
   }
 
   getAddress() {
