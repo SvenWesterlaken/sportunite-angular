@@ -12,30 +12,38 @@ import {EventService} from "../../../services/event.service";
 })
 export class SportEventListComponent implements OnInit {
 
-    events: SportEvent[];
-    resultEvents: SportEvent[];
+    events : SportEvent[];
+    resultEvents : SportEvent[];
+    toggleOpen = false;
 
     constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService, private eventService: EventService) {}
 
     ngOnInit() {
-        this.events = this.eventService.getEvents();
-        this.resultEvents = this.events;
-}
+        this.eventService.getEvents()
+          .then((result : SportEvent[]) => {
+            this.events = result;
+            this.resultEvents = this.events;
+            })
+          .catch((error) =>  console.log("Geen sportevents gevonden")
+          );
+
+    }
 
     onCreateNewEvent() {
         this.router.navigate(['add'], {relativeTo: this.route});
     }
 
-    searchEvents(searchInput: HTMLInputElement) {
-        /*this.service.getEventsyFilter(searchInput.value);*/
-        //solution until api is available
+   searchEvents(searchInput: HTMLInputElement) {
         if (searchInput.value != "") {
             this.resultEvents = this.events.filter(x => x.name.toLowerCase().includes(searchInput.value.toLowerCase()));
         }
         else {
             this.resultEvents = this.events;
         }
-        console.log(searchInput.value);
+    }
+
+    onToggle() {
+        this.toggleOpen = !this.toggleOpen;
     }
 
     logout() {

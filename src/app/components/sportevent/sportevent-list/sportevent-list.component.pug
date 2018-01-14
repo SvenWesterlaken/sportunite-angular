@@ -2,26 +2,27 @@
 
   .add-container
     .row.add
-      button.btn()
+      button.btn((click)="onCreateNewEvent()")
         mat-icon(svgIcon="plus")
       label Nieuw evenement
 
   .event-container
 
     .search-container
-      input(#titleInput type="text",  (keyup.enter)="searchEvents(titleInput)")
+      input(#titleInput type="text",  (keyup.enter)="searchEvents(titleInput)", (change)="searchEvents(titleInput)")
       mat-icon(svgIcon="magnify", (click)="searchEvents(titleInput)" )
 
     app-sportevent-list-item( *ngFor="let event of resultEvents; let i = index", [event] = "event", [index] = "event.sportEventId" )
+    p(*ngIf="!resultEvents") Geen evenementen om weer te geven
 
     .row.logout
       a((click)="logout()") Uitloggen
 
   .filter-container
-      button.btn((click)="onCreateNewEvent()")
+      button.btn((click)="onToggle()")
         mat-icon(svgIcon="filter-variant")
 
 
-
+      app-sportevent-list-filter(*ngIf="toggleOpen")
 
 

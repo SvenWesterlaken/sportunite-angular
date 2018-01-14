@@ -6,7 +6,7 @@ import {SharedModule} from './shared.module';
 import {SportEventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
-import {MatSelectModule, MatInputModule, MatCardModule} from "@angular/material";
+import {MatSelectModule, MatInputModule, MatCardModule, MatSlideToggleModule, MatChipsModule} from "@angular/material";
 import {EventService} from "../services/event.service";
 import {HttpClientModule} from "@angular/common/http";
 import {StepperModule} from "./stepper.module";
@@ -14,6 +14,7 @@ import {DatepickerModule} from "./datepicker.module";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
+import { SportEventListFilterComponent } from '../components/sportevent/sportevent-list/sportevent-list-filter/sportevent-list-filter.component';
 import {MomentModule} from 'angular2-moment';
 import {SportEventListItemComponent} from "../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component";
 
@@ -24,7 +25,8 @@ import {SportEventListItemComponent} from "../components/sportevent/sportevent-l
 		SportEventAddComponent,
 		SportEventDetailComponent,
 		SportEventAttendComponent,
-		SportEventListItemComponent
+		SportEventListItemComponent,
+		SportEventListFilterComponent
 	],
 	imports: [
 		SharedModule,
@@ -37,6 +39,8 @@ import {SportEventListItemComponent} from "../components/sportevent/sportevent-l
     HttpClientModule,
     MatSelectModule,
     MatCardModule,
+		MatChipsModule,
+		MatSlideToggleModule,
 		MatProgressBarModule,
     MomentModule
   ],

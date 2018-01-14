@@ -11,11 +11,10 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InnerModule} from './modules/inner.module';
 import {MatIconRegistry} from '@angular/material';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

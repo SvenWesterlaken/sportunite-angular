@@ -6,16 +6,19 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  .mat-progress-bar-background {
-    background-image: #{_mat-progress-bar-buffer($primary, lighter)};
-  }
+  .mat-progress-bar.mat-primary {
+    .mat-progress-bar-background {
+      background-image: #{_mat-progress-bar-buffer($primary, lighter)};
+    }
 
-  .mat-progress-bar-buffer {
-    background-color: transparent;
-  }
+    .mat-progress-bar-buffer {
+      background-color: transparent;
+    }
 
-  .mat-progress-bar-fill::after {
-    background-color: mat-color($primary);
+    .mat-progress-bar-fill::after {
+      background-color: mat-color($primary);
+      border-right: 20px solid #393E41;
+    }
   }
 
   .mat-progress-bar.mat-accent {
@@ -29,6 +32,7 @@
 
     .mat-progress-bar-fill::after {
       background-color: mat-color($accent);
+      border-right: 3px solid #393E41;
     }
   }
 

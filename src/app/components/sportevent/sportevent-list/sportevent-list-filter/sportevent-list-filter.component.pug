@@ -1,0 +1,16 @@
+mat-card
+    mat-card-header
+        .left
+            p Startdatum
+            input(placeholder="Begindatum")
+        .right
+            p Einddatum
+            input(placeholder="Einddatum")
+    mat-card-content
+        p Maximum afstand
+        mat-chip-list(class="mat-chip-list")
+            mat-chip(*ngFor="let filter of filters" selected="false") {{filter.name}}
+    mat-card-content
+        mat-slide-toggle Alleen waar vrienden naar toe gaan
+        mat-slide-toggle Alleen georganiseerd door vrienden
+

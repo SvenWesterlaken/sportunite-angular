@@ -13,47 +13,47 @@ import {Reservation} from '../models/reservation';
 export class EventService {
 
   //dummy data
-   events : SportEvent[] = [
-  new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
-  new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
-     new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
-     new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
-     new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
-     new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+  events: SportEvent[] = [
+    new SportEvent("Voetballen in een zaal", 10, 20, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+    new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+    new SportEvent("Voetballen in een zaal", 10, 10, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+    new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
+    new SportEvent("Voetballen in een zaal", 10, 10, "Lekker voetballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "10"),
+    new SportEvent("Basketballen in een zaal", 10, 100, "Lekker basketballuh", "10-12-2017", "10-12-2017", new Sport("Voetbal", 1), "11"),
 
-];
-    constructor(private http: HttpClient) {}
+  ];
 
-    addEvent(sportEvent): Promise<any> {
-      return this.http.post(`${environment.backend.url}/sportevents`, sportEvent).toPromise();
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    addUserToEvent(eventId): Promise<any> {
-      return this.http.post(`${environment.api.url}/sportevents`, { eventId: eventId }).toPromise();
-    }
+  addEvent(sportEvent): Promise<any> {
+    return this.http.post(`${environment.backend.url}/sportevents`, sportEvent).toPromise();
+  }
 
-    addReservation(reservation): Promise<any> {
-      return this.http.post<Reservation>(`${environment.backend.url}/reservations`, reservation).toPromise();
-    }
+  addUserToEvent(eventId): Promise<any> {
+    return this.http.post(`${environment.api.url}/sportevents`, {eventId: eventId}).toPromise();
+  }
 
-    getSports(): Promise<Sport[]> {
-      return this.http.get<{_embedded: { sports: Sport[] }, _links: any}>(`${environment.backend.url}/sports`).toPromise()
-        .then((result: {_embedded: { sports: Sport[] }, _links: any}) => result._embedded.sports);
-    }
+  addReservation(reservation): Promise<any> {
+    return this.http.post<Reservation>(`${environment.backend.url}/reservations`, reservation).toPromise();
+  }
 
-    getHalls(): Promise<Hall[]> {
-      return this.http.get<{_embedded: { halls: Hall[] }, _links: any}>(`${environment.backend.url}/halls`).toPromise()
-        .then((result: {_embedded: { halls: Hall[] }, _links: any}) => result._embedded.halls);
-    }
+  getSports(): Promise<Sport[]> {
+    return this.http.get<{ _embedded: { sports: Sport[] }, _links: any }>(`${environment.backend.url}/sports`).toPromise()
+      .then((result: { _embedded: { sports: Sport[] }, _links: any }) => result._embedded.sports);
+  }
 
-    getBuildings(): Promise<Building[]> {
-      return this.http.get<{_embedded: { buildings: Building[] }, _links: any}>(`${environment.backend.url}/buildings`).toPromise()
-        .then((result: {_embedded: { buildings: Building[] }, _links: any}) => result._embedded.buildings);
-    }
+  getHalls(): Promise<Hall[]> {
+    return this.http.get<{ _embedded: { halls: Hall[] }, _links: any }>(`${environment.backend.url}/halls`).toPromise()
+      .then((result: { _embedded: { halls: Hall[] }, _links: any }) => result._embedded.halls);
+  }
 
-    getEvents() {
-      return this.events;
-    }
+  getBuildings(): Promise<Building[]> {
+    return this.http.get<{ _embedded: { buildings: Building[] }, _links: any }>(`${environment.backend.url}/buildings`).toPromise()
+      .then((result: { _embedded: { buildings: Building[] }, _links: any }) => result._embedded.buildings);
+  }
 
-
+  getEvents(): Promise<any> {
+    return this.http.get(`${environment.api.url}/sportevents`).toPromise();
+  }
 }
