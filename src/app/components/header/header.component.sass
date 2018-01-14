@@ -1,0 +1,121 @@
+@import '../../../sass/1-base/colorvars'
+
+
+header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 16px 0
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 100
+
+  .profile-button
+    display: block
+    position: relative
+    height: 56px
+    width: 56px
+    min-width: 56px
+    margin: 8px 16px
+    border: 3px solid $text
+    border-radius: 50%
+    cursor: pointer
+    box-sizing: border-box
+    background:
+      position: center
+      size: cover
+
+    .hover-icon
+      height: 50px
+      width: 50px
+      border-radius: 50%
+      display: flex
+      align-items: center
+      justify-content: center
+      background: $primary
+      transform: scale(0)
+      transition: all .2s cubic-bezier(0.53, 0.01, 0.36, 1.63)
+
+      .mat-icon
+        color: $text-contrast
+        transform: scale(0)
+        transition: all .2s cubic-bezier(0.53, 0.01, 0.36, 1.63)
+        transition-delay: 150ms
+
+    &:hover
+      .hover-icon
+        transform: scale(1)
+        transition: all .2s
+
+        .mat-icon
+          transform: scale(1)
+          transition: all .2s
+
+  .floating-header
+    height: 56px
+    max-width: 1556px
+    width: 100%
+    margin: 8px 16px
+    line-height: 50px
+    border-radius: 28px
+    border: 3px solid $text
+    background: $primary
+    box-sizing: border-box
+    text-align: center
+
+    span
+      font-size: 18px
+      font-weight: bold
+      color: $text-contrast
+      text-transform: uppercase
+
+  .nav-container
+    .nav-button
+      background: white
+      border-radius: 50%
+      border: 3px solid $text
+      height: 56px
+      width: 56px
+      display: flex
+      justify-content: center
+      align-items: center
+      margin: 8px 16px
+      z-index: 2
+
+      button.hamburger
+        padding: 5px 16px 0
+
+    nav.app-nav
+      z-index: 1
+      position: absolute
+
+      a.nav-item
+        color: $text
+        display: flex
+        align-items: center
+        z-index: 0
+        cursor: pointer
+
+        .icon-container
+          height: 40px
+          width: 40px
+          margin: 8px 16px 8px 24px
+          border-radius: 50%
+          border: 3px solid $text
+          background: $text-contrast
+          display: flex
+          justify-content: center
+          align-items: center
+
+
+        .text-container
+          font:
+            weight: 500
+            size: 16px
+
+
+
+
+

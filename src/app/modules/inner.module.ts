@@ -3,7 +3,7 @@ import {AuthModule} from './auth.module';
 import {SportEventModule} from './sportevent.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../services/auth.interceptor';
-import {UserModule} from "./user.module";
+import {UserModule} from './user.module';
 
 @NgModule({
   imports: [
