@@ -7,12 +7,12 @@ import {AddressService} from '../../../services/address.service';
 import {UserService} from '../../../services/user.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Address} from '../../../models/address';
-import {User} from "../../../models/user";
-import {HttpErrorResponse} from "@angular/common/http";
-import {MatDialog, MatSnackBar} from "@angular/material";
-import {UserDialogComponent} from "./user-dialog/user-dialog.component";
-import {EventService} from "../../../services/event.service";
-import {Sport} from "../../../models/sport";
+import {User} from '../../../models/user';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {UserDialogComponent} from './user-dialog/user-dialog.component';
+import {EventService} from '../../../services/event.service';
+import {Sport} from '../../../models/sport';
 
 @Component({
     selector: 'app-user-edit',
@@ -20,21 +20,18 @@ import {Sport} from "../../../models/sport";
     styleUrls: ['./user-edit.component.sass']
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-
     private addressSub: Subscription;
+    private dialogSub: Subscription;
+
     private userForm: FormGroup;
     private addressLoading = false;
     private user: User;
     private sports: Sport[];
 
-    constructor(private addressService: AddressService, private eventService: EventService, private userService: UserService, public snackBar: MatSnackBar, public dialog: MatDialog) {
-    }
+    constructor(private addressService: AddressService, private eventService: EventService, private userService: UserService, public snackBar: MatSnackBar, public dialog: MatDialog) {}
 
     ngOnInit() {
-        this.userService.getUser().then((user: User) => {
-            this.initForm(user)
-        });
-
+        this.userService.getCurrentUser().then((user: User) => { this.initForm(user); });
         this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
     }
 
@@ -111,26 +108,27 @@ export class UserEditComponent implements OnInit, OnDestroy {
             favorite_sports: form.favorite_sports,
             biography: form.biography
         };
+
         this.userService.updateUser(userObject).then((res) => {
             console.log(res);
-            this.snackBar.open("Gegevens opgeslagen!", "Sluiten", {
+            this.snackBar.open('Gegevens opgeslagen!', 'Sluiten', {
                 duration: 2000
-            })
-        }), (err) => console.log(err);
+            });
+        }).catch((err) => console.log(err));
     }
 
     openDialog() {
-        let dialogRef = this.dialog.open(UserDialogComponent);
+        const dialogRef = this.dialog.open(UserDialogComponent);
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (result.passwordChanged)
-                this.snackBar.open("Wachtwoord gewijzigd!", "Sluiten", {
-                    duration: 2000
-                });
+        this.dialogSub = dialogRef.afterClosed().subscribe(result => {
+            if (result.passwordChanged) {
+                this.snackBar.open('Wachtwoord gewijzigd!', 'Sluiten', { duration: 2000 });
+            }
         });
     }
 
     ngOnDestroy() {
-        this.addressSub.unsubscribe();
+        if (this.dialogSub) { this.dialogSub.unsubscribe(); }
+        if (this.addressSub) { this.addressSub.unsubscribe(); }
     }
 }

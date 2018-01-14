@@ -16,6 +16,7 @@ import {UserRoutingModule} from "../routes/user.routing.module";
 import {UserService} from "../services/user.service";
 import {UserDialogComponent} from "../components/user/user-edit/user-dialog/user-dialog.component";
 import {SuiModule} from 'ng2-semantic-ui';
+import {MomentModule} from "angular2-moment";
 
 @NgModule({
     entryComponents: [
@@ -32,17 +33,15 @@ import {SuiModule} from 'ng2-semantic-ui';
         UserRoutingModule,
         ReactiveFormsModule,
         StepperModule,
-        FormsModule,
         DatepickerModule,
         MatInputModule,
-        BrowserAnimationsModule,
-        HttpModule,
         MatSelectModule,
         MatCardModule,
         MatTooltipModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,
-        SuiModule
+        SuiModule,
+        MomentModule
     ],
     providers: [
         UserService

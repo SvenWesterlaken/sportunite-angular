@@ -1,7 +1,7 @@
 doctype html
 
 mixin nav-item(title, icon, link)
-    a.nav-item([@navItemAnimation]="opened", routerLink=link)
+    a.nav-item([@navItemAnimation]="opened", routerLink=link, (click)="toggleNav()")
         .icon-container
             mat-icon(svgIcon=icon)
 
@@ -29,6 +29,6 @@ header
     .floating-header
         span SportUnite
 
-    a.profile-button(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')")
+    a.profile-button(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')", routerLink="/profile")
         .hover-icon
             mat-icon(svgIcon="eye-outline")

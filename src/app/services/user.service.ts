@@ -14,13 +14,17 @@ export class UserService {
         return this.http.put(`${environment.api.url}/users`, user).toPromise();
     }
 
+    getCurrentUser(): Promise<User> {
+        return this.http.get<User>(`${environment.api.url}/profile`).toPromise();
+    }
+
     getUser(): Promise<User> {
         return this.http.get<User>(`${environment.api.url}/users`).toPromise();
     }
 
     removeUser(): Promise<any> {
         return this.http.delete(`${environment.api.url}/users`).toPromise();
-    };
+    }
 
     changePassword(passwords): Promise<any> {
         return this.http.put(`${environment.api.url}/changePassword`, passwords).toPromise()
