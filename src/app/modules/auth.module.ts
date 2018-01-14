@@ -3,15 +3,12 @@ import {LoginComponent} from '../components/auth/login/login.component';
 import {RegisterComponent} from '../components/auth/register/register.component';
 import {AuthRoutingModule} from '../routes/auth.routing.module';
 import {SharedModule} from './shared.module';
-import {
-  MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatInputModule, MatProgressSpinnerModule,
-  MatSelectModule
-} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {StepperModule} from './stepper.module';
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
-import {DatepickerModule} from "./datepicker.module";
-import {AddressService} from "../services/address.service";
+import {DatepickerModule} from './datepicker.module';
+import {AddressService} from '../services/address.service';
+import {UnAuthGuard} from '../other/auth.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +28,8 @@ import {AddressService} from "../services/address.service";
     MatProgressSpinnerModule
   ],
   providers: [
-    AddressService
+    AddressService,
+    UnAuthGuard
   ]
 })
 export class AuthModule {}

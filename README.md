@@ -1,27 +1,16 @@
 # Sportunite
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+## Use backend Batch Files
 
-## Development server
+create a file in the root directory: `locations.txt`. And add this as content of that file:
+```
+NEO4J="[Path to Neo4J folder that includes the bin folder]"
+MONGO_DB_PATH="[Path to MongoDB folder that includes the bin folder]"
+MONGO_DB_DATA="[Path to your database path (for example: "D:\data\db")]"
+NET_API="[Path to .NET folder that includes the SportUnite.Api folder]"
+NODE_API="[Path to API root folder]"
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Don't forget to add double qoutes around the values of the variables**
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Then run the batch file itself or use `npm run backend` in the console.
