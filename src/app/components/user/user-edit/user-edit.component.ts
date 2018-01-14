@@ -13,6 +13,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {UserDialogComponent} from './user-dialog/user-dialog.component';
 import {EventService} from '../../../services/event.service';
 import {Sport} from '../../../models/sport';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-user-edit',
@@ -28,7 +29,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
     private user: User;
     private sports: Sport[];
 
-    constructor(private addressService: AddressService, private eventService: EventService, private userService: UserService, public snackBar: MatSnackBar, public dialog: MatDialog) {}
+    constructor(private addressService: AddressService, private eventService: EventService, private userService: UserService,
+                public snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) {}
 
     ngOnInit() {
         this.userService.getCurrentUser().then((user: User) => { this.initForm(user); });
@@ -53,8 +55,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
                     Validators.maxLength(6)]),
                 number: new FormControl(user.address.number, [Validators.required, CustomValidators.digits, Validators.maxLength(4)]),
                 suffix: new FormControl(user.address.suffix ? user.address.suffix : null),
-                city: new FormControl(user.address.city),
-                street: new FormControl(user.address.street)
+                city: new FormControl({ value: user.address.city, disabled: true}),
+                street: new FormControl({ value: user.address.street, disabled: true})
             }),
             favorite_sports: new FormControl(user.favorite_sports ? user.favorite_sports : null),
             biography: new FormControl(user.biography ? user.biography : null)
@@ -110,15 +112,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
         };
 
         this.userService.updateUser(userObject).then((res) => {
-            console.log(res);
-            this.snackBar.open('Gegevens opgeslagen!', 'Sluiten', {
-                duration: 2000
-            });
+            this.router.navigate(['/profile']);
         }).catch((err) => console.log(err));
     }
 
     openDialog() {
-        const dialogRef = this.dialog.open(UserDialogComponent);
+        const dialogRef = this.dialog.open(UserDialogComponent, {width: `${this.getDialogWidth()}vw`});
 
         this.dialogSub = dialogRef.afterClosed().subscribe(result => {
             if (result.passwordChanged) {
@@ -130,5 +129,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.dialogSub) { this.dialogSub.unsubscribe(); }
         if (this.addressSub) { this.addressSub.unsubscribe(); }
+    }
+
+    private getDialogWidth(): number {
+        const screenwidth = window.screen.width;
+
+        if (screenwidth <= 600) {
+            return 90;
+        } else if (screenwidth <= 992) {
+            return 80;
+        } else if (screenwidth <= 1200) {
+            return 50;
+        } else {
+            return 30;
+        }
     }
 }

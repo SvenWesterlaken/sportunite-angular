@@ -17,6 +17,10 @@ export class HeaderComponent {
     this.opened = !this.opened;
   }
 
+  closeNav() {
+    this.opened = false;
+  }
+
   logout() {
     this.auth.logout();
   }

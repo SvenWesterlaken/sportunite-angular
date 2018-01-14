@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {SharedModule} from './shared.module';
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
-import {MatInputModule, MatProgressSpinnerModule, MatSnackBarModule} from "@angular/material";
+import {MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSnackBarModule} from "@angular/material";
 import {MatSelectModule, MatCardModule} from "@angular/material";
 import {MatTooltipModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -40,8 +40,8 @@ import {MomentModule} from "angular2-moment";
         MatTooltipModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,
-        SuiModule,
-        MomentModule
+        MomentModule,
+        MatChipsModule
     ],
     providers: [
         UserService

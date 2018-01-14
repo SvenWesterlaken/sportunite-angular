@@ -1,67 +1,112 @@
-.div(*ngIf="userForm")
-    .form-container
-        form([formGroup]="userForm", (ngSubmit)="updateUser()")
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    input(matInput, placeholder="Voornaam", formControlName="firstName", type="text", [(ngModel)]="user.firstname")
-                    mat-error(*ngIf="userForm.get('firstName').hasError('required')") Dit veld is verplicht
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    input(matInput, placeholder="Achternaam", formControlName="lastName", type="text", [(ngModel)]="user.lastname")
-                    mat-error(*ngIf="userForm.get('lastName').hasError('required')") Dit veld is verplicht
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    input(matInput, placeholder="E-mailadres", formControlName="email", type="email", [(ngModel)]="user.email")
-                    mat-error(*ngIf="userForm.get('email').hasError('email') && !userForm.get('email').hasError('required')") Ongeldig e-mailadres
-                    mat-error(*ngIf="userForm.get('email').hasError('required')") E-mailadres is verplicht
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    input(matInput, [max]="maxDate", [matDatepicker]="birthDatePicker", placeholder="Geboortedatum", formControlName="birth", type="text")
-                    mat-datepicker-toggle(matSuffix, [for]="birthDatePicker")
-                    mat-datepicker(#birthDatePicker)
-                    mat-error(*ngIf="userForm.get('birth').hasError('maxDate') && !userForm.get('birth').hasError('required') && !userForm.get('birth').hasError('dateFormat')") Datum moet voor vandaag zijn
-                    mat-error(*ngIf="userForm.get('birth').hasError('dateFormat') && !userForm.get('birth').hasError('required')") Ongeldige datum
-                    mat-error(*ngIf="userForm.get('birth').hasError('required')") Dit veld is verplicht
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    mat-select(placeholder="Geslacht", formControlName="gender")
-                        mat-option(value="male") Man
-                        mat-option(value="female") Vrouw
-            .big-form-input-container
-                mat-form-field.big-form-field
-                    textarea(matInput, placeholder="Biografie", formControlName="biography", type="text", [(ngModel)]="user.biography")
-            .big-form-input-container
-                mat-card-subtitle Favoriete sporten
-                sui-multi-select(labeplaceholder="Kies sport", class="selection", [(ngModel)]="user.favorite_sports", formControlName="favorite_sports", [isSearchable]="true", [hasLabels]="true", #multiSelect)
-                    sui-select-option(*ngFor="let sport of sports", [value]="sport.name")
+.nav-padding
+.container(*ngIf="userForm")
+    h3 Profiel aanpassen
+    form([formGroup]="userForm", (ngSubmit)="updateUser()")
+        .card-panel
+            section
+                span.section-header Algemene informatie
+                .row
+                    mat-form-field.col.s12.m6
+                        input(matInput, placeholder="Voornaam", formControlName="firstName", type="text")
+                        mat-error(*ngIf="userForm.get('firstName').hasError('required')") Dit veld is verplicht
 
-            .div(formGroupName="registerAddress")
-                mat-card-subtitle Adresgegevens
-                .big-form-input-container
-                    mat-form-field.big-form-field
+                    mat-form-field.col.s12.m6
+                        input(matInput, placeholder="Achternaam", formControlName="lastName", type="text")
+                        mat-error(*ngIf="userForm.get('lastName').hasError('required')") Dit veld is verplicht
+
+                    mat-form-field.col.s12
+                        input(matInput, placeholder="E-mailadres", formControlName="email", type="email", [(ngModel)]="user.email")
+                        mat-error(*ngIf="userForm.get('email').hasError('email') && !userForm.get('email').hasError('required')") Ongeldig e-mailadres
+                        mat-error(*ngIf="userForm.get('email').hasError('required')") E-mailadres is verplicht
+
+            .divider
+            section
+                span.section-header Geboortedatum & Geslacht
+                .row
+                    mat-form-field.col.s12
+                        input(matInput, [max]="maxDate", [matDatepicker]="birthDatePicker", placeholder="Geboortedatum", formControlName="birth", type="text")
+                        mat-datepicker-toggle(matSuffix, [for]="birthDatePicker")
+                        mat-datepicker(#birthDatePicker)
+                        mat-error(*ngIf="userForm.get('birth').hasError('maxDate') && !userForm.get('birth').hasError('required') && !userForm.get('birth').hasError('dateFormat')") Datum moet voor vandaag zijn
+                        mat-error(*ngIf="userForm.get('birth').hasError('dateFormat') && !userForm.get('birth').hasError('required')") Ongeldige datum
+                        mat-error(*ngIf="userForm.get('birth').hasError('required')") Dit veld is verplicht
+                    mat-form-field.col.s12
+                        mat-select(placeholder="Geslacht", formControlName="gender")
+                            mat-option(value="male") Man
+                            mat-option(value="female") Vrouw
+            .divider
+            section
+                span.section-header Biografie
+                .row
+                    mat-form-field.col.s12
+                        textarea(matInput, placeholder="Biografie", formControlName="biography", type="text")
+            .divider
+            section
+                span.section-header Favoriete sporten
+                .row
+                    mat-form-field.col.s12(floatLabel="never")
+                        mat-select(placeholder="Favoriete sporten", formControlName="favorite_sports", multiple)
+                            mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
+
+            .divider
+            section(formGroupName="registerAddress")
+                span.section-header Adresgegevens
+                .row
+                    mat-form-field.col.s12.l6
                         input(matInput, placeholder="Postcode", formControlName="postalCode", type="text")
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('pattern') && !userForm.get('registerAddress.postalCode').hasError('maxlength')") Ongeldige postcode
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('maxlength')") Maximaal 6 tekens
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('required')") Dit veld is verplicht
-                    mat-form-field.big-form-field.small50
+                    mat-form-field.col.s6.l3
                         input(matInput, placeholder="Huisnummer", formControlName="number", type="text")
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('maxlength')") Maximaal 4 cijfers
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('digits')") Alleen cijfers toegestaan
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('required')") Dit veld is verplicht
-                    mat-form-field.big-form-field.small50
-                        input(matInput, placeholder="Toev.", formControlName="suffix", type="text")
+                    mat-form-field.col.s6.l3
+                        input(matInput, placeholder="Toevoeging", formControlName="suffix", type="text")
+                    mat-form-field.col.s6.s12(hintLabel="Wijzig straat door de postcode of huisnummer aan te passen")
+                        input(matInput, placeholder="Straat", formControlName="street")
+                    mat-form-field.col.s6.s12(hintLabel="Wijzig stad door de postcode of huisnummer aan te passen")
+                        input(matInput, placeholder="Stad", formControlName="city")
+                        mat-error(*ngIf="userForm.get('registerAddress').hasError('noAddress')") Geen adres gevonden
+
+                    button.right.btn((click)="getAddress()", [disabled]="userForm.get('registerAddress').invalid", type='button') Zoek adres
+                    mat-progress-spinner.address-loading-spinner(mode="indeterminate", [diameter]="44", [strokeWidth]="3", *ngIf="addressLoading")
+
+            .divider
+            section
+                span.section-header Wachtwoord wijzigen
+                .row
+                    .col.s12
+                        button.full-width.btn((click)="openDialog()", type='button') Wachtwoord wijzigen
+
+
+        .button-container
+            button.btn.btn-large.danger(type='button', routerLink="..") Annuleren
+            button.btn.btn-large([disabled]="userForm.invalid", type='submit') Wijzigingen opslaan
+
+.bottom-padding
+
+            //.div()
+                mat-card-subtitle Adresgegevens
                 .big-form-input-container
                     mat-form-field.big-form-field
-                        input(matInput, matTooltip="Voeg een nieuw adres toe door de postcode of huisnummer aan te passen", matTooltipShowDelay=200, matTooltipPosition="below", placeholder="Stad*", formControlName="city", type="text", [(ngModel)]="user.address.city", readonly="readonly" )
+
+                    mat-form-field.big-form-field.small50
+
+                    mat-form-field.big-form-field.small50
+
+                .big-form-input-container
+                    mat-form-field.big-form-field
+                        input(matInput, matTooltip="", matTooltipShowDelay=200, matTooltipPosition="below", placeholder="Stad*", formControlName="city", type="text", [(ngModel)]="user.address.city", readonly="readonly" )
                 .big-form-input-container
                     mat-form-field.big-form-field
                         input(matInput, matTooltip="Voeg een nieuw adres toe door de postcode of huisnummer aan te passen", matTooltipShowDelay=200, placeholder="Straat*", formControlName="street", type="text", [(ngModel)]="user.address.street", readonly="readonly" )
                 .big-form-title-container
-                    mat-error(*ngIf="userForm.get('registerAddress').hasError('noAddress')") Geen adres gevonden
-            .big-form-footer-container
-                button.btn.btn-large((click)="getAddress()", [disabled]="userForm.get('registerAddress').invalid", type='button') Zoek adres
-                mat-progress-spinner.address-loading-spinner(mode="indeterminate", [diameter]="44", [strokeWidth]="3", *ngIf="addressLoading")
-            .big-form-footer-container
-                button.btn.btn-large((click)="openDialog()", type='button') Wachtwoord wijzigen
-            .big-form-footer-container
-                button.btn.btn-large([disabled]="userForm.invalid || !userForm.get('registerAddress.city').value", type='submit') Opslaan
+
+            //.big-form-footer-container
+
+            //.big-form-footer-container
+            //
+            //.big-form-footer-container
+

@@ -7,10 +7,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-user-dialog',
-    templateUrl: './user-dialog.component.pug'
+    templateUrl: './user-dialog.component.pug',
+    styleUrls: ['./user-dialog.component.sass']
 })
 export class UserDialogComponent {
-
     private passwordForm: FormGroup;
 
     constructor(private userService: UserService,
