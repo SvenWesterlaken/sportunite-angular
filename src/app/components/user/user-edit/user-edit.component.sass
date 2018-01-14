@@ -1,0 +1,48 @@
+@import '../../../../sass/1-base/colorvars'
+
+.card-panel
+  border-radius: 11px
+  border: 3px solid $text
+  padding: 24px 0
+
+  .divider
+    height: 3px
+    background: $text
+    margin: 24px 0
+    width: 100%
+
+  section
+    padding: 0 24px
+
+    .mat-form-field
+      margin: 8px 0
+      font-size: 18px
+
+    span.section-header
+      display: block
+      margin-bottom: 16px
+      text-transform: uppercase
+      font-weight: 500
+      font-size: 16px
+      color: $primary
+
+.button-container
+  margin-top: 24px
+  display: flex
+  justify-content: space-between
+
+@media only screen and (max-width: 600px)
+  .cdk-overlay-pane
+    width: 90vw
+
+@media only screen and (max-width: 992px)
+  .cdk-overlay-pane
+    width: 80vw
+
+@media only screen and (min-width: 993px)
+  .cdk-overlay-pane
+    width: 50vw
+
+@media only screen and (min-width: 1201px)
+  .cdk-overlay-pane
+    width: 30vw

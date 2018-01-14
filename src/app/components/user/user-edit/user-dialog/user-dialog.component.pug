@@ -1,0 +1,18 @@
+form([formGroup]="passwordForm", (ngSubmit)="updatePassword()", *ngIf="passwordForm")
+    .row
+        mat-form-field.col.s12
+            input(matInput, placeholder="Oud wachtwoord", formControlName="oldPassword", type="password")
+            mat-error(*ngIf="passwordForm.get('oldPassword').hasError('required')") Dit veld is verplicht
+    .row(formGroupName="newPassword")
+        mat-form-field.col.s12.xl6
+            input(matInput, placeholder="Nieuw wachtwoord", formControlName="password", type="password")
+            mat-error(*ngIf="passwordForm.get('newPassword.password').hasError('required')") Dit veld is verplicht
+        mat-form-field.col.s12.xl6
+            input(matInput, placeholder="Herhaal wachtwoord", formControlName="passwordConfirmation", type="password")
+            mat-error(*ngIf="passwordForm.get('newPassword.passwordConfirmation').hasError('equalTo') && !passwordForm.get('newPassword.passwordConfirmation').hasError('required')") Wachtwoorden komen niet overeen
+            mat-error(*ngIf="passwordForm.get('newPassword.passwordConfirmation').hasError('required')") Dit veld is verplicht
+    .big-form-footer-container
+        mat-error(*ngIf="passwordForm.get('oldPassword').hasError('wrongPassword')") Onjuist wachtwoord
+        button.btn.danger((click)="closeDialog()", type='button') Annuleren
+        button.btn([disabled]="passwordForm.invalid", type='submit') Wachtwoord wijzigen
+

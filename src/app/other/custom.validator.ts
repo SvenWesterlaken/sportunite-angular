@@ -18,7 +18,7 @@ export function MinimumTime(minControl: AbstractControl): ValidatorFn {
 }
 
 export function IsGreaterThan(min_control: AbstractControl): ValidatorFn {
-  return (control: AbstractControl) => control.value >= min_control.value ? null : { isGreater: true };
+  return (control: AbstractControl) => +control.value >= +min_control.value ? null : { isGreater: true };
 }
 
 
