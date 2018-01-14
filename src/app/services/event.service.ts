@@ -11,6 +11,7 @@ import {Reservation} from '../models/reservation';
 
 @Injectable()
 export class EventService {
+<<<<<<< HEAD
 
   //dummy data
   events: SportEvent[] = [
@@ -57,3 +58,49 @@ export class EventService {
     return this.http.get(`${environment.api.url}/sportevents`).toPromise();
   }
 }
+=======
+	
+	constructor(private http: HttpClient) {
+	}
+	
+	addEvent(sportEvent): Promise<any> {
+		return this.http.post(`${environment.backend.url}/sportevents`, sportEvent).toPromise();
+	}
+	
+	addUserToEvent(eventId): Promise<any> {
+		return this.http.post(`${environment.api.url}/sportevents`, {eventId: eventId}).toPromise();
+	}
+	
+	addUserToAttendEvent(eventId, email): Observable<any> {
+		console.log(eventId);
+		return this.http.post(`${environment.api.url}/sportevents/${eventId}/attend`, {email: email, eventId: eventId});
+	}
+	
+	removeUserFromEventAttending(eventId, email): Observable<any> {
+		return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {email: email, eventId: eventId});
+	}
+	
+	addReservation(reservation): Promise<any> {
+		return this.http.post<Reservation>(`${environment.backend.url}/reservations`, reservation).toPromise();
+	}
+	
+	getEvent(id: string): Observable<any> {
+		return this.http.get(`${environment.backend.url}/sportevents/${id}`)
+	}
+	
+	getSports(): Promise<Sport[]> {
+		return this.http.get<{ _embedded: { sports: Sport[] }, _links: any }>(`${environment.backend.url}/sports`).toPromise()
+			.then((result: { _embedded: { sports: Sport[] }, _links: any }) => result._embedded.sports);
+	}
+	
+	getHalls(): Promise<Hall[]> {
+		return this.http.get<{ _embedded: { halls: Hall[] }, _links: any }>(`${environment.backend.url}/halls`).toPromise()
+			.then((result: { _embedded: { halls: Hall[] }, _links: any }) => result._embedded.halls);
+	}
+	
+	getBuildings(): Promise<Building[]> {
+		return this.http.get<{ _embedded: { buildings: Building[] }, _links: any }>(`${environment.backend.url}/buildings`).toPromise()
+			.then((result: { _embedded: { buildings: Building[] }, _links: any }) => result._embedded.buildings);
+	}
+}
+>>>>>>> bba62f5c35730e4875ec2b4d68738e02fc70fd61

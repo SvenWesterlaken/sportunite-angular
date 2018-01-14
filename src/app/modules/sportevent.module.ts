@@ -16,6 +16,8 @@ import {SharedModule} from './shared.module';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventListFilterComponent} from '../components/sportevent/sportevent-list/sportevent-list-filter/sportevent-list-filter.component';
 import {SportEventListItemComponent} from '../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component';
+import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leave/sportevent-leave.component';
+
 
 @NgModule({
 	declarations: [
@@ -23,16 +25,16 @@ import {SportEventListItemComponent} from '../components/sportevent/sportevent-l
 		SportEventListComponent,
 		SportEventAddComponent,
 		SportEventDetailComponent,
-		SportEventAttendComponent,
 		SportEventListItemComponent,
-		SportEventListFilterComponent
+		SportEventListFilterComponent,
+		SportEventAttendComponent,
+		SportEventLeaveComponent
 	],
 	imports: [
 		SharedModule,
 		SportEventRoutingModule,
 		ReactiveFormsModule,
 		StepperModule,
-		FormsModule,
 		DatepickerModule,
 		MatInputModule,
 		HttpClientModule,
@@ -42,9 +44,9 @@ import {SportEventListItemComponent} from '../components/sportevent/sportevent-l
 		MatSlideToggleModule,
 		MatProgressBarModule,
 		MomentModule
-	  ],
-	  providers: [
+	],
+	providers: [
 		EventService
-	  ]
+	]
 })
 export class SportEventModule {}

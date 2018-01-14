@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {SportEvent} from "../../../models/sportevent";
 import {EventService} from "../../../services/event.service";
-import {SportEvent} from "../../../models/SportEvent";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
-	selector: 'app-sportevent-attend',
-	templateUrl: './sportevent-attend.component.pug',
-	styleUrls: ['./sportevent-attend.component.sass']
+	selector: 'app-sportevent-leave',
+	templateUrl: './sportevent-leave.component.pug',
+	styleUrls: ['./sportevent-leave.component.sass']
 })
-export class SportEventAttendComponent implements OnInit {
+export class SportEventLeaveComponent implements OnInit {
 	private id: string;
-	private sportEvent: SportEvent;
+	private sportEvent: SportEvent
 	
 	constructor(private route: ActivatedRoute,
 	            private router: Router,
@@ -26,9 +26,7 @@ export class SportEventAttendComponent implements OnInit {
 					this.eventService.getEvent(this.id)
 						.subscribe(
 							(event: SportEvent) => {
-								console.log(event);
 								this.sportEvent = event;
-								//this.sportEvent.sportEventId = event.sportEventId;
 							}
 						)
 				}
@@ -48,7 +46,7 @@ export class SportEventAttendComponent implements OnInit {
 	}
 	
 	public proceed() {
-		this.eventService.addUserToAttendEvent(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
+		this.eventService.removeUserFromEventAttending(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
 			.subscribe(result => {
 				this.router.navigate(['../'], {relativeTo: this.route})
 			});
