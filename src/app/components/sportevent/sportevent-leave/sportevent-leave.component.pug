@@ -1,3 +1,4 @@
+.nav-padding
 mat-card
     mat-card-header
         mat-card-title
@@ -7,7 +8,7 @@ mat-card
         p U gaat dit evenement verlaten. Mogelijk kunt u hierna dit evenement niet meer opnieuw meedoen.
         p Weet u zeker dat u dit evenement wilt verlaten?
     hr
-    mat-card-content.footer
+    .button-footer-container
         h4 Verlaten bevestigen
         button.btn((click)="cancel()") Ga terug
         button.btn(style="color: red; border-color: red", (click)="proceed()") Evenement verlaten
