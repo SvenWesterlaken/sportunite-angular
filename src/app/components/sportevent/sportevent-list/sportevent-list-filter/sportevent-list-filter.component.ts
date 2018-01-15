@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-sportevent-list-filter',
@@ -18,6 +18,7 @@ export class SportEventListFilterComponent implements OnInit {
 
   ];
 
+  @Output
   constructor() { }
 
   ngOnInit() {

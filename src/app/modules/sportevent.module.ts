@@ -11,12 +11,13 @@ import {SportEventListComponent} from '../components/sportevent/sportevent-list/
 import {SportEventRoutingModule} from '../routes/sportevent.routing.module';
 import {SportEventDetailComponent} from '../components/sportevent/sportevent-detail/sportevent-detail.component';
 import {SportEventAttendComponent} from '../components/sportevent/sportevent-attend/sportevent-attend.component';
-import {NgModule} from '@angular/core/';
+import {NgModule} from '@angular/core';
 import {SharedModule} from './shared.module';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventListFilterComponent} from '../components/sportevent/sportevent-list/sportevent-list-filter/sportevent-list-filter.component';
 import {SportEventListItemComponent} from '../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component';
 import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leave/sportevent-leave.component';
+import {SportEventListUserComponent} from "../components/sportevent/sportevent-list-user/sportevent-list-user.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leav
 		SportEventListItemComponent,
 		SportEventListFilterComponent,
 		SportEventAttendComponent,
-		SportEventLeaveComponent
+		SportEventLeaveComponent,
+		SportEventListUserComponent
 	],
 	imports: [
 		SharedModule,

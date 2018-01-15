@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {SportEvent} from "../../../models/sportevent";
-import {Sport} from "../../../models/sport";
 import {EventService} from "../../../services/event.service";
 
 @Component({
@@ -20,11 +19,11 @@ export class SportEventListComponent implements OnInit {
 
     ngOnInit() {
         this.eventService.getEvents()
-          .then((result : SportEvent[]) => {
+          .then((result) => {
             this.events = result;
             this.resultEvents = this.events;
             })
-          .catch((error) =>  console.log("Geen sportevents gevonden")
+          .catch((error) =>  console.log(error)
           );
 
     }
@@ -46,7 +45,5 @@ export class SportEventListComponent implements OnInit {
         this.toggleOpen = !this.toggleOpen;
     }
 
-    logout() {
-        this.auth.logout();
-    }
+
 }
