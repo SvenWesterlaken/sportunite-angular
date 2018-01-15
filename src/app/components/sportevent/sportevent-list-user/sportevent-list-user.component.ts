@@ -4,6 +4,7 @@ import {EventService} from "../../../services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-sportevent-list-user',
@@ -25,12 +26,11 @@ export class SportEventListUserComponent implements OnInit {
 
     this.eventService.getEvents()
       .then((result) => {
-        this.events = result.filter(result => result.organisor.email === this.user.email);
+        this.events = _.filter(result, { organisor: { _id: this.user._id } });
         this.resultEvents = this.events;
       })
       .catch((error) =>  console.log("Geen sportevents gevonden")
       );
-
   }
 
   onCreateNewEvent() {
