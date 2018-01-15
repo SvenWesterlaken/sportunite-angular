@@ -1,0 +1,13 @@
+mat-card
+    mat-card-header
+        mat-card-title
+            h3 {{ getEvent()?.name }}
+        mat-card-subtitle {{ getEvent()?.description }}
+    mat-card-content.summary
+        p U gaat dit evenement verlaten. Mogelijk kunt u hierna dit evenement niet meer opnieuw meedoen.
+        p Weet u zeker dat u dit evenement wilt verlaten?
+    hr
+    mat-card-content.footer
+        h4 Verlaten bevestigen
+        button.btn((click)="cancel()") Ga terug
+        button.btn(style="color: red; border-color: red", (click)="proceed()") Evenement verlaten

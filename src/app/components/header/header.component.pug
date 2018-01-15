@@ -1,0 +1,34 @@
+doctype html
+
+mixin nav-item(title, icon, link)
+    a.nav-item([@navItemAnimation]="opened", routerLink=link, (click)="toggleNav()")
+        .icon-container.z-depth-2
+            mat-icon(svgIcon=icon)
+
+        .text-container
+            span= title
+
+
+header
+    .nav-container
+        .nav-button.z-depth-3
+            button.hamburger.hamburger--spin(type="button", (click)="toggleNav()", [class.is-active]="opened")
+                span.hamburger-box
+                    span.hamburger-inner
+        nav.app-nav([@navItemsAnimation]="opened")
+            +nav-item("Evenementen", "calendar-text", "/sportevent")
+            +nav-item("Mijn Evenementen", "calendar", "/")
+            +nav-item("Vrienden", "account-multiple-outline", "/")
+            a.nav-item([@navItemAnimation]="opened", (click)="logout()")
+                .icon-container.z-depth-2
+                    mat-icon(svgIcon="logout-variant")
+
+                .text-container
+                    span Uitloggen
+
+    .floating-header.z-depth-3
+        span SportUnite
+
+    a.profile-button.z-depth-3(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')", routerLink="/profile", (click)="closeNav()")
+        .hover-icon
+            mat-icon(svgIcon="eye-outline")

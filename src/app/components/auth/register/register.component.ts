@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.addressSub.unsubscribe();
+    if (this.addressSub) { this.addressSub.unsubscribe(); }
   }
 
   getAddress() {
@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       firstname: form.registerName.firstName,
       lastname: form.registerName.lastName,
       birth: moment(form.registerBirth.birth).toDate(),
-      gender: form.registerGender.gender,
+      gender: form.registerGender .gender,
       address: {
         street: this.address.street,
         number: this.address.number,

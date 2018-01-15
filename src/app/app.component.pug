@@ -1,1 +1,3 @@
-router-outlet
+app-header(*ngIf="auth.isLoggedIn()")
+.inner-container([class.with-nav]="auth.isLoggedIn()")
+    router-outlet
