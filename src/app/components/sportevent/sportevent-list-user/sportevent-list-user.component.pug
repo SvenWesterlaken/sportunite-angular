@@ -14,7 +14,8 @@
 
 
     app-sportevent-list-item( *ngFor="let event of resultEvents; let i = index", [event] = "event", [index] = "event.sportEventId" )
-    p(*ngIf="resultEvents?.length === 0") Je hebt nog geen evenementen aangemaakt
+    p(*ngIf="resultEvents?.length === 0") Er zijn geen evenementen van jou gevonden
+    p(*ngIf="!resultEvents") Geen evenementen om weer te geven
 
 
   .filter-container

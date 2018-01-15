@@ -34,7 +34,8 @@ export class SportEventListUserComponent implements OnInit {
   }
 
   onCreateNewEvent() {
-    this.router.navigate(['add'], {relativeTo: this.route});
+    this.router.navigate(['../add'], {relativeTo: this.route})
+
   }
 
   searchEvents(searchInput: HTMLInputElement) {
