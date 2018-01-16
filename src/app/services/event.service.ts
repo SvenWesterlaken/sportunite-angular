@@ -66,7 +66,7 @@ export class EventService {
   	return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {email: email, eventId: eventId});
   }
 
-  getEvent(id: string): Observable<any> {
-  	return this.http.get(`${environment.backend.url}/sportevents/${id}`);
+  getEvent(id: string): Promise<any> {
+  	return this.http.get(`${environment.backend.url}/sportevents/${id}`).toPromise();
   }
 }
