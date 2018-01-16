@@ -1,14 +1,9 @@
 .nav-padding
-mat-card
-    mat-card-header
-        mat-card-title
-            h3 {{ getEvent()?.name }}
-        mat-card-subtitle {{ getEvent()?.description }}
-    mat-card-content.summary
-        p U gaat dit evenement verlaten. Mogelijk kunt u hierna dit evenement niet meer opnieuw meedoen.
-        p Weet u zeker dat u dit evenement wilt verlaten?
-    hr
-    .button-footer-container
-        h4 Verlaten bevestigen
-        button.btn((click)="cancel()") Ga terug
-        button.btn(style="color: red; border-color: red", (click)="proceed()") Evenement verlaten
+.container
+    .mat-card
+        h3 Weet u zeker dat u #[span {{ sportEvent?.name }} ] wilt verlaten?
+        p Door verder te gaan zult u officieel het evenement verlaten. #[br] Mogelijk kunt u hierna dit evenement niet meer opnieuw meedoen.
+
+    .button-container
+        button.btn.btn-large.danger.left-btn((click)="cancel()") Annuleren
+        button.btn.btn-large.right-btn((click)="proceed()") Evenement verlaten

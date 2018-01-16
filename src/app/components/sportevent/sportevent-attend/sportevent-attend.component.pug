@@ -38,37 +38,3 @@ doctype html
     .button-container
         button.btn.btn-large.danger.left-btn((click)="cancel()") Annuleren
         button.btn.btn-large.right-btn((click)="proceed()") Betalen
-
-//mat-card
-    mat-card-header
-        mat-card-title
-            h3
-        mat-card-subtitle
-    mat-card-content.summary
-        h4 Mijn portemonnee
-        p Huidige balans:
-            span.card  &euro;35,-
-        hr
-        table
-            tr
-                td
-                    |Saldo
-                td
-                    p &euro;35,-
-            tr
-                td
-                    |Boeking
-                td
-                    p &euro;5,-
-            tr
-                td
-                td
-                    hr
-            tr
-                td
-                    |Resterend Saldo:
-                td
-                    p &euro;30,-
-    hr
-    mat-card-content.footer
-        h4 Boeking bevestigen
