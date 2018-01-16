@@ -18,7 +18,8 @@ header
         nav.app-nav([@navItemsAnimation]="opened")
             +nav-item("Evenementen", "calendar-text", "/sportevent")
             +nav-item("Mijn Evenementen", "calendar", "/")
-            +nav-item("Vrienden", "account-multiple-outline", "/")
+            +nav-item("Gebruikers", "calendar-text", "/users")
+            +nav-item("Vrienden", "account-multiple-outline", "/friends")
             a.nav-item([@navItemAnimation]="opened", (click)="logout()")
                 .icon-container.z-depth-2
                     mat-icon(svgIcon="logout-variant")
