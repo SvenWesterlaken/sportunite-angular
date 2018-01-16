@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import '../1-base/colorvars.sass';
+@import '../1-base/colorvars';
 
 @mixin mat-tabs-theme($theme) {
   $primary-theme: map-get($theme, primary);

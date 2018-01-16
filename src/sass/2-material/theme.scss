@@ -7,19 +7,14 @@
 @include mat-core();
 
 $custom-theme: mat-light-theme(mat-palette($mat-primary), mat-palette($mat-primary), mat-palette($mat-warn));
-//$extra-theme: mat-light-theme(mat-palette($mat-green), mat-palette($mat-orange), mat-palette($mat-warn));
 
 @mixin custom-theme($theme) {
   @include mat-form-field-theme($theme);
   @include mat-input-theme($theme);
   @include mat-tabs-theme($theme);
+  @include mat-progress-bar-theme($theme);
 }
-
-//@mixin extra-theme($theme) {
-//  @include mat-progress-bar-theme($theme);
-//}
 
 @include angular-material-theme($custom-theme);
 @include custom-theme($custom-theme);
-//@include extra-theme($extra-theme);
 

@@ -1,4 +1,5 @@
 @import '../../../../../sass/1-base/colorvars'
+@import '../../../../../sass/2-material/shadows'
 
 a.mat-card.sport-event-item
   max-width: 778px
@@ -7,22 +8,86 @@ a.mat-card.sport-event-item
   padding: 0
   border: 3px solid $text
   border-radius: 11px
+  @extend .z-depth-1
+  transition: all 0.2s ease-in-out
 
-  h5
-    font-size: 22px
-    font-weight: 500
-
-  .profile-pic
-    height: 28px
-    width: 28px
-    min-width: 28px
-    min-height: 28px
-    background:
-      position: center
-      size: cover
-    border-radius: 50%
+  &:hover
+    @extend .z-depth-3
 
 
+  .header-container
+    padding: 16px
+    display: flex
+    justify-content: space-between
+    border-bottom: 3px solid $text
+
+
+    span.title
+      font-size: 22px
+      font-weight: 500
+      margin: 0
+
+    .organiser-container
+      display: flex
+      align-items: center
+
+      span.organiser
+        margin-right: 16px
+        font-weight: 500
+
+      .profile-pic
+        height: 32px
+        width: 32px
+        min-width: 28px
+        min-height: 28px
+        background:
+          position: center
+          size: cover
+        border-radius: 50%
+        border: 3px solid $text
+
+  .inner-container
+    padding: 16px
+    border-bottom: 3px solid $text
+
+    .upper-container
+      display: flex
+      justify-content: space-between
+      margin-bottom: 8px
+
+      span.info, span.count
+        font:
+          size: 16px
+          weight: 500
+        text-transform: uppercase
+        margin: 0
+        padding: 0
+
+    .progress-bar
+      height: 16px
+      width: 100%
+      border-radius: 8px
+      border: 3px solid $text
+      box-sizing: border-box
+      background: none
+      position: relative
+
+      .inner-progress
+        height: 16px
+        background: $succes
+        border-radius: 8px
+        border: 3px solid $text
+        box-sizing: border-box
+        position: absolute
+        top: -3px
+        left: -3px
+
+
+        &.full
+          background: $danger
+
+        &.almost
+          background: $warning
 
 
 

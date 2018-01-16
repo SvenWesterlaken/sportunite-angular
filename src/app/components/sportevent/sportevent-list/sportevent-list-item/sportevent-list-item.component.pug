@@ -1,6 +1,6 @@
 a.mat-card.sport-event-item([routerLink]="event.sportEventId")
     .header-container
-        h5 {{event.name}}
+        span.title {{event.name}}
         .organiser-container
             span.organiser {{event.organisor.firstname}} {{event.organisor.lastname}}
             .profile-pic(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')", alt="avatar")
@@ -8,7 +8,8 @@ a.mat-card.sport-event-item([routerLink]="event.sportEventId")
         .upper-container
             span.info Aanwezigen
             span.count {{event.attendees.length}} / {{event.maxAttendees}}
-        mat-progress-bar(mode="determinate", [value]="value", [ngClass]="getMode()")
+        .progress-bar
+            .inner-progress([style.width]="value", [ngClass]="getMode()")
         //.friends-container
     .footer-container
         .date
