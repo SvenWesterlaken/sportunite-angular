@@ -1,4 +1,6 @@
-import { Component, OnInit, Output} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Sport} from "../../../../models/sport";
+import {EventService} from "../../../../services/event.service";
 
 @Component({
   selector: 'app-sportevent-list-filter',
@@ -8,20 +10,18 @@ import { Component, OnInit, Output} from '@angular/core';
 export class SportEventListFilterComponent implements OnInit {
 
   color: string;
+  sports : Sport[];
+  selectedSports = [];
+  @Output() handleSelectedSports = new EventEmitter();
 
-  filters = [
-    { name: '2 km'},
-    { name: '5 km' },
-    { name: '10 km' },
-    { name: '20 km' },
-    { name: '∞' }
-
-  ];
-
-  @Output
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
+  }
+
+  onSportsSelected() {
+    this.handleSelectedSports.emit(this.selectedSports);
   }
 
 }

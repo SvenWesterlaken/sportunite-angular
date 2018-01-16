@@ -7,9 +7,14 @@ mat-card
             p Einddatum
             input(placeholder="Einddatum")
     mat-card-content
-        p Maximum afstand
-        mat-chip-list(class="mat-chip-list")
-            mat-chip(*ngFor="let filter of filters" selected="false") {{filter.name}}
+        p Sporten
+        mat-form-field.col.s12(floatLabel="never")
+            mat-select(placeholder="Favoriete sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
+                mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
+
+        mat-chip-list
+            mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}
+
     mat-card-content
         mat-slide-toggle Alleen waar vrienden naar toe gaan
         mat-slide-toggle Alleen georganiseerd door vrienden

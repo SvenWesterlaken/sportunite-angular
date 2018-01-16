@@ -9,8 +9,8 @@
   .event-container
 
     .search-container
-      input(#titleInput type="text",  (keyup.enter)="searchEvents(titleInput)", (change)="searchEvents(titleInput)")
-      mat-icon(svgIcon="magnify", (click)="searchEvents(titleInput)" )
+      input(#titleInput type="text",  (keyup.enter)="onFilter()", (change)="onFilter()")
+      mat-icon(svgIcon="magnify", (click)="onFilter()" )
       
 
     app-sportevent-list-item( *ngFor="let event of resultEvents; let i = index", [event] = "event", [index] = "event.sportEventId" )
@@ -22,6 +22,6 @@
       button.btn((click)="onToggle()")
         mat-icon(svgIcon="filter-variant")
 
-      app-sportevent-list-filter(*ngIf="toggleOpen")
+      app-sportevent-list-filter(*ngIf="toggleOpen", (handleSelectedSports)="onFilter($event)" )
 
 
