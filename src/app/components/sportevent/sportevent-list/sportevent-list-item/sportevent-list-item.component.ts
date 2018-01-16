@@ -10,28 +10,22 @@ import {EventService} from "../../../../services/event.service";
 })
 export class SportEventListItemComponent implements OnInit {
 
-  @Input() event ;
+  @Input() event;
   @Input() index: number;
-  attendees = 0;
-  color = '';
   value = 0;
 
   constructor() { }
 
   ngOnInit() {
-    this.attendees = this.event.attendees.length;
-    this.value =  (this.event.attendees.length / this.event.maxAttendees) * 100;
+    this.value = (this.event.attendees.length / this.event.maxAttendees) * 100;
   }
 
-  setColor() {
-    if (this.value < 50) {
-      return 'primary'
+  getMode() {
+    if (this.value === 100) {
+      return 'full';
+    } else if (this.value >= 75) {
+      return 'almost';
     }
-    else if (this.value === 100) {
-      return 'warn'
-    }
-    else
-      return 'accent'
   }
 
 }

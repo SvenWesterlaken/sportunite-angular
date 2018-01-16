@@ -9,34 +9,15 @@ import {SportEvent} from "../../../models/SportEvent";
 	styleUrls: ['./sportevent-attend.component.sass']
 })
 export class SportEventAttendComponent implements OnInit {
-	private id: string;
+	private id: number;
 	private sportEvent: SportEvent;
 	
-	constructor(private route: ActivatedRoute,
-	            private router: Router,
-	            private eventService: EventService) {
-	}
+	constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
 	
 	ngOnInit() {
-		this.route.params
-			.subscribe(
-				(params: Params) => {
-					this.id = params['id'];
-					
-					this.eventService.getEvent(this.id)
-						.subscribe(
-							(event: SportEvent) => {
-								console.log(event);
-								this.sportEvent = event;
-								//this.sportEvent.sportEventId = event.sportEventId;
-							}
-						)
-				}
-			)
-	}
-	
-	public getId(): string {
-		return this.id;
+		this.route.params.subscribe((params: Params) =>
+			this.eventService.getEvent(params['id']).subscribe((event: SportEvent) => { this.sportEvent = event;	})
+		);
 	}
 	
 	public cancel() {
@@ -44,9 +25,8 @@ export class SportEventAttendComponent implements OnInit {
 	}
 	
 	public proceed() {
-		this.eventService.addUserToAttendEvent(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
-			.subscribe(result => {
-				this.router.navigate(['../'], {relativeTo: this.route})
-			});
+		this.eventService.addUserToAttendEvent(this.id).subscribe(result => {
+			this.router.navigate(['../'], {relativeTo: this.route});
+		});
 	}
 }
