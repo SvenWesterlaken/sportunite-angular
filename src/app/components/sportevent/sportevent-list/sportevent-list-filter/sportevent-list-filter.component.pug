@@ -1,16 +1,24 @@
 mat-card
     mat-card-header
-        .left
-            p Startdatum
-            input(placeholder="Begindatum")
-        .right
-            p Einddatum
-            input(placeholder="Einddatum")
+        form([formGroup]="dateForm", (ngSubmit)="onSportsSelected()")
+            .left
+                p Startdatum
+                input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Begindatum")
+                mat-datepicker-toggle(matSuffix, [for]="datePicker")
+                mat-datepicker(#datePicker)
+            .right
+                p Einddatum
+                input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Einddatum")
+                mat-datepicker-toggle(matSuffix, [for]="secondDatePicker")
+                mat-datepicker(#secondDatePicker)
+            button(type="submit", hidden='hidden') submit
+        button((click) = "clearSearch()") Clear
     mat-card-content
         p Sporten
         mat-form-field.col.s12(floatLabel="never")
             mat-select(placeholder="Favoriete sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
                 mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
+
 
         mat-chip-list
             mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}

@@ -22,6 +22,6 @@
       button.btn((click)="onToggle()")
         mat-icon(svgIcon="filter-variant")
 
-      app-sportevent-list-filter(*ngIf="toggleOpen", (handleSelectedSports)="onFilter($event)" )
+      app-sportevent-list-filter(*ngIf="toggleOpen", (handleSelectedSports)="getFilterData($event)")
 
 
