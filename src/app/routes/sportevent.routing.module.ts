@@ -2,11 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {SportEventListComponent} from '../components/sportevent/sportevent-list/sportevent-list.component';
 import {SportEventComponent} from '../components/sportevent/sportevent.component';
+import {SportEventAttendComponent} from '../components/sportevent/sportevent-attend/sportevent-attend.component';
+import {SportEventDetailComponent} from '../components/sportevent/sportevent-detail/sportevent-detail.component';
+import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
+import {AuthGuard} from '../other/auth.guard';
+import {SportEventLeaveComponent} from "../components/sportevent/sportevent-leave/sportevent-leave.component";
 
-import {SportEventAddComponent} from "../components/sportevent/sportevent-add/sportevent-add.component";
-import {AuthGuard} from "../other/auth.guard";
-import {SportEventDetailComponent} from "../components/sportevent/sportevent-detail/sportevent-detail.component";
-import {SportEventAttendComponent} from "../components/sportevent/sportevent-attend/sportevent-attend.component";
 
 const routes = [
 	{
@@ -29,6 +30,10 @@ const routes = [
 			{
 				path: ':id/attend',
 				component: SportEventAttendComponent
+			},
+			{
+				path: ':id/leave',
+				component: SportEventLeaveComponent
 			}
 		]
 	}];
@@ -38,5 +43,4 @@ const routes = [
 	exports: [RouterModule]
 })
 
-export class SportEventRoutingModule {
-}
+export class SportEventRoutingModule {}

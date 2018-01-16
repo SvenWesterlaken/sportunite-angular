@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { CustomValidators } from 'ng4-validators';
 import {StepperComponent} from '../../stepper/stepper.component';
 import * as moment from 'moment';
-import {ValidateDateFormat} from '../../../other/date.validator';
+import {ValidateDateFormat} from '../../../other/custom.validator';
 import {AddressService} from '../../../services/address.service';
 import {AuthService} from '../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.addressSub.unsubscribe();
+    if (this.addressSub) { this.addressSub.unsubscribe(); }
   }
 
   getAddress() {
@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       firstname: form.registerName.firstName,
       lastname: form.registerName.lastName,
       birth: moment(form.registerBirth.birth).toDate(),
-      gender: form.registerGender.gender,
+      gender: form.registerGender .gender,
       address: {
         street: this.address.street,
         number: this.address.number,

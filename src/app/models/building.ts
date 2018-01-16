@@ -1,5 +1,5 @@
-import {Hall} from "./Hall";
-import {BuildingAddress} from "./BuildingAddress";
+import {Hall} from './hall';
+import {BuildingAddress} from './building-address';
 export class Building {
 
   name: string;
@@ -8,7 +8,7 @@ export class Building {
   buildingId: string;
 
 
-  constructor(name : string, halls: Hall[], address: BuildingAddress, buildingId: string) {
+  constructor(name: string, halls: Hall[], address: BuildingAddress, buildingId: string) {
     this.name = name;
     this.halls = halls;
     this.address = address;

@@ -95,7 +95,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
         span.big-form-subheader Als deze niet kloppen kunt u kijken of uw bij de vorige stap de juiste gegevens hebt ingevuld.
 
       .big-form-input-container
-        p.big-form-info-content([class.hidden]="!address") {{address?.street}} {{address?.number}}{{address?.suffix.length > 1 ? ' ' : ''}}{{address?.suffix}} #[br] {{address?.postal_code}}, {{address?.city}}
+        p.big-form-info-content([class.hidden]="!address") {{address?.street}} {{address?.number}}{{address?.suffix?.length > 1 ? ' ' : ''}}{{address?.suffix}} #[br] {{address?.postal_code}}, {{address?.city}}
 
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
