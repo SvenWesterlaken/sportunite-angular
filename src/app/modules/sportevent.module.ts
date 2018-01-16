@@ -1,6 +1,6 @@
 import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatCardModule, MatChipsModule, MatInputModule, MatSelectModule, MatSlideToggleModule} from '@angular/material';
+import {MatCardModule, MatChipsModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatTabsModule} from '@angular/material';
 import {EventService} from '../services/event.service';
 import {StepperModule} from './stepper.module';
 import {DatepickerModule} from './datepicker.module';
@@ -43,6 +43,7 @@ import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leav
 		MatChipsModule,
 		MatSlideToggleModule,
 		MatProgressBarModule,
+		MatTabsModule,
 		MomentModule
 	],
 	providers: [

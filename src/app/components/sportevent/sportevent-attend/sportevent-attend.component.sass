@@ -1,0 +1,90 @@
+@import '../../../../sass/1-base/colorvars'
+
+.attend-card-container
+  max-width: 690px
+  width: 100%
+  margin: 16px auto
+  padding: 0
+  border: 3px solid $text
+  border-radius: 11px
+
+  .title-container
+    padding: 16px
+    border-bottom: 3px solid $text
+    text-align: center
+
+    h1
+      font:
+        size: 28px
+        weight: 500
+      margin: 0
+      padding: 0
+
+  .payment-container
+    .ideal-icon
+      height: 16px
+      fill: $text
+
+    .inner-container
+
+      .upper-container
+        padding: 16px
+        text-align: center
+        border-bottom: 3px solid $text
+
+        p.header
+          font-size: 18px
+          text-transform: uppercase
+          margin: 0
+
+        p.value
+          font:
+            size: 26px
+            weight: bold
+          margin: 0
+
+      .subtract-container
+        padding: 16px
+        border-bottom: 3px solid $text
+
+        p
+          font-size: 18px
+          margin: 0
+
+          &:first-child
+            margin-bottom: 4px
+
+          span.value
+            font-weight: 500
+            text-align: right
+            float: right
+
+      .result-container
+        padding: 16px
+
+        p
+          font-size: 18px
+          margin: 0
+
+          span.value
+            font-weight: 500
+            text-align: right
+            float: right
+
+
+
+.button-container
+  display: flex
+  max-width: 690px
+  width: 100%
+  margin: 8px auto 0
+  justify-content: space-around
+
+  .btn.right-btn
+    margin-left: 16px
+    width: 100%
+
+  .btn.left-btn
+    margin-right: 16px
+    width: 100%
+

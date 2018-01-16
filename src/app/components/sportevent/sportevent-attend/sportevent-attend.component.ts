@@ -39,10 +39,6 @@ export class SportEventAttendComponent implements OnInit {
 		return this.id;
 	}
 	
-	public getEvent() : SportEvent {
-		return this.sportEvent;
-	}
-	
 	public cancel() {
 		this.router.navigate(['../'], {relativeTo: this.route});
 	}
