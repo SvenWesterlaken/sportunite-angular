@@ -17,10 +17,12 @@ import {MomentModule} from 'angular2-moment';
 import {UserListComponent} from "../components/user/user-list/user-list.component";
 import {UserListItemComponent} from "../components/user/user-list/user-list-item/user-list-item.component";
 import {UserListItemDetailComponent} from "../components/user/user-list/user-list-item/user-list-item-detail/user-list-item-detail.component";
+import {UserDetailDialogComponent} from "../components/user/user-detail/user-detail-dialog/user-detail-dialog.component";
 
 @NgModule({
     entryComponents: [
-        UserDialogComponent
+        UserDialogComponent,
+        UserDetailDialogComponent
     ],
     declarations: [
         UserComponent,
@@ -29,7 +31,8 @@ import {UserListItemDetailComponent} from "../components/user/user-list/user-lis
         UserDialogComponent,
         UserListComponent,
         UserListItemComponent,
-        UserListItemDetailComponent
+        UserListItemDetailComponent,
+        UserDetailDialogComponent
     ],
     imports: [
         SharedModule,
