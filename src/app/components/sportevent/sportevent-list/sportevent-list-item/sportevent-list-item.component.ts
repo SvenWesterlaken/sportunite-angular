@@ -17,12 +17,16 @@ export class SportEventListItemComponent implements OnInit {
     this.value = (this.event.attendees.length / this.event.maxAttendees) * 100;
   }
 
-  getMode() {
+  getMode(): string {
     if (this.value === 100) {
       return 'full';
     } else if (this.value >= 75) {
       return 'almost';
     }
+  }
+
+  getWidth(): string {
+    return `${this.value}%`;
   }
 
 }

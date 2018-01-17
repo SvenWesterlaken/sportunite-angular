@@ -9,14 +9,15 @@ a.mat-card.sport-event-item([routerLink]="event.sportEventId")
             span.info Aanwezigen
             span.count {{event.attendees.length}} / {{event.maxAttendees}}
         .progress-bar
-            .inner-progress([style.width]="value", [ngClass]="getMode()")
+            .inner-progress([style.width]="getWidth()", [ngClass]="getMode()")
         //.friends-container
     .footer-container
         .date
             mat-icon(svgIcon="clock")
-            span {{event.eventStartTime | amDateFormat: 'HH:mm'}}-{{event.eventEndTime | amDateFormat: 'HH:mm'}}
+            span {{event.eventStartTime | amDateFormat: 'HH:mm'}} - {{event.eventEndTime | amDateFormat: 'HH:mm'}}
 
         .location
             mat-icon(svgIcon="map")
             span.name {{event.reservation.hall.building.name}}
+            .dot-divider
             span.address {{event.reservation.hall.building.address.streetName}} {{event.reservation.hall.building.address.houseNumber}}, {{event.reservation.hall.building.address.city}}

@@ -45,6 +45,7 @@ a.mat-card.sport-event-item
           size: cover
         border-radius: 50%
         border: 3px solid $text
+        box-sizing: border-box
 
   .inner-container
     padding: 16px
@@ -73,11 +74,11 @@ a.mat-card.sport-event-item
       position: relative
 
       .inner-progress
-        height: 16px
+        height: 10px
+        padding: 0 3px
         background: $succes
         border-radius: 8px
         border: 3px solid $text
-        box-sizing: border-box
         position: absolute
         top: -3px
         left: -3px
@@ -88,6 +89,50 @@ a.mat-card.sport-event-item
 
         &.almost
           background: $warning
+
+  .footer-container
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 16px
+
+    .date
+      display: flex
+      align-items: center
+
+      .mat-icon
+        margin-right: 16px
+
+      span
+        font-size: 15px
+        font-weight: 500
+        margin: 0
+        padding: 0
+
+    .location
+      display: flex
+      align-items: center
+
+      .mat-icon
+        margin-right: 16px
+
+      span.name
+        font-size: 15px
+        font-weight: 500
+
+      .dot-divider
+        height: 2px
+        width: 2px
+        border-radius: 50%
+        background: $text-disabled
+        margin: 0 7px
+
+      span.address
+        font-size: 15px
+
+
+
+
 
 
 
