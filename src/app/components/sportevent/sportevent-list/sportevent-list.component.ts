@@ -32,14 +32,6 @@ export class SportEventListComponent implements OnInit {
       this.router.navigate(['add'], {relativeTo: this.route});
   }
 
-  searchEvents(searchInput: HTMLInputElement) {
-    if (searchInput.value !== '') {
-        this.resultEvents = this.events.filter(x => x.name.toLowerCase().includes(searchInput.value.toLowerCase()));
-    } else {
-        this.resultEvents = this.events;
-    }
-  }
-
   onToggle() {
     this.toggleOpen = !this.toggleOpen;
   }
@@ -53,24 +45,18 @@ export class SportEventListComponent implements OnInit {
   }
 
   onFilter() {
+      if (this.titleInput.nativeElement.value !== '') {
+        this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
+      } else {
+        this.resultEvents = this.events;
+      }
 
-    const sports = this.selectedSports;
-    const firstDate = this.selectedFirstDate;
-    const secondDate = this.selectedSecondDate;
+      if (this.selectedSports.length !== 0) {
+        this.resultEvents = _.filter(this.resultEvents, events => _.includes(this.selectedSports, events.sport.name));
+      }
 
-    if (this.titleInput.nativeElement.value != '') {
-      this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
-    } else {
-      this.resultEvents = this.events;
-    }
-
-    if (this.selectedSports.length != 0) {
-      this.resultEvents = _.filter(this.resultEvents, events => _.includes(sports, events.sport.name));
-    }
-
-    if (this.selectedFirstDate  || this.selectedSecondDate ) {
-      this.resultEvents = _.filter(this.resultEvents, events => moment(events.eventStartTime).isBetween(firstDate, secondDate, 'days', '[]'));
-    }
-
+      if (this.selectedFirstDate  || this.selectedSecondDate ) {
+        this.resultEvents = _.filter(this.resultEvents, events => moment(events.eventStartTime).isBetween(this.selectedFirstDate, this.selectedSecondDate, 'days', '[]'));
+      }
   }
 }

@@ -25,19 +25,14 @@ export class SportEventListFilterComponent implements OnInit {
     this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
 
     this.dateForm = new FormGroup({
-      firstDate: new FormControl(' ', [Validators.required, ValidateDateFormat]),
+      firstDate: new FormControl('', [Validators.required, ValidateDateFormat]),
       secondDate: new FormControl('', [Validators.required, ValidateDateFormat])
-    })
-  }
+    });
 
-  clearSearch() {
-    this.dateForm.reset();
-    this.onSportsSelected();
+    this.dateForm.valueChanges.subscribe(value => this.onSportsSelected());
   }
-
 
   onSportsSelected() {
-    console.log(this.dateForm.value.firstDate);
     this.handleSelectedSports.emit({ sports: this.selectedSports, firstDate: this.dateForm.value.firstDate, secondDate: this.dateForm.value.secondDate });
   }
 }
