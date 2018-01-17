@@ -1,38 +1,52 @@
 @import '../../../../../sass/1-base/colorvars'
 
-mat-card
-  border-radius: 14px
-  border: #393E41 2px solid !important
-  padding: 0 !important
+
+.filter-container
   margin-top: 42px
-  box-sizing: border-box
+  border-radius: 11px
+  border: 3px solid #393E41
+  padding: 0
+
+  p
+    font-weight: 500
+    margin: 0
+
+  label
+    color: lightslategrey
+
+  .inner-container
+    border-top: 3px solid #393E41
+    padding-left: 16px
+    padding-top: 8px
+    padding-bottom: 16px
+
+    .sports-container
+      align-items: center
+      display: flex
+      justify-content: space-between
+      flex-flow: column
 
 
-mat-card-content
-  border-top: #393E41 2px solid !important
-  display: flex
-  flex-flow: column
-  justify-content: center
-  align-items: center
-  padding: 10px
+      mat-chip-list
+        align-items: center
 
-  mat-chip-list
+        mat-chip
+          alignment: center
+          margin-top: 5px !important
+
+          background: $primary
+          color: $text-contrast
+          font-weight: 500
+
+  form.filter-form
+    display: flex
+    padding-left: 16px
+    flex-flow: row
     align-items: center
-
-    mat-chip
-      alignment: center
-      margin-top: 5px !important
-
-      background: $primary
-      color: $text-contrast
-      font-weight: 500
+    justify-content: space-between
+    margin: 8px
 
 
-mat-card-header
-  display: flex
-  flex-flow: row
-  justify-content: space-between !important
-  align-items: center !important
 
 
 

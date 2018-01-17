@@ -37,7 +37,6 @@ export class SportEventListFilterComponent implements OnInit {
 
 
   onSportsSelected() {
-    console.log(this.dateForm.value.firstDate);
     this.handleSelectedSports.emit({ sports: this.selectedSports, firstDate: this.dateForm.value.firstDate, secondDate: this.dateForm.value.secondDate });
   }
 }

@@ -1,29 +1,32 @@
-mat-card
-    mat-card-header
-        form([formGroup]="dateForm", (ngSubmit)="onSportsSelected()")
-            .left
-                p Startdatum
-                input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Begindatum")
-                mat-datepicker-toggle(matSuffix, [for]="datePicker")
-                mat-datepicker(#datePicker)
-            .right
-                p Einddatum
-                input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Einddatum")
-                mat-datepicker-toggle(matSuffix, [for]="secondDatePicker")
-                mat-datepicker(#secondDatePicker)
-            button(type="submit", hidden='hidden') submit
-        button((click) = "clearSearch()") Clear
-    mat-card-content
-        p Sporten
-        mat-form-field.col.s12(floatLabel="never")
-            mat-select(placeholder="Favoriete sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
-                mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
+.col.s12
+    .card-panel.filter-container
+        .filter-date-container
+            form.filter-form([formGroup]="dateForm", (ngSubmit)="onSportsSelected()", (change)="onSportsSelected()")
+                .left-container
+                    p Startdatum
+                    input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Kies een begindatum", (click) = "datePicker.open()")
+                    mat-datepicker(#datePicker)
+                    mat-error(*ngIf="dateForm.get('firstDate').hasError('dateFormat')") Ongeldige datum
+                .right-container
+                    p Einddatum
+                    input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Kies een einddatum", (click)="secondDatePicker.open()")
+                    mat-datepicker(#secondDatePicker)
+                    mat-error(*ngIf="dateForm.get('secondDate').hasError('dateFormat')") Ongeldige datum
+                    button(type="submit", hidden='hidden') submit
+                label((click) = "clearSearch()") clear
 
+        .inner-container.filter-sports-container
+            p Sporten
 
-        mat-chip-list
-            mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}
+            .sports-container
+                mat-form-field.col.s12(floatLabel="never")
+                    mat-select(placeholder="Filter op sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
+                        mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
 
-    mat-card-content
-        mat-slide-toggle Alleen waar vrienden naar toe gaan
-        mat-slide-toggle Alleen georganiseerd door vrienden
+                mat-chip-list
+                    mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}
+
+        .inner-container.filter-friends-container
+            mat-slide-toggle Alleen waar vrienden naar toe gaan
+            mat-slide-toggle Alleen georganiseerd door vrienden
 
