@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Sport} from "../../../../models/sport";
+import {EventService} from "../../../../services/event.service";
+import {ValidateDateFormat} from "../../../../other/custom.validator";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CustomValidators} from 'ng4-validators';
 
 @Component({
   selector: 'app-sportevent-list-filter',
@@ -8,19 +13,31 @@ import { Component, OnInit } from '@angular/core';
 export class SportEventListFilterComponent implements OnInit {
 
   color: string;
+  sports : Sport[];
+  selectedSports = [];
+  dateForm: FormGroup;
 
-  filters = [
-    { name: '2 km'},
-    { name: '5 km' },
-    { name: '10 km' },
-    { name: '20 km' },
-    { name: '∞' }
+  @Output() handleSelectedSports = new EventEmitter();
 
-  ];
-
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
+
+    this.dateForm = new FormGroup({
+      firstDate: new FormControl(' ', [Validators.required, ValidateDateFormat]),
+      secondDate: new FormControl('', [Validators.required, ValidateDateFormat])
+    })
   }
 
+  clearSearch() {
+    this.dateForm.reset();
+    this.onSportsSelected();
+  }
+
+
+  onSportsSelected() {
+    console.log(this.dateForm.value.firstDate);
+    this.handleSelectedSports.emit({ sports: this.selectedSports, firstDate: this.dateForm.value.firstDate, secondDate: this.dateForm.value.secondDate });
+  }
 }

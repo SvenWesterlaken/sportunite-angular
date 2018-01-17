@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../../services/auth.service';
 import {SportEvent} from '../../../models/sportevent';
-import {Sport} from '../../../models/sport';
 import {EventService} from '../../../services/event.service';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-sportevent-list',
@@ -11,12 +11,15 @@ import {EventService} from '../../../services/event.service';
     styleUrls: ['./sportevent-list.component.sass']
 })
 export class SportEventListComponent implements OnInit {
-
   events: SportEvent[];
-  resultEvents: SportEvent[];
+  resultEvents = [];
+  @ViewChild('titleInput') titleInput: ElementRef;
   toggleOpen = false;
+  selectedSports = [];
+  selectedSecondDate;
+  selectedFirstDate;
 
-  constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService, private eventService: EventService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
 
   ngOnInit() {
     this.eventService.getEvents().then((result: SportEvent[]) => {
@@ -29,19 +32,45 @@ export class SportEventListComponent implements OnInit {
       this.router.navigate(['add'], {relativeTo: this.route});
   }
 
- searchEvents(searchInput: HTMLInputElement) {
-      if (searchInput.value !== '') {
-          this.resultEvents = this.events.filter(x => x.name.toLowerCase().includes(searchInput.value.toLowerCase()));
-      } else {
-          this.resultEvents = this.events;
-      }
+  searchEvents(searchInput: HTMLInputElement) {
+    if (searchInput.value !== '') {
+        this.resultEvents = this.events.filter(x => x.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+    } else {
+        this.resultEvents = this.events;
+    }
   }
 
   onToggle() {
-      this.toggleOpen = !this.toggleOpen;
+    this.toggleOpen = !this.toggleOpen;
   }
 
-  logout() {
-      this.auth.logout();
+  getFilterData(filter) {
+    this.selectedSports = filter.sports;
+    this.selectedSecondDate = filter.secondDate;
+    this.selectedFirstDate = filter.firstDate;
+
+    this.onFilter();
+  }
+
+  onFilter() {
+
+    const sports = this.selectedSports;
+    const firstDate = this.selectedFirstDate;
+    const secondDate = this.selectedSecondDate;
+
+    if (this.titleInput.nativeElement.value != '') {
+      this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
+    } else {
+      this.resultEvents = this.events;
+    }
+
+    if (this.selectedSports.length != 0) {
+      this.resultEvents = _.filter(this.resultEvents, events => _.includes(sports, events.sport.name));
+    }
+
+    if (this.selectedFirstDate  || this.selectedSecondDate ) {
+      this.resultEvents = _.filter(this.resultEvents, events => moment(events.eventStartTime).isBetween(firstDate, secondDate, 'days', '[]'));
+    }
+
   }
 }
