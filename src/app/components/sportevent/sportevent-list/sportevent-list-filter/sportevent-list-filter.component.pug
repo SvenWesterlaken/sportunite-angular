@@ -1,30 +1,25 @@
-.col.s12
-    .card-panel.filter-container
-        .filter-date-container
-            form.filter-form([formGroup]="dateForm", (keyup)="onSportsSelected()")
-                .left-container
-                    p Startdatum
-                    input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Kies een begindatum", (click) = "datePicker.open()")
-                    mat-datepicker(#datePicker)
-                    mat-error(*ngIf="dateForm.get('firstDate').hasError('dateFormat')") Ongeldige datum
-                .right-container
-                    p Einddatum
-                    input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Kies een einddatum", (click)="secondDatePicker.open()")
-                    mat-datepicker(#secondDatePicker)
-                    mat-error(*ngIf="dateForm.get('secondDate').hasError('dateFormat')") Ongeldige datum
-                mat-icon(svgIcon="calendar-remove", (click) = "this.dateForm.reset()")
+.card-panel.filter-card
+    .filter-date-container
+        form.filter-form([formGroup]="dateForm", (keyup)="onSportsSelected()")
+            .left-container
+                p Startdatum
+                input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Kies een begindatum", (click) = "datePicker.open()")
+                mat-datepicker(#datePicker)
+                mat-error(*ngIf="dateForm.get('firstDate').hasError('dateFormat')") Ongeldige datum
+            .right-container
+                p Einddatum
+                input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Kies een einddatum", (click)="secondDatePicker.open()")
+                mat-datepicker(#secondDatePicker)
+                mat-error(*ngIf="dateForm.get('secondDate').hasError('dateFormat')") Ongeldige datum
+            mat-icon(svgIcon="calendar-remove", (click)='dateForm.reset()')
 
-        .inner-container.filter-sports-container
-            p Sporten
-            .sports-container
-                mat-form-field.col.s12(floatLabel="never")
-                    mat-select(placeholder="Filter op sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
-                        mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
+    .filter-sports-container
+        span.header Sporten
+        mat-form-field.full-width(floatLabel="never")
+            mat-select(placeholder="Filter op sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
+                mat-option(*ngFor="let sport of sports", [value]="sport.name") {{sport.name}}
 
-                mat-chip-list
-                    mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}
-
-        .inner-container
-                mat-slide-toggle Alleen waar vrienden naar toe gaan
-                mat-slide-toggle Alleen georganiseerd door vrienden
+    //.inner-container
+    //        mat-slide-toggle Alleen waar vrienden naar toe gaan
+    //        mat-slide-toggle Alleen georganiseerd door vrienden
 

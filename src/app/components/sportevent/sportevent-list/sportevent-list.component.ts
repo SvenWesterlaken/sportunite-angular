@@ -11,22 +11,27 @@ import * as moment from 'moment';
     styleUrls: ['./sportevent-list.component.sass']
 })
 export class SportEventListComponent implements OnInit {
-  events: SportEvent[];
-  resultEvents = [];
-  @ViewChild('titleInput') titleInput: ElementRef;
-  toggleOpen = false;
-  selectedSports = [];
-  selectedSecondDate;
-  selectedFirstDate;
+    events: SportEvent[];
+    resultEvents = [];
+    @ViewChild('titleInput') titleInput: ElementRef;
+    toggleOpen = false;
+    selectedSports = [];
+    selectedSecondDate;
+    selectedFirstDate;
+    events_loading = true;
 
-  constructor(private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
+    constructor(private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
 
-  ngOnInit() {
-    this.eventService.getEvents().then((result: SportEvent[]) => {
-      this.events = result;
-      this.resultEvents = this.events;
-    }).catch((error) => console.log('Geen sportevents gevonden'));
-  }
+    ngOnInit() {
+        this.eventService.getEvents().then((result: SportEvent[]) => {
+            this.events_loading = false;
+            this.events = result;
+            this.resultEvents = this.events;
+        }).catch((error) => {
+            console.log('Geen sportevents gevonden');
+            this.events_loading = false;
+        });
+    }
 
   onCreateNewEvent() {
       this.router.navigate(['add'], {relativeTo: this.route});

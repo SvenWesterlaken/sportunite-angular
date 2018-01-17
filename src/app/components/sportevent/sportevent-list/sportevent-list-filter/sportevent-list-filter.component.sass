@@ -1,57 +1,45 @@
 @import '../../../../../sass/1-base/colorvars'
 
 
-.filter-container
-  margin-top: 42px
+.filter-card
   border-radius: 11px
-  border: 3px solid #393E41
+  border: 3px solid $text
   padding: 0
+  width: 476px
 
-  p
-    margin: 0
-    font-size: 16px
-
-  mat-icon
-    color: darkgrey
-
-  mat-icon:hover
-      color: #393E41
-
-  .inner-container
-    border-top: 3px solid #393E41
+  .filter-date-container
     padding: 16px
+    border-bottom: 3px solid $text
 
-    .sports-container
-      align-items: center
+    .filter-form
       display: flex
       justify-content: space-between
-      flex-flow: column
+      align-items: center
 
-      mat-chip-list
-        align-items: center
+      p
+        margin: 0 0 4px
+        font-weight: 500
 
-        mat-chip
-          margin-top: 5px !important
-          background: $primary
-          color: $text-contrast
-          font-weight: 500
+      .mat-icon
+        cursor: pointer
+        color: $text-secondary
+        transition: all 0.25s ease-in-out
 
-    mat-slide-toggle
-      margin-bottom: 8px
+        &:hover
+          color: $text
 
-  form.filter-form
-    display: flex
+  .filter-sports-container
     padding: 16px
-    flex-flow: row
-    align-items: flex-start
-    justify-content: space-between
 
-    input
+    span.header
+      display: block
       font-weight: 500
+      padding: 0
+      margin: 0 0 4px
 
-
-
-
+    .full-width
+      width: 100%
+      margin: 0
 
 
 
