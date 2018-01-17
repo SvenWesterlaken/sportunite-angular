@@ -67,6 +67,6 @@ export class EventService {
   }
 
   getEvent(id: string): Promise<any> {
-  	return this.http.get(`${environment.backend.url}/sportevents/${id}`).toPromise();
+  	return this.http.get(`${environment.api.url}/sportevents/${id}`).toPromise();
   }
 }
