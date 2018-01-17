@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {User} from "../../../../../models/user";
 import {UserService} from "../../../../../services/user.service";
@@ -30,6 +30,10 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
                     this.friendsWith = friends.some(user => user._id === this.user._id);
                 });
 
+                if (this.router.isActive('/profile/friends', false)) {
+                    this.user = this.userService.getFriend(this.id);
+                }
+
                 if (this.router.isActive('/users', false)) {
                     this.user = this.userService.getUser(this.id);
                 }
@@ -39,7 +43,6 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
                 }
             }
         );
-
     };
 
     addFriend() {

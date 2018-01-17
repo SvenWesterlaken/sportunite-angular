@@ -32,8 +32,6 @@ export class UserListComponent implements OnInit, OnDestroy {
             });
             this.userService.getFriends();
         }
-
-
     }
 
     ngOnDestroy() {

@@ -36,15 +36,10 @@ export class UserService {
             });
     }
 
-    // getUsers(): Promise<any> {
-    //     return this.http.get(`${environment.api.url}/users`).toPromise();
-    // }
-
     getUsers() {
         this.http.get<User[]>(`${environment.api.url}/users`).toPromise()
             .then(((users: User[]) => {
                     this.users = users;
-                    console.log(this.users);
                     this.usersChanged.next(this.users.slice());
                 })
             );
@@ -62,7 +57,6 @@ export class UserService {
         this.http.get<User[]>(`${environment.api.url}/friends`).toPromise()
             .then(((friends: User[]) => {
                     this.friends = friends;
-                    console.log(this.friends);
                     this.friendsChanged.next(this.friends.slice());
                 })
             );
@@ -75,10 +69,6 @@ export class UserService {
             return null;
         }
     }
-
-    // checkFriend(userId: string) : boolean {
-    //     return this.friends.some(user => user._id === userId);
-    // }
 
     addFriend(userId: string): Promise<any> {
         return this.http.post(`${environment.api.url}/friends/${userId}`, null).toPromise();

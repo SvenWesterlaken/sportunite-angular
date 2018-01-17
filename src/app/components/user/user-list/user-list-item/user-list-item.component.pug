@@ -1,6 +1,4 @@
 .nav-padding
-a([routerLink]="[index]" routerLinkActive="active")
+a(routerLink="{{routerLink}}{{index}}")
     .container
         span {{user.firstname}} {{user.email}}
-
-
