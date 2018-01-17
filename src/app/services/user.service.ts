@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from "../models/user";
 import {Subject} from "rxjs/Subject";
+import * as _ from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -44,18 +45,19 @@ export class UserService {
         this.http.get<User[]>(`${environment.api.url}/users`).toPromise()
             .then(((users: User[]) => {
                     this.users = users;
-                    console.log(this.users);
                     this.usersChanged.next(this.users.slice());
                 })
             );
     }
 
-    getUser(id: number) {
+    getUser(id: string) {
         if (this.users) {
-            return this.users[id];
+            console.log(this.users);
+            return _.filter(this.users, {_id : id})[0];
         } else {
             return null;
         }
+
     }
 
     getFriends() {
@@ -68,9 +70,9 @@ export class UserService {
             );
     }
 
-    getFriend(id: number) {
+    getFriend(id: string) {
         if (this.friends) {
-            return this.friends[id];
+            return _.filter(this.friends, {_id : id})[0];
         } else {
             return null;
         }
@@ -87,4 +89,5 @@ export class UserService {
     removeFriend(userId: string): Promise<any> {
         return this.http.delete(`${environment.api.url}/friends/${userId}`).toPromise();
     }
+
 }
