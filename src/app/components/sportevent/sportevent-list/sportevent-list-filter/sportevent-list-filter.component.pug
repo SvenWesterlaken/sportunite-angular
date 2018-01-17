@@ -1,7 +1,7 @@
 .col.s12
     .card-panel.filter-container
         .filter-date-container
-            form.filter-form([formGroup]="dateForm", (ngSubmit)="onSportsSelected()", (change)="onSportsSelected()")
+            form.filter-form([formGroup]="dateForm", (keyup)="onSportsSelected()")
                 .left-container
                     p Startdatum
                     input(matInput, [matDatepicker]="datePicker", type="text", formControlName="firstDate", placeholder="Kies een begindatum", (click) = "datePicker.open()")
@@ -12,12 +12,10 @@
                     input(matInput, [min]="dateForm.value.firstDate", [matDatepicker]="secondDatePicker", formControlName="secondDate" , type="text", placeholder="Kies een einddatum", (click)="secondDatePicker.open()")
                     mat-datepicker(#secondDatePicker)
                     mat-error(*ngIf="dateForm.get('secondDate').hasError('dateFormat')") Ongeldige datum
-                    button(type="submit", hidden='hidden') submit
-                label((click) = "clearSearch()") clear
+                mat-icon(svgIcon="calendar-remove", (click) = "this.dateForm.reset()")
 
         .inner-container.filter-sports-container
             p Sporten
-
             .sports-container
                 mat-form-field.col.s12(floatLabel="never")
                     mat-select(placeholder="Filter op sporten", multiple, [(value)]="selectedSports", (change)="onSportsSelected()")
@@ -26,7 +24,7 @@
                 mat-chip-list
                     mat-chip(*ngFor="let sport of selectedSports", color="primary", [selectable]="false") {{sport}}
 
-        .inner-container.filter-friends-container
-            mat-slide-toggle Alleen waar vrienden naar toe gaan
-            mat-slide-toggle Alleen georganiseerd door vrienden
+        .inner-container
+                mat-slide-toggle Alleen waar vrienden naar toe gaan
+                mat-slide-toggle Alleen georganiseerd door vrienden
 

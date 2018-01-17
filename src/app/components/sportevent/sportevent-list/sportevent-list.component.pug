@@ -9,7 +9,7 @@
   .event-container
 
     .search-container
-      input(#titleInput type="text",  (keyup.enter)="onFilter()", (change)="onFilter()")
+      input(#titleInput type="text",  (keyup)="onFilter()")
       mat-icon(svgIcon="magnify", (click)="onFilter()" )
       
 

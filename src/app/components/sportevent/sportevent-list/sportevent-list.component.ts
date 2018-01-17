@@ -31,7 +31,6 @@ export class SportEventListComponent implements OnInit {
             })
           .catch((error) =>  console.log(error)
           );
-
     }
 
     onCreateNewEvent() {
@@ -47,11 +46,6 @@ export class SportEventListComponent implements OnInit {
     }
 
     onFilter() {
-
-      let sports = this.selectedSports;
-      let firstDate = this.selectedFirstDate;
-      let secondDate = this.selectedSecondDate;
-
       if (this.titleInput.nativeElement.value != "") {
         this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
       }
@@ -60,13 +54,12 @@ export class SportEventListComponent implements OnInit {
       }
 
       if (this.selectedSports.length != 0) {
-        this.resultEvents = _.filter(this.resultEvents, events => { return _.includes(sports, events.sport.name);});
+        this.resultEvents = _.filter(this.resultEvents, events => { return _.includes(this.selectedSports, events.sport.name);});
       }
 
       if (this.selectedFirstDate  || this.selectedSecondDate ) {
-        this.resultEvents = _.filter(this.resultEvents, events => { return moment(events.eventStartTime).isBetween(firstDate, secondDate, 'days', "[]");});
+        this.resultEvents = _.filter(this.resultEvents, events => { return moment(events.eventStartTime).isBetween(this.selectedFirstDate, this.selectedSecondDate, 'days', "[]");});
       }
-
     }
 
     onToggle() {

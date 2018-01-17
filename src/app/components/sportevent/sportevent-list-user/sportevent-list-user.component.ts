@@ -26,7 +26,6 @@ export class SportEventListUserComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,  private eventService: EventService, private userService: UserService) {}
 
   ngOnInit() {
-
     this.userService.getCurrentUser().then((user) => { this.user = user; });
 
     this.eventService.getEvents()
@@ -40,7 +39,6 @@ export class SportEventListUserComponent implements OnInit {
 
   onCreateNewEvent() {
     this.router.navigate(['../add'], {relativeTo: this.route})
-
   }
 
   getFilterData(filter) {
@@ -52,11 +50,6 @@ export class SportEventListUserComponent implements OnInit {
   }
 
   onFilter() {
-
-    let sports = this.selectedSports;
-    let firstDate = this.selectedFirstDate;
-    let secondDate = this.selectedSecondDate;
-
     if (this.titleInput.nativeElement.value != "") {
       this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
     }
@@ -65,13 +58,12 @@ export class SportEventListUserComponent implements OnInit {
     }
 
     if (this.selectedSports.length != 0) {
-      this.resultEvents = _.filter(this.resultEvents, events => { return _.includes(sports, events.sport.name);});
+      this.resultEvents = _.filter(this.resultEvents, events => { return _.includes(this.selectedSports, events.sport.name);});
     }
 
     if (this.selectedFirstDate  || this.selectedSecondDate ) {
-      this.resultEvents = _.filter(this.resultEvents, events => { return moment(events.eventStartTime).isBetween(firstDate, secondDate, 'days', "[]");});
+      this.resultEvents = _.filter(this.resultEvents, events => { return moment(events.eventStartTime).isBetween(this.selectedFirstDate, this.selectedSecondDate, 'days', "[]");});
     }
-
   }
 
   onToggle() {
