@@ -19,6 +19,8 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
     friendsWith: boolean;
     sportEvents: SportEvent[];
     private friendSub: Subscription;
+    private friends: User[];
+
 
     constructor(private route: ActivatedRoute, private router: Router,
                 private userService: UserService, private eventService: EventService) {
@@ -47,12 +49,14 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
                 if (!this.user) {
                     this.userService.getUsers(this.id).then((user: User) => {
                         this.user = user;
+                        this.userService.getUserFriends(this.user._id).then((friends: User[]) => this.friends = friends);
                         this.friendsWith = friends.some(user => user._id === this.user._id);
                         if (this.router.isActive('/friends', false) && !this.friendsWith) {
                             this.router.navigate(['..'], {relativeTo: this.route});
                         }
                     });
                 } else {
+                    this.userService.getUserFriends(this.user._id).then((friends: User[]) => this.friends = friends);
                     this.friendsWith = friends.some(user => user._id === this.user._id);
                 }
             });

@@ -30,6 +30,6 @@
                         mat-chip-list(*ngIf="user.favorite_sports && user.favorite_sports.length > 0")
                             mat-chip(*ngFor="let sport of user?.favorite_sports", color="primary", [selectable]="false") {{sport}}
 
-
+                app-user-list-item(*ngFor="let friend of friends;", [user] = "friend", [index] = "friend._id")
             .col.s12
                 p( *ngFor="let event of getEvents()") {{event.name }}
