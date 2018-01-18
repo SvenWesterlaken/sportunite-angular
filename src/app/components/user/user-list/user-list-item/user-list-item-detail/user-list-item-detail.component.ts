@@ -35,10 +35,6 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
             this.id = params['id'];
             this.userService.getFriends();
 
-            this.friendSub = this.userService.friendsChanged.subscribe((friends: User[]) => {
-                this.friendsWith = friends.some(user => user._id === this.id);
-            });
-
             if (this.router.isActive('/users', false)) {
                 this.user = this.userService.getUser(this.id);
             }
