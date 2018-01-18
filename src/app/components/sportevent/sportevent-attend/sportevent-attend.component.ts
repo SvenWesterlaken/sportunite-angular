@@ -9,24 +9,25 @@ import {SportEvent} from "../../../models/SportEvent";
 	styleUrls: ['./sportevent-attend.component.sass']
 })
 export class SportEventAttendComponent implements OnInit {
-	private id: number;
 	private sportEvent: SportEvent;
 	
 	constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
-	
-	ngOnInit() {
-		this.route.params.subscribe((params: Params) =>
-			this.eventService.getEvent(params['id']).subscribe((event: SportEvent) => { this.sportEvent = event;	})
-		);
-	}
-	
-	public cancel() {
-		this.router.navigate(['../'], {relativeTo: this.route});
-	}
-	
-	public proceed() {
-		this.eventService.addUserToAttendEvent(this.id).subscribe(result => {
-			this.router.navigate(['../'], {relativeTo: this.route});
-		});
-	}
+
+    ngOnInit() {
+        this.route.params.subscribe((params: Params) =>
+            this.eventService.getEvent(params['id']).subscribe((event: SportEvent) => {
+                this.sportEvent = event;
+            })
+        );
+    }
+
+    public cancel() {
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
+
+    public proceed() {
+        this.eventService.addUserToAttendEvent(+this.sportEvent.sportEventId).subscribe(result => {
+            this.router.navigate(['../'], {relativeTo: this.route});
+        });
+    }
 }
