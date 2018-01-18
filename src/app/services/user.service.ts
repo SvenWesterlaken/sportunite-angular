@@ -37,19 +37,22 @@ export class UserService {
             });
     }
 
-    getUsers() {
-        this.http.get<User[]>(`${environment.api.url}/users`).toPromise()
-            .then(((users: User[]) => {
-                    this.users = users;
-                    this.usersChanged.next(this.users.slice());
-                })
-            );
+    getUsers(id?: string) {
+        if (id) {
+            return this.http.get(`${environment.api.url}/users/${id}`).toPromise();
+        } else {
+            this.http.get<User[]>(`${environment.api.url}/users`).toPromise()
+                .then(((users: User[]) => {
+                        this.users = users;
+                        this.usersChanged.next(this.users.slice());
+                    })
+                );
+        }
     }
 
     getUser(id: string) {
         if (this.users) {
-            console.log(this.users);
-            return _.filter(this.users, {_id : id})[0];
+            return _.filter(this.users, {_id: id})[0];
         } else {
             return null;
         }
@@ -67,7 +70,7 @@ export class UserService {
 
     getFriend(id: string) {
         if (this.friends) {
-            return _.filter(this.friends, {_id : id})[0];
+            return _.filter(this.friends, {_id: id})[0];
         } else {
             return null;
         }
