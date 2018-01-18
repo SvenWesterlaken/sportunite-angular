@@ -71,6 +71,6 @@ export class EventService {
   }
 
   removeEvent(id: string): Promise<any> {
-
+    //
   }
 }
