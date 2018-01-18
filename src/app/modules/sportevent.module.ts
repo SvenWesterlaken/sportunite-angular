@@ -17,6 +17,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventListFilterComponent} from '../components/sportevent/sportevent-list/sportevent-list-filter/sportevent-list-filter.component';
 import {SportEventListItemComponent} from '../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component';
 import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leave/sportevent-leave.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leav
 		MatChipsModule,
 		MatSlideToggleModule,
 		MatProgressBarModule,
+    MatSnackBarModule,
 		MomentModule
 	],
 	providers: [

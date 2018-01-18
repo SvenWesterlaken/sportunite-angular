@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {EventService} from "../../../services/event.service";
 import {SportEvent} from "../../../models/SportEvent";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
 	selector: 'app-sportevent-attend',
@@ -14,7 +15,8 @@ export class SportEventAttendComponent implements OnInit {
 
 	constructor(private route: ActivatedRoute,
 	            private router: Router,
-	            private eventService: EventService) {
+	            private eventService: EventService,
+              private snackBar: MatSnackBar) {
 	}
 
 	ngOnInit() {
@@ -49,6 +51,7 @@ export class SportEventAttendComponent implements OnInit {
 	public proceed() {
 		this.eventService.addUserToAttendEvent(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
 			.subscribe(result => {
+        this.snackBar.open('U hebt zich succesvol aangemeld voor dit evenement!', 'Sluiten', { duration: 3000 });
 				this.router.navigate(['../'], {relativeTo: this.route})
 			});
 	}

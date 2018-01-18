@@ -71,6 +71,7 @@ export class EventService {
   }
 
   removeEvent(id: string): Promise<any> {
+    console.log("Event verwijderen met promise: " + id);
     return this.http.delete(`${environment.api.url}/sportevents/${id}`).toPromise();
   }
 }

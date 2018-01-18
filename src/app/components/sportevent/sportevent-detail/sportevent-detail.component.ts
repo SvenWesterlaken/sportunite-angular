@@ -4,6 +4,7 @@ import {ActivatedRoute, Router, Params} from "@angular/router";
 import {SportEvent} from "../../../models/sportevent";
 import {AuthService} from "../../../services/auth.service";
 import * as _ from 'lodash';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-sportevent-detail',
@@ -24,7 +25,8 @@ export class SportEventDetailComponent implements OnInit {
   value = 0;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private eventService: EventService, private authService:AuthService) { }
+              private eventService: EventService, private authService:AuthService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.route.params
@@ -85,12 +87,19 @@ export class SportEventDetailComponent implements OnInit {
     return attendee === undefined ? '' : attendee._id;
   }
 
-  leaveEvent() {
-    console.log("You left the event!");
-  }
-
   removeEvent() {
-    console.log("Event is verwijderd!");
+    console.log("probeer evenement te verwijderen");
+    this.eventService.removeEvent(this.id).then(
+      (response) => {
+        console.log("response: " + JSON.stringify(response));
+        if (response.status == 200) {
+          this.snackBar.open('Evenement is succesvol verwijderd!', 'Sluiten', { duration: 3000 });
+        } else {
+          this.snackBar.open('U kunt dit evenement niet verwijderen!', 'Sluiten', { duration: 3000 });
+        }
+      }
+    )
+    .catch((err) => console.log(err))
   }
 
 }

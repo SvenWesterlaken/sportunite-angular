@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SportEvent} from "../../../models/sportevent";
 import {EventService} from "../../../services/event.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
 	selector: 'app-sportevent-leave',
@@ -14,7 +15,8 @@ export class SportEventLeaveComponent implements OnInit {
 
 	constructor(private route: ActivatedRoute,
 	            private router: Router,
-	            private eventService: EventService) {
+	            private eventService: EventService,
+              private snackBar: MatSnackBar) {
 	}
 
 	ngOnInit() {
@@ -48,6 +50,7 @@ export class SportEventLeaveComponent implements OnInit {
 	public proceed() {
 		this.eventService.removeUserFromEventAttending(this.sportEvent.sportEventId, sessionStorage.getItem('email') || localStorage.getItem('email'))
 			.subscribe(result => {
+        this.snackBar.open('U hebt zich succesvol afgemeld voor dit evenement!', 'Sluiten', { duration: 3000 });
 				this.router.navigate(['../'], {relativeTo: this.route})
 			});
 	}
