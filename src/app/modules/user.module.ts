@@ -14,16 +14,25 @@ import {UserRoutingModule} from '../routes/user.routing.module';
 import {UserService} from '../services/user.service';
 import {UserDialogComponent} from '../components/user/user-edit/user-dialog/user-dialog.component';
 import {MomentModule} from 'angular2-moment';
+import {UserListComponent} from "../components/user/user-list/user-list.component";
+import {UserListItemComponent} from "../components/user/user-list/user-list-item/user-list-item.component";
+import {UserListItemDetailComponent} from "../components/user/user-list/user-list-item/user-list-item-detail/user-list-item-detail.component";
+import {UserDetailDialogComponent} from "../components/user/user-detail/user-detail-dialog/user-detail-dialog.component";
 
 @NgModule({
     entryComponents: [
-        UserDialogComponent
+        UserDialogComponent,
+        UserDetailDialogComponent
     ],
     declarations: [
         UserComponent,
         UserEditComponent,
         UserDetailComponent,
-        UserDialogComponent
+        UserDialogComponent,
+        UserListComponent,
+        UserListItemComponent,
+        UserListItemDetailComponent,
+        UserDetailDialogComponent
     ],
     imports: [
         SharedModule,

@@ -1,0 +1,5 @@
+.container
+    app-user-list-item( *ngFor="let user of users; let i = index", [user] = "user", [index] = "i" )
+    .div(*ngIf="!users || users.length === 0")
+        .nav-padding
+        .p Geen vrienden :(
