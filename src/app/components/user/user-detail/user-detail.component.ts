@@ -61,7 +61,7 @@ export class UserDetailComponent implements OnInit {
 
         this.dialogSub = dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.router.navigate(['/']); //Wordt eigen sporteventen endpoint wanneer deze beschikbaar is
+                this.router.navigate(['/sportevent/organised']);
             }
         });
     }
