@@ -77,13 +77,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }, (err: HttpErrorResponse) => {
             this.userForm.get('registerAddress.city').patchValue(null);
             this.userForm.get('registerAddress.street').patchValue(null);
+            this.user.address.city = null;
+            this.user.address.street = null;
             this.addressLoading = false;
-
-            if (err.status === 404 && err.error.error === 'No address with this suffix') {
-                this.userForm.get('registerAddress').setErrors({noAddress: true});
-            } else if (err.status === 404 && err.error.error === 'No address found') {
-                this.userForm.get('registerAddress').setErrors({noAddress: true});
-            }
+            this.userForm.get('registerAddress').setErrors({noAddress: true});
         });
     }
 
