@@ -1,35 +1,40 @@
-mat-card
-    mat-card-header
-        mat-card-title
-            h3 {{ getEvent()?.name }}
-        mat-card-subtitle {{ getEvent()?.description }}
-    mat-card-content.summary
-        h4 Mijn portemonnee
-        p Huidige balans:
-            span.card  &euro;35,-
-        hr
-        table
-            tr
-                td
-                    |Saldo
-                td
-                    p &euro;35,-
-            tr
-                td
-                    |Boeking
-                td
-                    p &euro;5,-
-            tr
-                td
-                td
-                    hr
-            tr
-                td
-                    |Resterend Saldo:
-                td
-                    p &euro;30,-
-    hr
-    mat-card-content.footer
-        h4 Boeking bevestigen
-        button.btn(style="color: red; border-color: red", (click)="cancel()") Annuleren
-        button.btn((click)="proceed()") Betalen
+doctype html
+.nav-padding
+.container
+    .card-panel.attend-card-container
+        .title-container
+            h1 {{ sportEvent?.name }}
+        .payment-container
+            mat-tab-group(disableRipple="true", mat-stretch-tabs="always")
+                mat-tab
+                    ng-template(mat-tab-label): mat-icon(svgIcon="wallet")
+                    .inner-container
+                        .upper-container
+                            p.header Mijn Portemonnee
+                            p.value €35,00
+                        .subtract-container
+                            p Saldo: #[span.value € 35,00]
+                            p Boeking: #[span.value -€ 3,50]
+                        .result-container
+                            p Saldo na boeking: #[span.value € 31,50]
+
+                mat-tab(disabled)
+                    ng-template(mat-tab-label)
+                        mat-icon(svgIcon="credit-card")
+                    h1 test
+
+                mat-tab(disabled)
+                    ng-template(mat-tab-label)
+                        svg.ideal-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 28 24")
+                            title Middel 1
+                            g(id="Laag_2", data-name="Laag 2")
+                                g(id="Laag_2-2", data-name="Laag 2")
+                                    path(d="M16,2c.41,0,10,.11,10,10,0,9.65-9,10-10,10H2V2H16m0-2H0V24H16s12,0,12-12S16,0,16,0Z")
+                                    path(d="M10,4h6s8,0,8,8-8,8-8,8H10Z")
+                                    rect(x="4" y="13" width="4" height="7")
+                                    circle(cx="6" cy="10" r="2")
+                    h1 test
+
+    .button-container
+        button.btn.btn-large.danger.left-btn((click)="cancel()") Annuleren
+        button.btn.btn-large.right-btn((click)="proceed()") Betalen

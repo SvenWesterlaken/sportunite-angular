@@ -1,81 +1,139 @@
-mat-card
-  border-radius: 14px
-  border: #393E41 2px solid !important
-  padding: 0 !important
-  margin-bottom: 32px
+@import '../../../../../sass/1-base/colorvars'
+@import '../../../../../sass/2-material/shadows'
+
+a.mat-card.sport-event-item
+  max-width: 778px
   width: 100%
-  cursor: pointer
-  box-sizing: border-box
-  color: #393E41
+  margin: 16px auto
+  padding: 0
+  border: 3px solid $text
+  border-radius: 11px
+  @extend .z-depth-1
+  transition: all 0.2s ease-in-out
 
-  mat-card-header
-    border-bottom: #393E41 2px solid !important
+  &:hover
+    @extend .z-depth-3
 
-  .container
-    width: 100%
+
+  .header-container
+    padding: 16px
     display: flex
-    flex-direction: row
+    justify-content: space-between
+    border-bottom: 3px solid $text
+
+
+    span.title
+      font-size: 22px
+      font-weight: 500
+      margin: 0
+
+    .organiser-container
+      display: flex
+      align-items: center
+
+      span.organiser
+        margin-right: 16px
+        font-weight: 500
+
+      .profile-pic
+        height: 32px
+        width: 32px
+        min-width: 28px
+        min-height: 28px
+        background:
+          position: center
+          size: cover
+        border-radius: 50%
+        border: 3px solid $text
+        box-sizing: border-box
+
+  .inner-container
+    padding: 16px
+    border-bottom: 3px solid $text
+
+    .upper-container
+      display: flex
+      justify-content: space-between
+      margin-bottom: 8px
+
+      span.info, span.count
+        font:
+          size: 16px
+          weight: 500
+        text-transform: uppercase
+        margin: 0
+        padding: 0
+
+    .progress-bar
+      height: 16px
+      width: 100%
+      border-radius: 8px
+      border: 3px solid $text
+      box-sizing: border-box
+      background: none
+      position: relative
+
+      .inner-progress
+        height: 10px
+        padding: 0 3px
+        background: $succes
+        border-radius: 8px
+        border: 3px solid $text
+        position: absolute
+        top: -3px
+        left: -3px
+
+
+        &.full
+          background: $danger
+
+        &.almost
+          background: $warning
+
+  .footer-container
+    display: flex
     justify-content: space-between
     align-items: center
+    padding: 16px
+
+    .date
+      display: flex
+      align-items: center
+
+      .mat-icon
+        margin-right: 16px
+
+      span
+        font-size: 15px
+        font-weight: 500
+        margin: 0
+        padding: 0
+
+      .mat-icon.second
+        margin-left: 16px
+
+    .location
+      display: flex
+      align-items: center
+
+      .mat-icon
+        margin-right: 16px
+
+      span.name
+        font-size: 15px
+        font-weight: 500
+
+      .dot-divider
+        height: 2px
+        width: 2px
+        border-radius: 50%
+        background: $text-disabled
+        margin: 0 7px
+
+      span.address
+        font-size: 15px
 
 
-  mat-card-content
-    padding-left: 8px
-
-  mat-progress-bar
-    border-radius: 16px
-    border: #393E41 2px solid !important
-    height: 10px
-    width: 97%
-
-  mat-card-content.footer
-    border-top: #393E41 2px solid !important
-    height: 40px
-    padding-bottom: 8px
-
-
-h5
-  font-size: 20px
-  font-weight: 500
-
-
-img
-  border-radius: 50%
-  height: 25px
-  width: 25px
-  padding-right: 16px
-
-
-p
-  font-weight: 500
-  margin-bottom: 8px
-  margin-right: 16px
-
-
-mat-icon
-  padding-left: 8px
-  padding-top: 8px
-  padding-right: 8px
-  vertical-align: bottom
-
-label
-  font-weight: 600
-  padding-bottom: 8px
-  font-size: 14px
-  padding-right: 8px
-
-.small
-  font-weight: 500
-  font-size: 12px
-
-
-div.header
-  display: flex
-  flex-direction: row
-  align-items: center
-
-label.text
-  padding-right: 16px
 
 
 

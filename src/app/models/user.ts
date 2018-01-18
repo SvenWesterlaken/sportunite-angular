@@ -10,4 +10,5 @@ export class User {
   favorite_sports?: [string];
   biography?: string;
   address: Address;
+  _id?: string;
 }

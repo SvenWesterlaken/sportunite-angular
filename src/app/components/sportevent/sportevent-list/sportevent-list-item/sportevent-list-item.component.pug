@@ -1,29 +1,25 @@
-a([routerLink]="[index]" routerLinkActive="active")
-    mat-card
-        mat-card-header
-            .container
-                h5 {{event.name}}
-                .header
-                    label.text.small {{event.organisor.firstname}} {{event.organisor.lastname}}
-                    img(src="data:image/jpeg;base64,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" alt="Avatar")
+a.mat-card.sport-event-item([routerLink]="event.sportEventId")
+    .header-container
+        span.title {{event.name}}
+        .organiser-container
+            span.organiser {{event.organisor.firstname}} {{event.organisor.lastname}}
+            .profile-pic(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')", alt="avatar")
+    .inner-container
+        .upper-container
+            span.info Aanwezigen
+            span.count {{event.attendees.length}} / {{event.maxAttendees}}
+        .progress-bar
+            .inner-progress([style.width]="getWidth()", [ngClass]="getMode()")
+        //.friends-container
+    .footer-container
+        .date
+            mat-icon(svgIcon="clock")
+            span {{event.eventStartTime | amDateFormat: 'HH:mm'}} - {{event.eventEndTime | amDateFormat: 'HH:mm'}}
+            mat-icon.second(svgIcon="calendar-text")
+            span {{event.date | amLocale: 'nl' | amDateFormat: 'DD MMMM, YYYY' }}
 
-        mat-card-content
-            .container
-                .right
-                    P AANWEZIGEN
-                .left
-                    P {{attendees}} / {{event.maxAttendees}}
-            mat-progress-bar(mode="determinate", [value]="value", [color]="setColor()")
-        mat-card-content.footer
-            .container
-                .left
-                    // mat-icon(svgIcon="cash")
-                    // label &euro;25
-                    mat-icon(svgIcon="clock" )
-                    label {{event.eventStartTime | amDateFormat: 'HH:mm'}}-{{event.eventEndTime | amDateFormat: 'HH:mm'}}
-                .right
-                    mat-icon(svgIcon="map")
-                    label {{event.reservation.hall.building.name}}
-                    label.small {{event.reservation.hall.building.address.streetName}} {{event.reservation.hall.building.address.houseNumber}}, {{event.reservation.hall.building.address.city}}
-                    // mat-icon(svgIcon="map-marker")
-                    // label 0.5 km
+        .location
+            mat-icon(svgIcon="map")
+            span.name {{event.reservation.hall.building.name}}
+            .dot-divider
+            span.address {{event.reservation.hall.building.address.streetName}} {{event.reservation.hall.building.address.houseNumber}}, {{event.reservation.hall.building.address.city}}

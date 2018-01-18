@@ -1,40 +1,45 @@
-mat-card
-  border-radius: 14px
-  border: #393E41 2px solid !important
-  padding: 0 !important
-  margin-top: 42px
-  box-sizing: border-box
+@import '../../../../../sass/1-base/colorvars'
 
 
-mat-card-content
-  border-top: #393E41 2px solid !important
-  display: flex
-  flex-flow: column
-  justify-content: center
-  align-items: center
-  padding: 10px
+.filter-card
+  border-radius: 11px
+  border: 3px solid $text
+  padding: 0
+  width: 476px
 
-mat-card-header
-  display: flex
-  flex-flow: row
-  justify-content: space-between !important
-  align-items: center !important
+  .filter-date-container
+    padding: 16px
+    border-bottom: 3px solid $text
 
+    .filter-form
+      display: flex
+      justify-content: space-between
+      align-items: center
 
-mat-chip
-  border: #393E41 2px solid !important
-  background-color: white !important
-  color: #393E41 !important
-  width: 35px
-  font-size: 12px
-  font-weight: 500
+      p
+        margin: 0 0 4px
+        font-weight: 500
 
-mat-chip:active
-  background-color: #005B77 !important
-  color: white !important
+      .mat-icon
+        cursor: pointer
+        color: $text-secondary
+        transition: all 0.25s ease-in-out
 
-mat-chip-list
-  align-items: center
+        &:hover
+          color: $text
+
+  .filter-sports-container
+    padding: 16px
+
+    span.header
+      display: block
+      font-weight: 500
+      padding: 0
+      margin: 0 0 4px
+
+    .full-width
+      width: 100%
+      margin: 0
 
 
 

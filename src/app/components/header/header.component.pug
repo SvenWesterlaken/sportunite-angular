@@ -17,7 +17,7 @@ header
                     span.hamburger-inner
         nav.app-nav([@navItemsAnimation]="opened")
             +nav-item("Evenementen", "calendar-text", "/sportevent")
-            +nav-item("Mijn Evenementen", "calendar", "/")
+            +nav-item("Mijn Evenementen", "calendar", "/sportevent/organised")
             +nav-item("Vrienden", "account-multiple-outline", "/")
             a.nav-item([@navItemAnimation]="opened", (click)="logout()")
                 .icon-container.z-depth-2

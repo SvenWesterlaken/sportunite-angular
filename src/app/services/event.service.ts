@@ -57,13 +57,12 @@ export class EventService {
     return this.http.get(`${environment.api.url}/sportevents`).toPromise();
   }
 
-  addUserToAttendEvent(eventId, email): Observable<any> {
-  	console.log(eventId);
-  	return this.http.post(`${environment.api.url}/sportevents/${eventId}/attend`, {email: email, eventId: eventId});
+  addUserToAttendEvent(eventId: number): Observable<any> {
+  	return this.http.post(`${environment.api.url}/sportevents/${eventId}/attend`, {eventId: eventId});
   }
 
-  removeUserFromEventAttending(eventId, email): Observable<any> {
-  	return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {email: email, eventId: eventId});
+  removeUserFromEventAttending(eventId: number): Observable<any> {
+  	return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {eventId: eventId});
   }
 
   getEvent(id: string): Observable<any> {
