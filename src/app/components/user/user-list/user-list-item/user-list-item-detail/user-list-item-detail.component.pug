@@ -31,5 +31,6 @@
                             mat-chip(*ngFor="let sport of user?.favorite_sports", color="primary", [selectable]="false") {{sport}}
 
 
-            .col.s12
-                p( *ngFor="let event of getEvents()") {{event.name }}
+        .col.s12.l7
+            .col.s12.right-container
+                app-user-sportevent-list-item(*ngFor="let event of getEvents()", [event]="event", [index]="event.sportEventId")

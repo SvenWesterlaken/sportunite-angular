@@ -27,6 +27,6 @@ export class SportEventAttendComponent implements OnInit {
 	public proceed() {
 		this.eventService.addUserToAttendEvent(this.id).subscribe(result => {
 			this.router.navigate(['../'], {relativeTo: this.route});
-		});
+		}, error => console.log(error));
 	}
 }

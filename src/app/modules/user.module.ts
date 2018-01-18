@@ -18,6 +18,8 @@ import {UserListComponent} from "../components/user/user-list/user-list.componen
 import {UserListItemComponent} from "../components/user/user-list/user-list-item/user-list-item.component";
 import {UserListItemDetailComponent} from "../components/user/user-list/user-list-item/user-list-item-detail/user-list-item-detail.component";
 import {UserDetailDialogComponent} from "../components/user/user-detail/user-detail-dialog/user-detail-dialog.component";
+import {SportEventListItemComponent} from '../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component';
+import {UserSportEventListItemComponent} from '../components/user/user-list/user-list-item/user-list-item-detail/user-sportevent-list-item/sportevent-list-item.component';
 
 @NgModule({
     entryComponents: [
@@ -32,7 +34,8 @@ import {UserDetailDialogComponent} from "../components/user/user-detail/user-det
         UserListComponent,
         UserListItemComponent,
         UserListItemDetailComponent,
-        UserDetailDialogComponent
+        UserDetailDialogComponent,
+        UserSportEventListItemComponent
     ],
     imports: [
         SharedModule,
