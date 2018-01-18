@@ -1,4 +1,5 @@
-.nav-padding
-a(routerLink="{{routerLink}}{{index}}")
-    .container
-        span {{user.firstname}} {{user.email}}
+a.user-item(routerLink="{{routerLink}}{{index}}")
+    .user-pic(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')")
+    span.name {{user.firstname}} {{user.lastname}}
+    .dot-divider
+    span.email {{user.email}}

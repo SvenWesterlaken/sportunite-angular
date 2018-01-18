@@ -1,0 +1,50 @@
+@import '../../../../../sass/1-base/colorvars'
+@import '../../../../../sass/2-material/shadows'
+
+.user-item
+  display: flex
+  background: white
+  height: 48px
+  padding-right: 16px
+  padding-left: 64px
+  width: 432px
+  margin: 16px auto
+  border: 3px solid $text
+  border-radius: 24px
+  box-sizing: border-box
+  position: relative
+  align-items: center
+  @extend .z-depth-2
+  transition: all 0.2s ease-in-out
+
+  &:hover
+    @extend .z-depth-4
+
+  .user-pic
+    height: 48px
+    width: 48px
+    border-radius: 50%
+    border: 3px solid $text
+    box-sizing: border-box
+    position: absolute
+    top: -3px
+    left: -3px
+    background:
+      size: cover
+      position: center
+
+
+  span.name
+    color: $text
+    font-weight: 500
+
+  .dot-divider
+    height: 2px
+    width: 2px
+    border-radius: 50%
+    background: $text-disabled
+    margin: 0 7px
+
+  span.email
+    color: $primary
+    font-weight: 500
