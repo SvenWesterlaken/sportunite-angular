@@ -99,7 +99,7 @@ form.register-container([formGroup]="registerForm", (ngSubmit)="register()")
 
       .big-form-footer-container
         span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
-        div
+        .button-container
           button.btn.btn-large.danger((click)="cancelAddress()", type='button') Terug
           button.btn.btn-large((click)="getAddress()", [disabled]="!address", type='button') Volgende stap
 
