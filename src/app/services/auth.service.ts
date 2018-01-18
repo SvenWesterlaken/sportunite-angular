@@ -4,11 +4,15 @@ import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {User} from "../models/user";
+import {JwtHelper} from "angular2-jwt-session";
 
 @Injectable()
 export class AuthService {
+  private jwt;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.jwt = new JwtHelper();
+  }
 
   getToken(name: string = 'token'): string {
     return localStorage.getItem(name) || sessionStorage.getItem(name);
@@ -34,6 +38,10 @@ export class AuthService {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  getLoggedInUserId(): string {
+    return this.jwt.decodeToken(this.getToken()).sub;
   }
 
 }

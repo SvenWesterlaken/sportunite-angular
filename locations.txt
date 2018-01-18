@@ -1,5 +1,0 @@
-NEO4J="E:\ProgramFiles\Neo4j CE 3.3.0"
-MONGO_DB_PATH="C:\Program Files\MongoDB\Server\3.4"
-MONGO_DB_DATA="C:\data\db"
-NET_API="C:\Users\twanv\source\repos\SportUniteB3"
-NODE_API="E:\ProgramFiles\mongodb\MongoWorkspace\sportunite-api"

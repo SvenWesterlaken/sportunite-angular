@@ -69,4 +69,8 @@ export class EventService {
   getEvent(id: string): Promise<any> {
   	return this.http.get(`${environment.api.url}/sportevents/${id}`).toPromise();
   }
+
+  removeEvent(id: string): Promise<any> {
+
+  }
 }

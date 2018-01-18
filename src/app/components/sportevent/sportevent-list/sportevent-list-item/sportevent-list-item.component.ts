@@ -1,7 +1,4 @@
 import { Component, OnInit, Input} from '@angular/core';
-import {Sport} from "../../../../models/sport";
-import {SportEvent} from "../../../../models/sportevent";
-import {EventService} from "../../../../services/event.service";
 
 @Component({
   selector: 'app-sportevent-list-item',

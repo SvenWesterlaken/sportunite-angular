@@ -50,7 +50,9 @@
               span Tijd:
               span.info {{sportEvent.eventStartTime | amDateFormat: 'HH:mm'}} - {{sportEvent.eventEndTime | amDateFormat: 'HH:mm'}}
 
-        button.btn.btn-full-width(routerLink="attend") Aanmelden
+        button.btn.btn-full-width(*ngIf="organisorId === getCurrentLoggedInUser()", (click)="removeEvent()") Verwijder evenement
+        button.btn.btn-full-width(*ngIf="organisorId !== getCurrentLoggedInUser() && matchAttendeeId() === getCurrentLoggedInUser()" routerLink="leave") verlaat evenement
+        button.btn.btn-full-width(*ngIf="matchAttendeeId() !== getCurrentLoggedInUser()", routerLink="attend") Aanmelden
         button.btn.btn-full-width Vrienden uitnodigen
 
 

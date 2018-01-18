@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {EventService} from "../../../services/event.service";
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import {SportEvent} from "../../../models/sportevent";
+import {AuthService} from "../../../services/auth.service";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-sportevent-detail',
@@ -15,12 +17,14 @@ export class SportEventDetailComponent implements OnInit {
   private postalcode: string;
   private address: string;
   private suffix: string;
-  private organisor: string;
+  private organisorName: string;
+  private organisorId: string;
   attendees = 0;
   color = '';
   value = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private eventService: EventService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+              private eventService: EventService, private authService:AuthService) { }
 
   ngOnInit() {
     this.route.params
@@ -50,17 +54,14 @@ export class SportEventDetailComponent implements OnInit {
                       `${this.suffix}`;
                 }
 
-                this.organisor = `${this.sportEvent.organisor.firstname} ${this.sportEvent.organisor.lastname}`;
+                this.organisorName = `${this.sportEvent.organisor.firstname} ${this.sportEvent.organisor.lastname}`;
+                this.organisorId = this.sportEvent.organisor._id;
                 this.value =  (this.sportEvent.attendees.length / this.sportEvent.maxAttendees) * 100;
 
               }
             )
         }
       )
-  }
-
-  onAttend() {
-    this.router.navigate(['attend'], {relativeTo: this.route});
   }
 
   getMode(): string {
@@ -73,6 +74,23 @@ export class SportEventDetailComponent implements OnInit {
 
   getWidth(): string {
     return `${this.value}%`;
+  }
+
+  getCurrentLoggedInUser(): string {
+    return this.authService.getLoggedInUserId();
+  }
+
+  matchAttendeeId(): string {
+    const attendee = _.find(this.sportEvent.attendees, ['_id', this.getCurrentLoggedInUser()]);
+    return attendee === undefined ? '' : attendee._id;
+  }
+
+  leaveEvent() {
+    console.log("You left the event!");
+  }
+
+  removeEvent() {
+    console.log("Event is verwijderd!");
   }
 
 }
