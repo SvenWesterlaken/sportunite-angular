@@ -16,7 +16,7 @@ a.mat-card.sport-event-item([routerLink]="event.sportEventId")
             mat-icon(svgIcon="clock")
             span {{event.eventStartTime | amDateFormat: 'HH:mm'}} - {{event.eventEndTime | amDateFormat: 'HH:mm'}}
             mat-icon.second(svgIcon="calendar-text")
-            span {{event.date | amLocale: 'nl' | amDateFormat: 'DD MMMM, YYYY' }}
+            span {{event.eventStartTime | amLocale: 'nl' | amDateFormat: 'DD MMMM, YYYY' }}
 
         .location
             mat-icon(svgIcon="map")
