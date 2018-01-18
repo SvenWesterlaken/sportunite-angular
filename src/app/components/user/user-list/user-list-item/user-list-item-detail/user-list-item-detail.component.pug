@@ -5,26 +5,30 @@
             .col.s12
                 .profile-upper-container
                     .profile-pic(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')")
-                    span.user-name {{user.firstname | titlecase }} {{user.lastname | titlecase }}
+                    span.user-name {{user?.firstname | titlecase }} {{user?.lastname | titlecase }}
                 .card-panel.profile-info-card
                     .div(*ngIf="!friendsWith")
                         .button-container: button.btn.profile-friend-btn((click)="addFriend()", type='button') Vriend toevoegen
                     .div(*ngIf="friendsWith")
                         .button-container: button.btn.profile-friend-btn((click)="removeFriend()", type='button') Vriend verwijderen
                     .inner-container
-                        p.profile-text Email: #[span.value {{user.email}}]
-                        p.profile-text Geboren op: #[span.value {{ user.birth | amLocale:'nl' | amDateFormat: 'D MMMM YYYY' }}]
-                        p.profile-text Geslacht: #[span.value {{user.gender.toLowerCase() == 'male' ? 'Man' : 'Vrouw'}}]
-                        p.profile-text Adres: #[span.value {{user.address.street}} {{user.address.number}}{{user.address.suffix}}]
-                        p.profile-text Stad: #[span.value {{user.address.city}}]
-                        p.profile-text Land: #[span.value {{user.address.country}}]
+                        p.profile-text Email: #[span.value {{user?.email}}]
+                        p.profile-text Geboren op: #[span.value {{ user?.birth | amLocale:'nl' | amDateFormat: 'D MMMM YYYY' }}]
+                        p.profile-text Geslacht: #[span.value {{user?.gender.toLowerCase() == 'male' ? 'Man' : 'Vrouw'}}]
+                        p.profile-text Adres: #[span.value {{user?.address.street}} {{user?.address.number}}{{user?.address.suffix}}]
+                        p.profile-text Stad: #[span.value {{user?.address.city}}]
+                        p.profile-text Land: #[span.value {{user?.address.country}}]
 
                     .inner-container
                         p.profile-biography-title Biografie
-                        p.profile-biography {{user.biography}}
-                        p.profile-biography(*ngIf="user.biography != '' || user.biography") #[i Geen biografie]
+                        p.profile-biography {{user?.biography}}
+                        p.profile-biography(*ngIf="user?.biography != '' || user?.biography") #[i Geen biografie]
 
                     .inner-container
                         p.profile-biography-title Favoriete sporten
                         mat-chip-list
-                            mat-chip(*ngFor="let sport of user.favorite_sports", color="primary", [selectable]="false") {{sport}}
+                            mat-chip(*ngFor="let sport of user?.favorite_sports", color="primary", [selectable]="false") {{sport}}
+
+
+            .col.s12
+                p( *ngFor="let event of getEvents()") {{event.name }}
