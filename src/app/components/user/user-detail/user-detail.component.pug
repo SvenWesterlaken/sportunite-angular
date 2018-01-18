@@ -23,6 +23,7 @@
 
                     .inner-container
                         p.profile-biography-title Favoriete sporten
+                        i(*ngIf="!user.favorite_sports || user.favorite_sports.length === 0") Geen favoriete sportevents geselecteerd
                         mat-chip-list
                             mat-chip(*ngFor="let sport of user.favorite_sports", color="primary", [selectable]="false") {{sport}}
 
