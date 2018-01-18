@@ -32,7 +32,7 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
             this.userService.getFriends();
 
             this.friendSub = this.userService.friendsChanged.subscribe((friends: User[]) => {
-                this.friendsWith = friends.some(user => user._id === this.user._id);
+                this.friendsWith = friends.some(user => user._id === this.id);
             });
 
             if (this.router.isActive('/users', false)) {
