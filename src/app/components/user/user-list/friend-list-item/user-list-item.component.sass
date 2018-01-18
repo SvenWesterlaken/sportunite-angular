@@ -1,0 +1,19 @@
+@import '../../../../../sass/1-base/colorvars'
+@import '../../../../../sass/2-material/shadows'
+
+.user-pic
+  height: 48px
+  width: 48px
+  display: block
+  border-radius: 50%
+  border: 3px solid $text
+  box-sizing: border-box
+  margin-right: 16px
+  background:
+    size: cover
+    position: center
+  @extend .z-depth-2
+  transition: all 0.2s ease-in-out
+
+  &:hover
+    @extend .z-depth-4

@@ -28,9 +28,13 @@
                             mat-chip(*ngFor="let sport of user.favorite_sports", color="primary", [selectable]="false") {{sport}}
 
             .col.s12
-                button.btn.btn-large.danger(type="button", (click)="deleteUser()") Account verwijderen
-                br
+                button.btn.btn.danger.btn-full-width(type="button", (click)="deleteUser()") Account verwijderen
+
+            .col.s12
                 p(*ngIf="friends && friends.length > 0") Vrienden
-                app-user-list-item(*ngFor="let friend of friends;", [user] = "friend", [index] = "friend._id")
+                .friends-container
+                    app-friend-list-item(*ngFor="let friend of friends;", [user]="friend", [index] = "friend._id")
+
         .col.s12.l7
-            i eventuele lijst met feed over deelnemende evenementen
+            .col.s12.right-container
+                app-user-sportevent-list-item(*ngFor="let event of getEvents()", [event]="event", [index]="event.sportEventId")

@@ -6,6 +6,9 @@ import {AuthService} from "../../../services/auth.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {UserDetailDialogComponent} from "./user-detail-dialog/user-detail-dialog.component";
 import {Router} from "@angular/router";
+import * as _ from 'lodash';
+import {EventService} from '../../../services/event.service';
+import {SportEvent} from '../../../models/sportevent';
 
 
 @Component({
@@ -20,11 +23,17 @@ export class UserDetailComponent implements OnInit {
     private friendSub: Subscription;
 
     private dialogSub: Subscription;
+    private sportEvents: SportEvent[];
 
-    constructor(private userService: UserService, private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) {
+    constructor(private userService: UserService, private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private eventService: EventService) {
     }
 
     ngOnInit() {
+      this.eventService.getEvents().then((events) => {
+        console.log(events);
+        this.sportEvents = events;
+      }).catch(error => console.log(error));
+
         this.userService.getCurrentUser().then((user) => {
             this.user = user;
         });
@@ -70,4 +79,8 @@ export class UserDetailComponent implements OnInit {
             return 30;
         }
     }
+
+  getEvents() {
+    return this.sportEvents = _.filter(this.sportEvents, {attendees: [{_id: this.user._id.toString()}]});
+  }
 }

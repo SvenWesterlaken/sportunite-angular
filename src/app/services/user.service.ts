@@ -68,6 +68,10 @@ export class UserService {
             );
     }
 
+    getUserFriends(userId: string): Promise<any> {
+        return this.http.get<User[]>(`${environment.api.url}/users/${userId}/friends`).toPromise();
+    }
+
     getFriend(id: string) {
         if (this.friends) {
             return _.filter(this.friends, {_id: id})[0];
