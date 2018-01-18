@@ -92,14 +92,16 @@ export class SportEventDetailComponent implements OnInit {
     this.eventService.removeEvent(this.id).then(
       (response) => {
         console.log("response: " + JSON.stringify(response));
-        if (response.status == 200) {
-          this.snackBar.open('Evenement is succesvol verwijderd!', 'Sluiten', { duration: 3000 });
-        } else {
-          this.snackBar.open('U kunt dit evenement niet verwijderen!', 'Sluiten', { duration: 3000 });
-        }
+        this.snackBar.open('Evenement is succesvol verwijderd!', 'Sluiten', {duration: 3000});
+        this.router.navigate(['../'], {relativeTo: this.route});
+
+    })
+    .catch((err) => {
+      if (err.status == 401) {
+        this.snackBar.open('U kunt dit evenement niet verwijderen!', 'Sluiten', { duration: 3000 });
       }
-    )
-    .catch((err) => console.log(err))
+      console.log(err)
+    })
   }
 
 }
