@@ -1,6 +1,8 @@
 doctype html
 .nav-padding
-.container(*ngIf="sportEvent != undefined")
+.container(*ngIf="sportEvent")
+
+    mat-progress-spinner.event-loading-spinner(mode="indeterminate", [diameter]="64", [strokeWidth]="3", *ngIf="loading")
 
     .left-container
 

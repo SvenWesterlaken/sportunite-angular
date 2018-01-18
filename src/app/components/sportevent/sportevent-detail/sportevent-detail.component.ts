@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {EventService} from "../../../services/event.service";
-import {ActivatedRoute, Router, Params} from "@angular/router";
-import {SportEvent} from "../../../models/sportevent";
-import {AuthService} from "../../../services/auth.service";
+import {EventService} from '../../../services/event.service';
+import {ActivatedRoute, Router, Params} from '@angular/router';
+import {SportEvent} from '../../../models/sportevent';
+import {AuthService} from '../../../services/auth.service';
 import * as _ from 'lodash';
-import {MatSnackBar} from "@angular/material";
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-sportevent-detail',
@@ -23,9 +23,10 @@ export class SportEventDetailComponent implements OnInit {
   attendees = 0;
   color = '';
   value = 0;
+  loading = true;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private eventService: EventService, private authService:AuthService,
+              private eventService: EventService, private authService: AuthService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -33,14 +34,15 @@ export class SportEventDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          console.log("sportevent: " + this.sportEvent);
+          console.log('sportevent: ' + this.sportEvent);
 
           this.eventService.getEvent(this.id)
             .then(
               (event: SportEvent) => {
                 console.log(event);
+                this.loading = false;
                 this.sportEvent = event;
-                if (this.sportEvent.reservation != undefined) {
+                if (this.sportEvent.reservation !== undefined) {
                   this.city = this.sportEvent.reservation.hall.building.address.city;
                   this.postalcode = this.sportEvent.reservation.hall.building.address.zipCode;
                   this.suffix = this.sportEvent.reservation.hall.building.address.suffix;
@@ -61,9 +63,9 @@ export class SportEventDetailComponent implements OnInit {
                 this.value =  (this.sportEvent.attendees.length / this.sportEvent.maxAttendees) * 100;
 
               }
-            )
+            );
         }
-      )
+      );
   }
 
   getMode(): string {
@@ -88,20 +90,20 @@ export class SportEventDetailComponent implements OnInit {
   }
 
   removeEvent() {
-    console.log("probeer evenement te verwijderen");
+    console.log('probeer evenement te verwijderen');
     this.eventService.removeEvent(this.id).then(
       (response) => {
-        console.log("response: " + JSON.stringify(response));
+        console.log('response: ' + JSON.stringify(response));
         this.snackBar.open('Evenement is succesvol verwijderd!', 'Sluiten', {duration: 3000});
         this.router.navigate(['../'], {relativeTo: this.route});
 
     })
     .catch((err) => {
-      if (err.status == 401) {
+      if (err.status === 401) {
         this.snackBar.open('U kunt dit evenement niet verwijderen!', 'Sluiten', { duration: 3000 });
       }
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
 }
