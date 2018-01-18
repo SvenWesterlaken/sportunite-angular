@@ -1,25 +1,25 @@
-.wrapper
+.nav-padding
 
-  .add-container
-    .row.add
-      button.btn((click)="onCreateNewEvent()")
-        mat-icon(svgIcon="plus")
-      label Nieuw evenement
+.add-button((click)="onCreateNewEvent()")
+  .button-container
+    mat-icon(svgIcon="plus")
+  span Nieuw evenement
 
-  .event-container
-
-    .search-container
-      input(#titleInput type="text",  (keyup)="onFilter()")
-      mat-icon(svgIcon="magnify", (click)="onFilter()" )
-
-
-    app-sportevent-list-item( *ngFor="let event of resultEvents; let i = index", [event] = "event", [index] = "event.sportEventId" )
-    p(*ngIf="!resultEvents") Geen evenementen om weer te geven
-    p(*ngIf="resultEvents?.length === 0") Er zijn geen evenementen gevonden
-
+.search-container
+  input(#titleInput type="text",  (keyup)="onFilter()")
+  mat-icon(svgIcon="magnify", (click)="onFilter()" )
 
   .filter-container
-    button.btn((click)="onToggle()")
+    .button-container((click)="onToggle()")
       mat-icon(svgIcon="filter-variant")
 
     app-sportevent-list-filter(*ngIf="toggleOpen", (handleSelectedSports)="getFilterData($event)")
+
+.container
+
+.event-container
+  app-sportevent-list-item( *ngFor="let event of resultEvents", [event] = "event", [index] = "event.sportEventId" )
+  mat-progress-spinner.event-loading-spinner(mode="indeterminate", [diameter]="64", [strokeWidth]="3", *ngIf="events_loading")
+  p(*ngIf="!resultEvents && !events_loading") Geen evenementen om weer te geven
+  p(*ngIf="resultEvents?.length === 0") Er zijn geen evenementen gevonden
+
