@@ -65,7 +65,12 @@ export class EventService {
   	return this.http.post(`${environment.api.url}/sportevents/${eventId}/leave`, {eventId: eventId});
   }
 
-  getEvent(id: string): Observable<any> {
-  	return this.http.get(`${environment.backend.url}/sportevents/${id}`);
+  getEvent(id: string): Promise<any> {
+  	return this.http.get(`${environment.api.url}/sportevents/${id}`).toPromise();
+  }
+
+  removeEvent(id: string): Promise<any> {
+    console.log("Event verwijderen met promise: " + id);
+    return this.http.delete(`${environment.api.url}/sportevents/${id}`).toPromise();
   }
 }

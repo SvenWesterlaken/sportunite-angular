@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {EventService} from "../../../services/event.service";
 import {SportEvent} from "../../../models/SportEvent";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
 	selector: 'app-sportevent-attend',
@@ -9,25 +10,47 @@ import {SportEvent} from "../../../models/SportEvent";
 	styleUrls: ['./sportevent-attend.component.sass']
 })
 export class SportEventAttendComponent implements OnInit {
+	private id;
 	private sportEvent: SportEvent;
-	
-	constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService) {}
 
-    ngOnInit() {
-        this.route.params.subscribe((params: Params) =>
-            this.eventService.getEvent(params['id']).subscribe((event: SportEvent) => {
-                this.sportEvent = event;
-            })
-        );
-    }
+	constructor(private route: ActivatedRoute, private router: Router,
+	            private eventService: EventService, private snackBar: MatSnackBar) {
+	}
 
-    public cancel() {
-        this.router.navigate(['../'], {relativeTo: this.route});
-    }
+	ngOnInit() {
+		this.route.params
+			.subscribe(
+				(params: Params) => {
+					this.id = params['id'];
 
-    public proceed() {
-        this.eventService.addUserToAttendEvent(+this.sportEvent.sportEventId).subscribe(result => {
-            this.router.navigate(['../'], {relativeTo: this.route});
-        });
-    }
+					this.eventService.getEvent(this.id)
+						.then(
+							(event: SportEvent) => {
+								console.log(event);
+								this.sportEvent = event;
+							}
+						)
+				}
+			)
+	}
+
+	public getId(): string {
+		return this.id;
+	}
+
+	public getEvent(): SportEvent {
+		return this.sportEvent;
+	}
+
+	public cancel() {
+		this.router.navigate(['../'], {relativeTo: this.route});
+	}
+
+	public proceed() {
+		this.eventService.addUserToAttendEvent(+this.sportEvent.sportEventId)
+			.subscribe(result => {
+        this.snackBar.open('U hebt zich succesvol aangemeld voor dit evenement!', 'Sluiten', { duration: 3000 });
+				this.router.navigate(['../'], {relativeTo: this.route});
+			});
+	}
 }

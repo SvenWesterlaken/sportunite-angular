@@ -1,0 +1,177 @@
+@import '../../../../sass/1-base/colorvars'
+.container
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+
+.left-container
+  flex-basis: 68%
+
+  @media all and (max-width: 800px)
+    flex-basis: 100%
+    order: 2
+
+  @media all and (max-width: 500px)
+    flex-basis: 100%
+    order: 2
+
+.right-container
+  flex-basis: 27%
+
+  @media all and (max-width: 800px)
+    flex-basis: 100%
+    order: 1
+
+  @media all and (max-width: 500px)
+    flex-basis: 100%
+    order: 1
+
+  button
+    margin-bottom: 10px
+    flex-basis: 100%
+
+    @media all and (max-width: 800px)
+      flex-basis: 100%
+      order: 3
+
+    @media all and (max-width: 500px)
+      flex-basis: 100%
+      order: 3
+
+.left-container, .right-container
+  .sportevent-info-card
+    border-radius: 11px
+    border: 3px solid $text
+    padding: 0
+
+    .header-container
+      padding: 16px
+      display: flex
+      justify-content: space-between
+      border-bottom: 3px solid $text
+
+      .organisor-container
+
+        p.organisor
+          font:
+            size: 16px
+            weight: 500
+          margin: 0
+          padding: 0
+
+        .mat-card-subtitle
+          margin-bottom: 0px
+          display: block
+
+      .profile-picture-container
+        display: flex
+        align-items: center
+
+        .profile-pic
+          height: 32px
+          width: 32px
+          min-width: 28px
+          min-height: 28px
+          background:
+            position: center
+            size: cover
+          border-radius: 50%
+          border: 3px solid $text
+          box-sizing: border-box
+
+      span.title
+        font-size: 22px
+        font-weight: 500
+        margin: 0
+
+    .inner-container
+      padding: 16px
+      border-bottom: 3px solid $text
+
+      .space-between
+        display: flex
+        justify-content: space-between
+
+        span.info
+          font-weight: 500
+
+      .upper-container
+        display: flex
+        justify-content: space-between
+        margin-bottom: 8px
+
+        span.info, span.count
+          font:
+            size: 16px
+            weight: 500
+          text-transform: uppercase
+          margin: 0
+          padding: 0
+
+      .building-maps-container
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+
+        .building-container
+
+          p.building
+            font:
+              size: 16px
+              weight: 500
+            text-transform: uppercase
+            margin: 0
+            padding: 0
+
+          .mat-card-subtitle
+            margin-bottom: 0px
+            display: inline-block
+
+          span.dot-divider
+            height: 4px
+            width: 4px
+            border-radius: 50%
+            background: #bbb
+            margin: 0px 7px 2px 7px
+            display: inline-block
+
+        .maps-container
+          display: flex
+          align-items: center
+
+          a
+            color: $primary
+
+      .progress-bar
+        height: 16px
+        width: 100%
+        border-radius: 8px
+        border: 3px solid $text
+        box-sizing: border-box
+        background: none
+        position: relative
+
+        .inner-progress
+          height: 10px
+          padding: 0 3px
+          background: $succes
+          border-radius: 8px
+          border: 3px solid $text
+          position: absolute
+          top: -3px
+          left: -3px
+
+
+          &.full
+            background: $danger
+
+          &.almost
+            background: $warning
+
+      &.footer
+        border-bottom: none
+
+h5
+  font-size: 20px
+  font-weight: 500
+

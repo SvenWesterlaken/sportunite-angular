@@ -1,0 +1,60 @@
+doctype html
+.nav-padding
+.container(*ngIf="sportEvent != undefined")
+
+    .left-container
+
+        .card-panel.sportevent-info-card
+          .header-container
+            span.title {{sportEvent.name}}
+          .inner-container
+            .upper-container
+              span.info Aanwezigen
+              span.count {{sportEvent.attendees.length}} / {{sportEvent.maxAttendees}}
+            .progress-bar
+              .inner-progress([style.width]="getWidth()", [ngClass]="getMode()")
+
+          .inner-container
+            .building-maps-container
+              .building-container
+                p.building {{sportEvent.reservation.hall.building.name}}
+                mat-card-subtitle {{address}}
+                span.dot-divider
+                mat-card-subtitle {{postalcode}}, {{city}}
+              .maps-container
+                span.maps: a BEKIJK OP GOOGLE MAPS
+          .inner-container.footer
+            p {{sportEvent.description}}
+
+    .right-container
+
+        .card-panel.sportevent-info-card
+          .header-container
+            .organisor-container
+              mat-card-subtitle Organisator
+              p.organisor {{organisor}}
+            .profile-picture-container
+              .profile-pic(style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/saulihirvi/128.jpg')",
+                alt="avatar")
+
+          .inner-container.footer
+            .space-between
+              span Kosten:
+              span.info ?
+            .space-between
+              span Afstand:
+              span.info ?
+            .space-between
+              span Datum:
+              span.info {{sportEvent.eventStartTime | amLocale: 'nl' | amDateFormat: 'DD MMMM, YYYY' }}
+            .space-between
+              span Tijd:
+              span.info {{sportEvent.eventStartTime | amDateFormat: 'HH:mm'}} - {{sportEvent.eventEndTime | amDateFormat: 'HH:mm'}}
+
+        button.btn.btn-full-width.danger(*ngIf="organisorId === getCurrentLoggedInUser()", (click)="removeEvent()") Verwijder evenement
+        button.btn.btn-full-width.danger(*ngIf="organisorId !== getCurrentLoggedInUser() && matchAttendeeId() === getCurrentLoggedInUser()" routerLink="leave") verlaat evenement
+        button.btn.btn-full-width(*ngIf="matchAttendeeId() !== getCurrentLoggedInUser()", routerLink="attend") Aanmelden
+        button.btn.btn-full-width(disabled) Vrienden uitnodigen
+
+
+

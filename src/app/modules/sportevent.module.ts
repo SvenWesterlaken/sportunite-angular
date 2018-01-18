@@ -1,8 +1,8 @@
 import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {
-    MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule,
-    MatTabsModule
+  MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule,
+  MatTabsModule
 } from '@angular/material';
 import {EventService} from '../services/event.service';
 import {StepperModule} from './stepper.module';
@@ -20,7 +20,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {SportEventListFilterComponent} from '../components/sportevent/sportevent-list/sportevent-list-filter/sportevent-list-filter.component';
 import {SportEventListItemComponent} from '../components/sportevent/sportevent-list/sportevent-list-item/sportevent-list-item.component';
 import {SportEventLeaveComponent} from '../components/sportevent/sportevent-leave/sportevent-leave.component';
-import {SportEventListUserComponent} from "../components/sportevent/sportevent-list-user/sportevent-list-user.component";
+import {SportEventListUserComponent} from '../components/sportevent/sportevent-list-user/sportevent-list-user.component';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -49,8 +51,9 @@ import {SportEventListUserComponent} from "../components/sportevent/sportevent-l
 		MatSlideToggleModule,
 		MatProgressBarModule,
 		MatTabsModule,
-		MomentModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+    MatSnackBarModule,
+		MomentModule
 	],
 	providers: [
 		EventService
