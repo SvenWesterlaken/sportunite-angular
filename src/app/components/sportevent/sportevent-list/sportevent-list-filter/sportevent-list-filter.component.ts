@@ -13,7 +13,7 @@ import {CustomValidators} from 'ng4-validators';
 export class SportEventListFilterComponent implements OnInit {
 
   color: string;
-  sports : Sport[];
+  sports: Sport[];
   selectedSports = [];
   dateForm: FormGroup;
 
