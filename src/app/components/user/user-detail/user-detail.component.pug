@@ -31,7 +31,6 @@
                 button.btn.btn-large.danger(type="button", (click)="deleteUser()") Account verwijderen
                 br
                 p(*ngIf="friends && friends.length > 0") Vrienden
-                app-user-list-item(*ngFor="let friend of friends; let i = index", [user] = "user", [index] = "i")
+                app-user-list-item(*ngFor="let friend of friends;", [user] = "friend", [index] = "friend._id")
         .col.s12.l7
             i eventuele lijst met feed over deelnemende evenementen
-

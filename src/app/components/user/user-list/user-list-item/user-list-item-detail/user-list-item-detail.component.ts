@@ -21,11 +21,15 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
     private friendSub: Subscription;
 
     constructor(private route: ActivatedRoute, private router: Router,
-                private userService: UserService, private eventService: EventService) {}
+                private userService: UserService, private eventService: EventService) {
+    }
 
     ngOnInit() {
-        this.eventService.getEvents().then((events) => { console.log(events); this.sportEvents = events; })
-          .catch(error => console.log(error));
+        this.eventService.getEvents().then((events) => {
+            console.log(events);
+            this.sportEvents = events;
+        })
+            .catch(error => console.log(error));
 
         this.route.params.subscribe((params: Params) => {
             this.id = params['id'];
@@ -45,7 +49,13 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
 
             this.friendSub = this.userService.friendsChanged.subscribe((friends: User[]) => {
                 if (!this.user) {
-                    this.router.navigate(['..'], {relativeTo: this.route});
+                    this.userService.getUsers(this.id).then((user: User) => {
+                        this.user = user;
+                        this.friendsWith = friends.some(user => user._id === this.user._id);
+                        if (this.router.isActive('/friends', false) && !this.friendsWith) {
+                            this.router.navigate(['..'], {relativeTo: this.route});
+                        }
+                    });
                 } else {
                     this.friendsWith = friends.some(user => user._id === this.user._id);
                 }
@@ -64,8 +74,7 @@ export class UserListItemDetailComponent implements OnInit, OnDestroy {
     }
 
     getEvents() {
-        console.log(this.sportEvents);
-        return this.sportEvents = _.filter(this.sportEvents,{attendees: [{ _id: this.id}]});
+        return this.sportEvents = _.filter(this.sportEvents, {attendees: [{_id: this.id}]});
     }
 
     ngOnDestroy() {
