@@ -10,6 +10,7 @@
                     mat-form-field.big-form-field(floatLabel="never")
                         input#name(matInput type="text", formControlName="name", placeholder="Evenementnaam", (keyup.enter)="stepper.next()")
                         mat-error(*ngIf="eventForm.get('name').hasError('required')") Dit veld is verplicht
+                        mat-hint(align="end") {{eventForm.value.name?.length || 0}}/200
 
                 .big-form-footer-container
                   span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
@@ -33,12 +34,12 @@
                   h3.big-form-header Wanneer vindt de sportactiviteit plaats?
 
                 .big-form-input-container
-                    mat-form-field.big-form-field(floatLabel="never")
+                    mat-form-field.big-form-field#startTimeField(floatLabel="never")
                         input#startTime(matInput type="text", formControlName="startTime", placeholder="Begintijd", (keyup.enter)="stepper.next()", (keyup)="eventForm.get('eventDate.endTime').updateValueAndValidity()")
                         mat-error(*ngIf="eventForm.get('eventDate.startTime').hasError('required')") Dit veld is verplicht
                         mat-error(*ngIf="eventForm.get('eventDate.startTime').hasError('momentFormat') && !eventForm.get('eventDate.startTime').hasError('required')") Ongeldig tijd-formaat
                     span.between-text Tot
-                    mat-form-field.big-form-field(floatLabel="never")
+                    mat-form-field.big-form-field#endTimeField(floatLabel="never")
                         input#endTime(matInput type="text", formControlName="endTime", placeholder="Eindtijd", (keyup.enter)="stepper.next()")
                         mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('required')") Dit veld is verplicht
                         mat-error(*ngIf="eventForm.get('eventDate.endTime').hasError('momentFormat') && !eventForm.get('eventDate.endTime').hasError('required')") Ongeldig tijd-formaat
@@ -115,11 +116,12 @@
                   h3.big-form-header Wil je nog meer informatie geven over de sportactiviteit?
 
                 .big-form-input-container
-                    mat-form-field.big-form-field(floatLabel="never")
+                    mat-form-field.big-form-field(floatLabel="never", hintLabel="Minimaal 50 tekens")
                         textarea#description(matInput type="text", formControlName="description", placeholder="Vul een beschrijving in")
                         mat-error(*ngIf="eventForm.get('description').hasError('minlength')") Moet uit minimaal 50 tekens bestaan
-                        mat-error(*ngIf="eventForm.get('description').hasError('maxlength')") Mag uit maximaal 500 tekens bestaan
+                        mat-error(*ngIf="eventForm.get('description').hasError('maxlength')") Mag uit maximaal 200 tekens bestaan
                         mat-error(*ngIf="eventForm.get('description').hasError('required')") Dit veld is verplicht
+                        mat-hint(align="end") {{eventForm.value.description?.length || 0}}/200
 
                 .big-form-footer-container
                     span.step-counter {{stepper.selectedIndex + 1}}/{{stepper._steps.length}}
@@ -134,10 +136,10 @@
                     mat-card-content.summary
                         h4 {{ eventForm.value.name }}
                         p Om bezig te zijn met
-                          span.card  {{ eventForm.value.sport.name }}
-                        p Op #[span.card {{ eventForm.get('eventDate.date').value | amLocal | amDateFormat: 'D MMMM YYYY' }}] van #[span.card {{ eventForm.value.eventDate.startTime }}] tot #[span.card {{ eventForm.value.eventDate.endTime }}]
-                        p Bij #[span.card {{ eventForm.get('location.building').value.name }}] in  #[span.card {{ eventForm.get('location.hall').value.name }}]op  #[span.card {{ eventForm.get('location.building').value.address?.streetName }} {{ eventForm.get('location.building').value.address?.houseNumber }} ] te #[span.card {{ eventForm.get('location.city').value }}]
-                        p Met #[span.card {{ eventForm.get('eventAttendees.minAttendees').value }}] tot #[span.card {{ eventForm.get('eventAttendees.maxAttendees').value }}] personen
+                          span  {{ eventForm.value.sport.name }}
+                        p Op #[span {{ eventForm.get('eventDate.date').value | amLocal | amDateFormat: 'D MMMM YYYY' }}] van #[span {{ eventForm.value.eventDate.startTime }}] tot #[span {{ eventForm.value.eventDate.endTime }}]
+                        p Bij #[span {{ eventForm.get('location.building').value.name }}] in  #[span {{ eventForm.get('location.hall').value.name }}]op  #[span {{ eventForm.get('location.building').value.address?.streetName }} {{ eventForm.get('location.building').value.address?.houseNumber }} ] te #[span {{ eventForm.get('location.city').value }}]
+                        p Met #[span {{ eventForm.get('eventAttendees.minAttendees').value }}] tot #[span {{ eventForm.get('eventAttendees.maxAttendees').value }}] personen
 
 
                     mat-card-content.footer

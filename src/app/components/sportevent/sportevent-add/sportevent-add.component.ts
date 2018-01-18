@@ -53,7 +53,7 @@ export class SportEventAddComponent implements OnInit {
               maxAttendees: new FormControl(2, [Validators.required, Validators.min(2),
                                             IsGreaterThan(minAttendees), CustomValidators.digits]),
           }),
-          description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(500)])
+          description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(200)])
         });
 
         this.eventService.getSports().then((sports: Sport[]) => this.sports = sports);
