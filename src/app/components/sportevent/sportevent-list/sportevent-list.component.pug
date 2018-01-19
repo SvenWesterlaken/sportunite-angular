@@ -18,7 +18,7 @@
 .container
 
 .event-container
-  app-sportevent-list-item( *ngFor="let event of resultEvents", [event] = "event", [index] = "event.sportEventId" )
+  app-sportevent-list-item( *ngFor="let event of resultEvents", [event] = "event", [index] = "event.sportEventId", [@eventAnimation])
   mat-progress-spinner.event-loading-spinner(mode="indeterminate", [diameter]="64", [strokeWidth]="3", *ngIf="events_loading")
   p(*ngIf="!resultEvents && !events_loading") Geen evenementen om weer te geven
   p(*ngIf="resultEvents?.length === 0 && !events_loading") Er zijn geen evenementen gevonden

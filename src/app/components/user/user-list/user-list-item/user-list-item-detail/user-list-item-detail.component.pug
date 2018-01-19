@@ -38,4 +38,5 @@
 
         .col.s12.l7
             .col.s12.right-container
+                p.none(*ngIf="!getEvents() || getEvents().length === 0 ") {{user.firstname}} neemt niet deel aan een sportevenement
                 app-user-sportevent-list-item(*ngFor="let event of getEvents()", [event]="event", [index]="event.sportEventId")
