@@ -4,11 +4,13 @@ import {SportEvent} from '../../../models/sportevent';
 import {EventService} from '../../../services/event.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {eventItemAnimation} from '../../../animations/event-items.animations';
 
 @Component({
     selector: 'app-sportevent-list',
     templateUrl: './sportevent-list.component.pug',
-    styleUrls: ['./sportevent-list.component.sass']
+    styleUrls: ['./sportevent-list.component.sass'],
+    animations: [eventItemAnimation]
 })
 export class SportEventListComponent implements OnInit {
     events: SportEvent[];

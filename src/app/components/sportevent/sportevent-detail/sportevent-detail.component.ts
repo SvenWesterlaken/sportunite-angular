@@ -38,7 +38,7 @@ export class SportEventDetailComponent implements OnInit {
 
           this.eventService.getEvent(this.id)
             .then(
-              (event: SportEvent) => {
+              (event) => {
                 console.log(event);
                 this.loading = false;
                 this.sportEvent = event;
@@ -58,7 +58,8 @@ export class SportEventDetailComponent implements OnInit {
                       `${this.suffix}`;
                 }
 
-                this.organisorName = `${this.sportEvent.organisor.firstname} ${this.sportEvent.organisor.lastname}`;
+
+                this.organisorName = `${event.organisor.firstname} ${event.organisor.lastname}`;
                 this.organisorId = this.sportEvent.organisor._id;
                 this.value =  (this.sportEvent.attendees.length / this.sportEvent.maxAttendees) * 100;
 

@@ -11,7 +11,7 @@ export class FriendsListItemComponent implements OnInit {
     @Input() user;
     @Input() index: number;
 
-    routerLink = '/friends/';
+    routerLink = '/users/';
 
     constructor(private router: Router) {
     }

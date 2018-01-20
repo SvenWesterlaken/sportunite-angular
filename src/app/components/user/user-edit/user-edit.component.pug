@@ -53,22 +53,22 @@
                 span.section-header Adresgegevens
                 .row
                     mat-form-field.col.s12.l6
-                        input(matInput, placeholder="Postcode", formControlName="postalCode", type="text")
+                        input(matInput, placeholder="Postcode", formControlName="postalCode", type="text", [(ngModel)]="user.address.postal_code")
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('pattern') && !userForm.get('registerAddress.postalCode').hasError('maxlength')") Ongeldige postcode
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('maxlength')") Maximaal 6 tekens
                         mat-error(*ngIf="userForm.get('registerAddress.postalCode').hasError('required')") Dit veld is verplicht
                     mat-form-field.col.s6.l3
-                        input(matInput, placeholder="Huisnummer", formControlName="number", type="text")
+                        input(matInput, placeholder="Huisnummer", formControlName="number", type="text", [(ngModel)]="user.address.number")
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('maxlength')") Maximaal 4 cijfers
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('digits')") Alleen cijfers toegestaan
                         mat-error(*ngIf="userForm.get('registerAddress.number').hasError('required')") Dit veld is verplicht
                     mat-form-field.col.s6.l3
-                        input(matInput, placeholder="Toevoeging", formControlName="suffix", type="text")
+                        input(matInput, placeholder="Toevoeging", formControlName="suffix", type="text", [(ngModel)]="user.address.suffix")
                     mat-form-field.col.s6.s12(hintLabel="Wijzig straat door de postcode of huisnummer aan te passen")
-                        input(matInput, placeholder="Straat", formControlName="street")
+                        input(matInput, placeholder="Straat", formControlName="street", [(ngModel)]="user.address.street")
                     mat-form-field.col.s6.s12(hintLabel="Wijzig stad door de postcode of huisnummer aan te passen")
-                        input(matInput, placeholder="Stad", formControlName="city")
-                        mat-error(*ngIf="userForm.get('registerAddress').hasError('noAddress')") Geen adres gevonden
+                        input(matInput, placeholder="Stad", formControlName="city", type="text", [(ngModel)]="user.address.city")
+                    mat-error(*ngIf="userForm.get('registerAddress').hasError('noAddress')") Geen adres gevonden
 
                     button.right.btn((click)="getAddress()", [disabled]="userForm.get('registerAddress').invalid", type='button') Zoek adres
                     mat-progress-spinner.address-loading-spinner(mode="indeterminate", [diameter]="44", [strokeWidth]="3", *ngIf="addressLoading")
@@ -80,9 +80,8 @@
                     .col.s12
                         button.full-width.btn((click)="openDialog()", type='button') Wachtwoord wijzigen
 
-
         .button-container
             button.btn.btn-large.danger(type='button', routerLink="..") Annuleren
-            button.btn.btn-large([disabled]="userForm.invalid", type='submit') Wijzigingen opslaan
+            button.btn.btn-large([disabled]="userForm.invalid || !user.address.city", type='submit') Wijzigingen opslaan
 
 .bottom-padding

@@ -19,7 +19,7 @@
                     .inner-container
                         p.profile-biography-title Biografie
                         p.profile-biography {{user.biography}}
-                        p.profile-biography(*ngIf="user.biography != '' || user.biography") #[i Geen biografie]
+                        p.profile-biography(*ngIf="user.biography === '' || !user.biography") #[i Geen biografie]
 
                     .inner-container
                         p.profile-biography-title Favoriete sporten
