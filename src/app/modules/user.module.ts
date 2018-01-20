@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {SharedModule} from './shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
-  MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSnackBarModule,
-  MatTooltipModule
+    MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSnackBarModule,
+    MatTooltipModule
 } from '@angular/material';
 import {StepperModule} from './stepper.module';
 import {DatepickerModule} from './datepicker.module';

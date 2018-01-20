@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {EventService} from "../../../services/event.service";
-import {SportEvent} from "../../../models/SportEvent";
-import {MatSnackBar} from "@angular/material";
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {EventService} from '../../../services/event.service';
+import {SportEvent} from '../../../models/sportevent';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
 	selector: 'app-sportevent-attend',
@@ -29,9 +29,9 @@ export class SportEventAttendComponent implements OnInit {
 								console.log(event);
 								this.sportEvent = event;
 							}
-						)
+						);
 				}
-			)
+			);
 	}
 
 	public getId(): string {

@@ -1,7 +1,6 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, forwardRef,
-  HostListener,
-  Inject, OnInit, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
+    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, forwardRef,
+    HostListener, Inject, OnInit, QueryList, SkipSelf, ViewChildren, ViewEncapsulation
 } from '@angular/core';
 import {CdkStep, CdkStepper} from '@angular/cdk/stepper';
 import {StepperNavComponent} from './stepper-nav/stepper-nav.component';

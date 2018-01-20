@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Sport} from "../../../../models/sport";
 import {EventService} from "../../../../services/event.service";
 import {ValidateDateFormat} from "../../../../other/custom.validator";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from 'ng4-validators';
 
 @Component({
   selector: 'app-sportevent-list-filter',

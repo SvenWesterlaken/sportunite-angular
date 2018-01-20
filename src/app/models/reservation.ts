@@ -1,4 +1,3 @@
-import {Hall} from "./hall";
 export class Reservation {
 
   reservationId: string;

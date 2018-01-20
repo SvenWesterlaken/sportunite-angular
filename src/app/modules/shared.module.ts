@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CustomErrorStateMatcher} from '../other/errorstate.manager';
-import {StepperComponent} from '../components/stepper/stepper.component';
 import {MatIconModule} from '@angular/material';
 
 @NgModule({

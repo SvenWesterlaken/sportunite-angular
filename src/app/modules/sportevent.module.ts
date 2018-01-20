@@ -1,8 +1,8 @@
 import {SportEventAddComponent} from '../components/sportevent/sportevent-add/sportevent-add.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
-  MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule,
-  MatTabsModule
+    MatCardModule, MatChipsModule, MatInputModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule,
+    MatTabsModule
 } from '@angular/material';
 import {EventService} from '../services/event.service';
 import {StepperModule} from './stepper.module';
