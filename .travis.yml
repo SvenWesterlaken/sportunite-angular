@@ -1,0 +1,19 @@
+branches:
+  - master
+
+language: node_js
+node_js:
+  - "stable"
+
+script:
+  - ng build -prod -aot
+
+after_success:
+  - cd ./deploy
+
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  api_key:
+    secure: d/5ZfaK569Pq8zsLgThiDgnapTAqUls9xzs/sdyXtk3Z2lE6NYJNCfGP4dKRw982LHBu557XCaOlsMq3Wpd0JoU8p6V5ipFQ7K8ArtQ9rwyLnGLBaw5IXKUDAzszwwEi59R5yCKYrgEYCHxeNMDOS2mgfgNYEB9+DRXFdEvPVzx1Pef1fl8LNBHUjYBK4aIiG24iAvxhalpqR5NukIdJCWfOmVktq9hsEMawRzFIvMp0bRUhnvq5MGW0N3xoBsPELzegcAhn1gCnT4wsH38chk6E+kNMEN6nUeRyKXsQ0q3m8a5PndTBbVmeNZJ2bDmRThfYaPt8VBdQ5iteQ4qL7YVwvgxGgpHMPpDSIoyX6d+CI3FiHdTiaXapDtLUWAnKvBNnQEC5xdVGopRV1YF/yhBqk7gBUzcd7rc/sQNCMP33V3wo1nvXqfM8wlMaH0wjbqKb4Ou/1ZkJJ3ks2je74h8CxOW8CRZSuNraKXf1RLrplfThhMm34hG4pYwqlUWjF86zthFeflNED3gvlviv5gbY9oRrczFQ0zP5wScdZL3tkpcM4N9p06bwveGS3L1lnRzPNC8N7vGQnybAfQzDR2Zhz6ssPTl+DGH3Jt7BcsrmIrvaANeib7EYeTY4GC39o3GbuZekTI1tejdH0PSHhV9sQUrNS5joaNBpTyG8cw0=
+  app: sportuniteb3-angular
