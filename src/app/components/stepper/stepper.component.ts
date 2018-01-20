@@ -60,7 +60,7 @@ export class StepperDirective extends CdkStepper implements AfterContentInit {
   encapsulation: ViewEncapsulation.None
 })
 export class StepperComponent extends StepperDirective implements OnInit {
-  private isSmallScreen;
+  isSmallScreen;
 
   ngOnInit() {
     this.isSmallScreen = window.screen.width < 968;

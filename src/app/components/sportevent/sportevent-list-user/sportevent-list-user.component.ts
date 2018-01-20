@@ -20,6 +20,7 @@ export class SportEventListUserComponent implements OnInit {
   selectedSports = [];
   selectedSecondDate;
   selectedFirstDate;
+  events_loading = true;
   @ViewChild('titleInput') titleInput: ElementRef;
 
   constructor(private router: Router, private route: ActivatedRoute,  private eventService: EventService, private userService: UserService) {}
@@ -30,10 +31,13 @@ export class SportEventListUserComponent implements OnInit {
     this.eventService.getEvents()
       .then((result) => {
         this.events = _.filter(result, { organisor: { _id: this.user._id } });
+        this.events_loading = false;
         this.resultEvents = this.events;
       })
-      .catch((error) =>  console.log('Geen sportevents gevonden')
-      );
+      .catch((error) =>  {
+        console.log('Geen sportevents gevonden');
+        this.events_loading = false;
+      });
   }
 
   onCreateNewEvent() {
@@ -51,8 +55,7 @@ export class SportEventListUserComponent implements OnInit {
   onFilter() {
     if (this.titleInput.nativeElement.value !== '') {
       this.resultEvents = _.filter(this.events , x => x.name.toLowerCase().includes(this.titleInput.nativeElement.value.toLowerCase()));
-    }
-    else {
+    } else {
       this.resultEvents = this.events;
     }
 

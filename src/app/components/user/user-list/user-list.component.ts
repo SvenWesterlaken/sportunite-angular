@@ -10,14 +10,14 @@ import {Router} from "@angular/router";
     styleUrls: ['./user-list.component.sass']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-    private users: User[];
+    users: User[];
     private userSub: Subscription;
 
     constructor(private userService: UserService, private router: Router) {
     }
 
     ngOnInit() {
-        //Get all users
+        // Get all users
         if (this.router.isActive('/users', false)) {
             this.userSub = this.userService.usersChanged.subscribe((users: User[]) => {
                 this.users = users;
@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit, OnDestroy {
             this.userService.getUsers();
         }
 
-        //Get all friends
+        // Get all friends
         if (this.router.isActive('/friends', false)) {
             this.userSub = this.userService.friendsChanged.subscribe((friends: User[]) => {
                 this.users = friends;

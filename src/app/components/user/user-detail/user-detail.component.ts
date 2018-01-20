@@ -17,7 +17,7 @@ import {SportEvent} from '../../../models/sportevent';
     styleUrls: ['./user-detail.component.sass']
 })
 export class UserDetailComponent implements OnInit {
-    private user: User;
+    user: User;
 
     private friends: User[];
     private friendSub: Subscription;

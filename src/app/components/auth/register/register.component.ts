@@ -20,11 +20,14 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild(StepperComponent) stepper: StepperComponent;
 
-  private maxDate = moment();
-  private addressSub: Subscription;
-  private registerForm: FormGroup;
-  private address: Address;
-  private addressLoading = false;
+  firstname: string;
+  lastname: string;
+
+  maxDate = moment();
+  addressSub: Subscription;
+  registerForm: FormGroup;
+  address: Address;
+  addressLoading = false;
 
 
   constructor(private addressService: AddressService, private auth: AuthService, private router: Router) { }

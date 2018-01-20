@@ -13,7 +13,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class SportEventDetailComponent implements OnInit {
   private id: string;
-  private sportEvent;
+  sportEvent;
   private city: string;
   private postalcode: string;
   private address: string;

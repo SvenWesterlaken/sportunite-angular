@@ -9,7 +9,7 @@ import {NavItemsAnimation} from '../../animations/nav-items.animation';
   animations: NavItemsAnimation
 })
 export class HeaderComponent {
-  private opened = false;
+  opened = false;
 
   constructor(private auth: AuthService) {}
 

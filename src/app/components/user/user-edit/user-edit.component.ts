@@ -24,10 +24,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
     private addressSub: Subscription;
     private dialogSub: Subscription;
 
-    private userForm: FormGroup;
+    userForm: FormGroup;
     private addressLoading = false;
     private user: User;
-    private sports: Sport[];
+    sports: Sport[];
 
     constructor(private addressService: AddressService, private eventService: EventService, private userService: UserService,
                 public snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) {}

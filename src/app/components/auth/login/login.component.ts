@@ -11,9 +11,9 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
 
-  constructor(private auth: AuthService, private errors: CustomErrorStateMatcher, private router: Router) {}
+  constructor(private auth: AuthService, public errors: CustomErrorStateMatcher, private router: Router) {}
 
   ngOnInit() {
 

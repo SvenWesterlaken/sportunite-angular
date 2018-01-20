@@ -12,7 +12,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class SportEventLeaveComponent implements OnInit {
 	private id: string;
-	private sportEvent: SportEvent;
+	sportEvent: SportEvent;
 
 	constructor(private route: ActivatedRoute, private router: Router,
 	            private eventService: EventService, private snackBar: MatSnackBar) {
@@ -32,14 +32,6 @@ export class SportEventLeaveComponent implements OnInit {
 						)
 				}
 			)
-	}
-
-	public getId(): string {
-		return this.id;
-	}
-
-	public getEvent(): SportEvent {
-		return this.sportEvent;
 	}
 
 	public cancel() {

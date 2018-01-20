@@ -11,7 +11,7 @@ import {MatSnackBar} from "@angular/material";
 })
 export class SportEventAttendComponent implements OnInit {
 	private id;
-	private sportEvent: SportEvent;
+	sportEvent: SportEvent;
 
 	constructor(private route: ActivatedRoute, private router: Router,
 	            private eventService: EventService, private snackBar: MatSnackBar) {

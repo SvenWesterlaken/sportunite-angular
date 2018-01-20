@@ -1,4 +1,4 @@
-import {StepComponent, StepperComponent} from '../components/stepper/stepper.component';
+import {StepComponent, StepperComponent, StepperDirective} from '../components/stepper/stepper.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StepperNavComponent} from '../components/stepper/stepper-nav/stepper-nav.component';
@@ -19,7 +19,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     StepComponent,
     StepperNavComponent,
     StepperButtonNextDirective,
-    StepperButtonPreviousDirective
+    StepperButtonPreviousDirective,
+    StepperDirective
   ],
   imports: [
     CommonModule,

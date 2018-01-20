@@ -20,12 +20,12 @@ import * as _ from 'lodash';
 export class SportEventAddComponent implements OnInit {
     @ViewChild(StepperComponent) stepper: StepperComponent;
 
-    private eventForm: FormGroup;
-    private sports = [];
-    private halls: Hall[];
-    private resultHalls = [];
-    private resultBuildings = [];
-    private buildings: Building[];
+    eventForm: FormGroup;
+    sports = [];
+    halls: Hall[];
+    resultHalls = [];
+    resultBuildings = [];
+    buildings: Building[];
 
     tomorrow = moment().add(1, 'days');
 

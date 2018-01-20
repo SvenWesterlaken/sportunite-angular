@@ -1,5 +1,5 @@
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {Component, Inject} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "ng4-validators";
 import {UserService} from "../../../../services/user.service";
@@ -10,8 +10,8 @@ import {HttpErrorResponse} from "@angular/common/http";
     templateUrl: './user-dialog.component.pug',
     styleUrls: ['./user-dialog.component.sass']
 })
-export class UserDialogComponent {
-    private passwordForm: FormGroup;
+export class UserDialogComponent implements OnInit {
+    passwordForm: FormGroup;
 
     constructor(private userService: UserService,
                 public dialogRef: MatDialogRef<UserDialogComponent>,
