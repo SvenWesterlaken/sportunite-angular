@@ -1,4 +1,4 @@
-import {trigger, state, style, transition, animate, group} from '@angular/animations';
+import {animate, group, state, style, transition, trigger} from '@angular/animations';
 
 // Variables
 

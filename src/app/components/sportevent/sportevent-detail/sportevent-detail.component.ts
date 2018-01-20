@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../../services/event.service';
-import {ActivatedRoute, Router, Params} from '@angular/router';
-import {SportEvent} from '../../../models/sportevent';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import * as _ from 'lodash';
 import {MatSnackBar} from '@angular/material';

@@ -1,4 +1,4 @@
-import {ViewChild, Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Sport} from '../../../models/sport';
 import * as moment from 'moment';

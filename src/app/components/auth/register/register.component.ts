@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { CustomValidators } from 'ng4-validators';
+import {CustomValidators} from 'ng4-validators';
 import {StepperComponent} from '../../stepper/stepper.component';
 import * as moment from 'moment';
 import {ValidateDateFormat} from '../../../other/custom.validator';

@@ -1,5 +1,6 @@
 import {Hall} from './hall';
 import {BuildingAddress} from './building-address';
+
 export class Building {
 
   name: string;
