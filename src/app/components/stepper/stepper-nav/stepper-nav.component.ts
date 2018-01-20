@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, Host, HostBinding, Input, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {coerceBooleanProperty, coerceNumberProperty} from '@angular/cdk/coercion';
 import {StepperIntlService} from '../stepper-intl.service';

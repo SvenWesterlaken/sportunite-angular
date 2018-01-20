@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import {
-  DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerIntl,
-  MatDatepickerModule
+    DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerIntl,
+    MatDatepickerModule
 } from '@angular/material';
 import {DateLocales} from '../other/date.locales';
 import {MomentDateAdapter} from "../other/date.adapter";

@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import {Directive} from '@angular/core';
 import {CdkStepper, CdkStepperNext, CdkStepperPrevious} from '@angular/cdk/stepper';
 import {StepperComponent} from './stepper.component';
 

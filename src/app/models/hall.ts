@@ -1,4 +1,5 @@
 import {Sport} from "./sport";
+
 export class Hall {
 
   name: string;

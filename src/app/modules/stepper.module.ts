@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StepperNavComponent} from '../components/stepper/stepper-nav/stepper-nav.component';
 import {
-  StepperButtonNextDirective,
-  StepperButtonPreviousDirective
+    StepperButtonNextDirective,
+    StepperButtonPreviousDirective
 } from '../components/stepper/stepper-button.directive';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {StepperIntlService} from '../components/stepper/stepper-intl.service';
